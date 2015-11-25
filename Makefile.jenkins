@@ -108,7 +108,7 @@ langdoc:
 	  cd  $(BUILDDIR)/langdoc && git clone https://github.com/Kurento/kurento-room.git && cd kurento-room && git checkout kurento-room-$(CLIENT_JAVA_VERSION) || git checkout $(CLIENT_JAVA_VERSION) || echo "Using master branch"
 	  mv $(BUILDDIR)/langdoc/kurento-room/kurento-room-sdk $(BUILDDIR)/langdoc/kurento-room-sdk
 	  rsync -av --exclude 'target' $(BUILDDIR)/langdoc/kurento-room-sdk/* $(BUILDDIR)/langdoc/kurento-room-sdk
-	  cd $(BUILDDIR)/langdoc/kurento-room-sdk && mvn --settings /tmp/config8488717981426612691tmp clean package -DskipTests
+	  cd $(BUILDDIR)/langdoc/kurento-room-sdk && mvn --settings /tmp/config826346220661173982tmp clean package -DskipTests
 	  
 	  # kurento-client javadoc
 	  rm -rf $(BUILDDIR)/langdoc/kurento-client
@@ -116,7 +116,7 @@ langdoc:
 	  cd kurento-java && git checkout kurento-java-$(CLIENT_JAVA_VERSION) || \
 	  git checkout $(CLIENT_JAVA_VERSION) || echo "Using master branch"
 	  mv $(BUILDDIR)/langdoc/kurento-java/kurento-client $(BUILDDIR)/langdoc
-	  cd $(BUILDDIR)/langdoc/kurento-client && mvn --settings /tmp/config8488717981426612691tmp clean package -DskipTests
+	  cd $(BUILDDIR)/langdoc/kurento-client && mvn --settings /tmp/config826346220661173982tmp clean package -DskipTests
 	  rsync -av $(BUILDDIR)/langdoc/kurento-client/target/generated-sources/kmd/* $(BUILDDIR)/langdoc/kurento-client/src/main/java/
 	   
 	  javadoc $(DOCLINT) -windowtitle "Kurento Room SDK Javadoc" \

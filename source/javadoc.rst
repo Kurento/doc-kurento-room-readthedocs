@@ -5,4 +5,4 @@ Kurento JavaDoc
 Kurento Room SDK JavaDoc
 ========================
    
-* `kurento-room-sdk <./langdoc/javadoc/index.html>`_
+* `kurento-room-sdk <./_static/langdoc/javadoc/index.html>`_
