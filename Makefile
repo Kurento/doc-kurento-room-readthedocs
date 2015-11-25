@@ -119,7 +119,7 @@ langdoc:
 	  cd $(BUILDDIR)/langdoc/kurento-client && mvn clean package -DskipTests
 	  rsync -av $(BUILDDIR)/langdoc/kurento-client/target/generated-sources/kmd/* $(BUILDDIR)/langdoc/kurento-client/src/main/java/
 	   
-	  javadoc -Xdoclint:none -windowtitle "Kurento Room SDK Javadoc" \
+	  javadoc $(DOCLINT) -windowtitle "Kurento Room SDK Javadoc" \
 	    -d $(BUILDDIR)/html/langdoc/javadoc \
 	    -sourcepath $(BUILDDIR)/langdoc/kurento-room-sdk/src/main/java/:$(BUILDDIR)/langdoc/kurento-client/src/main/java/ \
 	    -subpackages org.kurento.room:org.kurento.client \
