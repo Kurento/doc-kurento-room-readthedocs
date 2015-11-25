@@ -1,0 +1,5 @@
+org.kurento.client
+org.kurento.room
+org.kurento.room.api
+org.kurento.room.api.pojo
+org.kurento.room.exception
