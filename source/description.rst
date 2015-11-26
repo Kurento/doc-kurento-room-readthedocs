@@ -17,6 +17,10 @@ For example, some might need only small modifications on the client side but
 others will want to inject their logic on server side and might even have to
 modify the SDK.
 
+..
+   Image source:
+   https://docs.google.com/a/naevatec.com/drawings/d/1I3Upj-vMlEtBkt0InWNKQ2ChpzhoS73wf7dgvDqcjug/edit?usp=sharing
+
 .. figure:: images/Room-intro.png 
    :align:   center 
    :alt: Kurento Room component layers

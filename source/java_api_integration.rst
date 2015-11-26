@@ -185,6 +185,10 @@ POJOs
 Room SDK integration diagram (with notifications)
 =================================================
 
+..
+   Image source:
+   https://docs.google.com/a/naevatec.com/drawings/d/1sAng_Gp3CtZHuTOacHJT8_tlcEdgmUIRvaQy9OrhpUM/edit?usp=sharing
+
 .. figure:: images/Room-stack.png 
    :align:   center 
    :alt:  Room SDK integration diagram
