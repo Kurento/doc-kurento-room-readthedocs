@@ -1,3 +1,10 @@
+.. image:: images/kurento-rect-logo3.png
+   :alt:    Kurento logo
+   :align:  center
+
+|
+|
+
 %%%%%%%%%%%%%%%%%
 Table of Contents
 %%%%%%%%%%%%%%%%%
