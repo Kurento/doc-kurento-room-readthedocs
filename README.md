@@ -17,17 +17,14 @@ $ sudo apt-get install python-pip python-dev build-essential
 $ sudo apt-get install graphviz
 ```
 
-The documentation will be generated during the *package* phase of a Maven build
-of this project:
+The documentation will be generated in html executing:
 
 ```
-$ cd kurento-room-doc
-$ mvn clean package
+$ make html
 ```
 
-The resulting HTML files will be located in the folder
-`kurento-room-doc/target/site/html` (`index.html` should be opened with a
-web browser).
+The resulting HTML files will be located in the folder `build/html/` (`index.html` 
+should be opened with a web browser).
 
 What is Kurento
 ---------------
