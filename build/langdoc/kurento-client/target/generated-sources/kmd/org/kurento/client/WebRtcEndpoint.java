@@ -108,6 +108,295 @@ public interface WebRtcEndpoint extends BaseRtpEndpoint {
  **/
     void addIceCandidate(Transaction tx, @org.kurento.client.internal.server.Param("candidate") org.kurento.client.IceCandidate candidate);
 
+
+/**
+ *
+ * Create a new data channel if data channel are supported
+ *
+ * @param label
+ *       Channel's label attribute
+ * @param ordered
+ *       If the data channel should guarantee order or not
+ * @param maxPacketLifeTime
+ *       the length of the time window (in milliseconds) during which transmissions and retransmissions may occur in unreliable mode
+ * @param maxRetransmits
+ *       maximum number of retransmissions that are attempted in unreliable mode
+ * @param protocol
+ *       the name of the sub-protocol used
+ *
+ **/
+  void createDataChannel(@org.kurento.client.internal.server.Param("label") String label, @org.kurento.client.internal.server.Param("ordered") boolean ordered, @org.kurento.client.internal.server.Param("maxPacketLifeTime") int maxPacketLifeTime, @org.kurento.client.internal.server.Param("maxRetransmits") int maxRetransmits, @org.kurento.client.internal.server.Param("protocol") String protocol);
+
+/**
+ *
+ * Asynchronous version of createDataChannel:
+ * {@link Continuation#onSuccess} is called when the action is
+ * done. If an error occurs, {@link Continuation#onError} is called.
+ * @see WebRtcEndpoint#createDataChannel
+ *
+ * @param label
+ *       Channel's label attribute
+ * @param ordered
+ *       If the data channel should guarantee order or not
+ * @param maxPacketLifeTime
+ *       the length of the time window (in milliseconds) during which transmissions and retransmissions may occur in unreliable mode
+ * @param maxRetransmits
+ *       maximum number of retransmissions that are attempted in unreliable mode
+ * @param protocol
+ *       the name of the sub-protocol used
+ *
+ **/
+    void createDataChannel(@org.kurento.client.internal.server.Param("label") String label, @org.kurento.client.internal.server.Param("ordered") boolean ordered, @org.kurento.client.internal.server.Param("maxPacketLifeTime") int maxPacketLifeTime, @org.kurento.client.internal.server.Param("maxRetransmits") int maxRetransmits, @org.kurento.client.internal.server.Param("protocol") String protocol, Continuation<Void> cont);
+
+/**
+ *
+ * Create a new data channel if data channel are supported
+ *
+ * @param label
+ *       Channel's label attribute
+ * @param ordered
+ *       If the data channel should guarantee order or not
+ * @param maxPacketLifeTime
+ *       the length of the time window (in milliseconds) during which transmissions and retransmissions may occur in unreliable mode
+ * @param maxRetransmits
+ *       maximum number of retransmissions that are attempted in unreliable mode
+ * @param protocol
+ *       the name of the sub-protocol used
+ *
+ **/
+    void createDataChannel(Transaction tx, @org.kurento.client.internal.server.Param("label") String label, @org.kurento.client.internal.server.Param("ordered") boolean ordered, @org.kurento.client.internal.server.Param("maxPacketLifeTime") int maxPacketLifeTime, @org.kurento.client.internal.server.Param("maxRetransmits") int maxRetransmits, @org.kurento.client.internal.server.Param("protocol") String protocol);
+
+
+/**
+ *
+ * Close an opened data channel
+ *
+ * @param channelId
+ *       The channel identifier
+ *
+ **/
+  void closeDataChannel(@org.kurento.client.internal.server.Param("channelId") int channelId);
+
+/**
+ *
+ * Asynchronous version of closeDataChannel:
+ * {@link Continuation#onSuccess} is called when the action is
+ * done. If an error occurs, {@link Continuation#onError} is called.
+ * @see WebRtcEndpoint#closeDataChannel
+ *
+ * @param channelId
+ *       The channel identifier
+ *
+ **/
+    void closeDataChannel(@org.kurento.client.internal.server.Param("channelId") int channelId, Continuation<Void> cont);
+
+/**
+ *
+ * Close an opened data channel
+ *
+ * @param channelId
+ *       The channel identifier
+ *
+ **/
+    void closeDataChannel(Transaction tx, @org.kurento.client.internal.server.Param("channelId") int channelId);
+
+
+/**
+ *
+ * Create a new data channel if data channel are supported
+ *
+ **/
+  void createDataChannel();
+
+/**
+ *
+ * Asynchronous version of createDataChannel:
+ * {@link Continuation#onSuccess} is called when the action is
+ * done. If an error occurs, {@link Continuation#onError} is called.
+ * @see WebRtcEndpoint#createDataChannel
+ *
+ **/
+    void createDataChannel(Continuation<Void> cont);
+
+/**
+ *
+ * Create a new data channel if data channel are supported
+ *
+ **/
+    void createDataChannel(Transaction tx);
+
+
+/**
+ *
+ * Create a new data channel if data channel are supported
+ *
+ * @param label
+ *       Channel's label attribute
+ *
+ **/
+  void createDataChannel(@org.kurento.client.internal.server.Param("label") String label);
+
+/**
+ *
+ * Asynchronous version of createDataChannel:
+ * {@link Continuation#onSuccess} is called when the action is
+ * done. If an error occurs, {@link Continuation#onError} is called.
+ * @see WebRtcEndpoint#createDataChannel
+ *
+ * @param label
+ *       Channel's label attribute
+ *
+ **/
+    void createDataChannel(@org.kurento.client.internal.server.Param("label") String label, Continuation<Void> cont);
+
+/**
+ *
+ * Create a new data channel if data channel are supported
+ *
+ * @param label
+ *       Channel's label attribute
+ *
+ **/
+    void createDataChannel(Transaction tx, @org.kurento.client.internal.server.Param("label") String label);
+
+
+/**
+ *
+ * Create a new data channel if data channel are supported
+ *
+ * @param label
+ *       Channel's label attribute
+ * @param ordered
+ *       If the data channel should guarantee order or not
+ *
+ **/
+  void createDataChannel(@org.kurento.client.internal.server.Param("label") String label, @org.kurento.client.internal.server.Param("ordered") boolean ordered);
+
+/**
+ *
+ * Asynchronous version of createDataChannel:
+ * {@link Continuation#onSuccess} is called when the action is
+ * done. If an error occurs, {@link Continuation#onError} is called.
+ * @see WebRtcEndpoint#createDataChannel
+ *
+ * @param label
+ *       Channel's label attribute
+ * @param ordered
+ *       If the data channel should guarantee order or not
+ *
+ **/
+    void createDataChannel(@org.kurento.client.internal.server.Param("label") String label, @org.kurento.client.internal.server.Param("ordered") boolean ordered, Continuation<Void> cont);
+
+/**
+ *
+ * Create a new data channel if data channel are supported
+ *
+ * @param label
+ *       Channel's label attribute
+ * @param ordered
+ *       If the data channel should guarantee order or not
+ *
+ **/
+    void createDataChannel(Transaction tx, @org.kurento.client.internal.server.Param("label") String label, @org.kurento.client.internal.server.Param("ordered") boolean ordered);
+
+
+/**
+ *
+ * Create a new data channel if data channel are supported
+ *
+ * @param label
+ *       Channel's label attribute
+ * @param ordered
+ *       If the data channel should guarantee order or not
+ * @param maxPacketLifeTime
+ *       the length of the time window (in milliseconds) during which transmissions and retransmissions may occur in unreliable mode
+ *
+ **/
+  void createDataChannel(@org.kurento.client.internal.server.Param("label") String label, @org.kurento.client.internal.server.Param("ordered") boolean ordered, @org.kurento.client.internal.server.Param("maxPacketLifeTime") int maxPacketLifeTime);
+
+/**
+ *
+ * Asynchronous version of createDataChannel:
+ * {@link Continuation#onSuccess} is called when the action is
+ * done. If an error occurs, {@link Continuation#onError} is called.
+ * @see WebRtcEndpoint#createDataChannel
+ *
+ * @param label
+ *       Channel's label attribute
+ * @param ordered
+ *       If the data channel should guarantee order or not
+ * @param maxPacketLifeTime
+ *       the length of the time window (in milliseconds) during which transmissions and retransmissions may occur in unreliable mode
+ *
+ **/
+    void createDataChannel(@org.kurento.client.internal.server.Param("label") String label, @org.kurento.client.internal.server.Param("ordered") boolean ordered, @org.kurento.client.internal.server.Param("maxPacketLifeTime") int maxPacketLifeTime, Continuation<Void> cont);
+
+/**
+ *
+ * Create a new data channel if data channel are supported
+ *
+ * @param label
+ *       Channel's label attribute
+ * @param ordered
+ *       If the data channel should guarantee order or not
+ * @param maxPacketLifeTime
+ *       the length of the time window (in milliseconds) during which transmissions and retransmissions may occur in unreliable mode
+ *
+ **/
+    void createDataChannel(Transaction tx, @org.kurento.client.internal.server.Param("label") String label, @org.kurento.client.internal.server.Param("ordered") boolean ordered, @org.kurento.client.internal.server.Param("maxPacketLifeTime") int maxPacketLifeTime);
+
+
+/**
+ *
+ * Create a new data channel if data channel are supported
+ *
+ * @param label
+ *       Channel's label attribute
+ * @param ordered
+ *       If the data channel should guarantee order or not
+ * @param maxPacketLifeTime
+ *       the length of the time window (in milliseconds) during which transmissions and retransmissions may occur in unreliable mode
+ * @param maxRetransmits
+ *       maximum number of retransmissions that are attempted in unreliable mode
+ *
+ **/
+  void createDataChannel(@org.kurento.client.internal.server.Param("label") String label, @org.kurento.client.internal.server.Param("ordered") boolean ordered, @org.kurento.client.internal.server.Param("maxPacketLifeTime") int maxPacketLifeTime, @org.kurento.client.internal.server.Param("maxRetransmits") int maxRetransmits);
+
+/**
+ *
+ * Asynchronous version of createDataChannel:
+ * {@link Continuation#onSuccess} is called when the action is
+ * done. If an error occurs, {@link Continuation#onError} is called.
+ * @see WebRtcEndpoint#createDataChannel
+ *
+ * @param label
+ *       Channel's label attribute
+ * @param ordered
+ *       If the data channel should guarantee order or not
+ * @param maxPacketLifeTime
+ *       the length of the time window (in milliseconds) during which transmissions and retransmissions may occur in unreliable mode
+ * @param maxRetransmits
+ *       maximum number of retransmissions that are attempted in unreliable mode
+ *
+ **/
+    void createDataChannel(@org.kurento.client.internal.server.Param("label") String label, @org.kurento.client.internal.server.Param("ordered") boolean ordered, @org.kurento.client.internal.server.Param("maxPacketLifeTime") int maxPacketLifeTime, @org.kurento.client.internal.server.Param("maxRetransmits") int maxRetransmits, Continuation<Void> cont);
+
+/**
+ *
+ * Create a new data channel if data channel are supported
+ *
+ * @param label
+ *       Channel's label attribute
+ * @param ordered
+ *       If the data channel should guarantee order or not
+ * @param maxPacketLifeTime
+ *       the length of the time window (in milliseconds) during which transmissions and retransmissions may occur in unreliable mode
+ * @param maxRetransmits
+ *       maximum number of retransmissions that are attempted in unreliable mode
+ *
+ **/
+    void createDataChannel(Transaction tx, @org.kurento.client.internal.server.Param("label") String label, @org.kurento.client.internal.server.Param("ordered") boolean ordered, @org.kurento.client.internal.server.Param("maxPacketLifeTime") int maxPacketLifeTime, @org.kurento.client.internal.server.Param("maxRetransmits") int maxRetransmits);
+
     /**
      * Add a {@link EventListener} for event {@link OnIceCandidateEvent}. Synchronous call.
      *
@@ -222,6 +511,82 @@ public interface WebRtcEndpoint extends BaseRtpEndpoint {
      **/
     @org.kurento.client.internal.server.EventSubscription(OnIceComponentStateChangedEvent.class)
     void removeOnIceComponentStateChangedListener(ListenerSubscription listenerSubscription, Continuation<Void> cont);
+    /**
+     * Add a {@link EventListener} for event {@link OnDataChannelOpenedEvent}. Synchronous call.
+     *
+     * @param  listener Listener to be called on OnDataChannelOpenedEvent
+     * @return ListenerSubscription for the given Listener
+     *
+     **/
+    @org.kurento.client.internal.server.EventSubscription(OnDataChannelOpenedEvent.class)
+    ListenerSubscription addOnDataChannelOpenedListener(EventListener<OnDataChannelOpenedEvent> listener);
+    /**
+     * Add a {@link EventListener} for event {@link OnDataChannelOpenedEvent}. Asynchronous call.
+     * Calls Continuation&lt;ListenerSubscription&gt; when it has been added.
+     *
+     * @param listener Listener to be called on OnDataChannelOpenedEvent
+     * @param cont     Continuation to be called when the listener is registered
+     *
+     **/
+    @org.kurento.client.internal.server.EventSubscription(OnDataChannelOpenedEvent.class)
+    void addOnDataChannelOpenedListener(EventListener<OnDataChannelOpenedEvent> listener, Continuation<ListenerSubscription> cont);
+    
+	/**
+     * Remove a {@link ListenerSubscription} for event {@link OnDataChannelOpenedEvent}. Synchronous call.
+     *
+     * @param listenerSubscription Listener subscription to be removed
+     *
+     **/
+    @org.kurento.client.internal.server.EventSubscription(OnDataChannelOpenedEvent.class)
+    void removeOnDataChannelOpenedListener(ListenerSubscription listenerSubscription);
+    /**
+     * Remove a {@link ListenerSubscription} for event {@link OnDataChannelOpenedEvent}. Asynchronous call.
+     * Calls Continuation&lt;Void&gt; when it has been removed.
+     *
+     * @param listenerSubscription Listener subscription to be removed
+     * @param cont                 Continuation to be called when the listener is removed
+     *
+     **/
+    @org.kurento.client.internal.server.EventSubscription(OnDataChannelOpenedEvent.class)
+    void removeOnDataChannelOpenedListener(ListenerSubscription listenerSubscription, Continuation<Void> cont);
+    /**
+     * Add a {@link EventListener} for event {@link OnDataChannelClosedEvent}. Synchronous call.
+     *
+     * @param  listener Listener to be called on OnDataChannelClosedEvent
+     * @return ListenerSubscription for the given Listener
+     *
+     **/
+    @org.kurento.client.internal.server.EventSubscription(OnDataChannelClosedEvent.class)
+    ListenerSubscription addOnDataChannelClosedListener(EventListener<OnDataChannelClosedEvent> listener);
+    /**
+     * Add a {@link EventListener} for event {@link OnDataChannelClosedEvent}. Asynchronous call.
+     * Calls Continuation&lt;ListenerSubscription&gt; when it has been added.
+     *
+     * @param listener Listener to be called on OnDataChannelClosedEvent
+     * @param cont     Continuation to be called when the listener is registered
+     *
+     **/
+    @org.kurento.client.internal.server.EventSubscription(OnDataChannelClosedEvent.class)
+    void addOnDataChannelClosedListener(EventListener<OnDataChannelClosedEvent> listener, Continuation<ListenerSubscription> cont);
+    
+	/**
+     * Remove a {@link ListenerSubscription} for event {@link OnDataChannelClosedEvent}. Synchronous call.
+     *
+     * @param listenerSubscription Listener subscription to be removed
+     *
+     **/
+    @org.kurento.client.internal.server.EventSubscription(OnDataChannelClosedEvent.class)
+    void removeOnDataChannelClosedListener(ListenerSubscription listenerSubscription);
+    /**
+     * Remove a {@link ListenerSubscription} for event {@link OnDataChannelClosedEvent}. Asynchronous call.
+     * Calls Continuation&lt;Void&gt; when it has been removed.
+     *
+     * @param listenerSubscription Listener subscription to be removed
+     * @param cont                 Continuation to be called when the listener is removed
+     *
+     **/
+    @org.kurento.client.internal.server.EventSubscription(OnDataChannelClosedEvent.class)
+    void removeOnDataChannelClosedListener(ListenerSubscription listenerSubscription, Continuation<Void> cont);
     
 
 

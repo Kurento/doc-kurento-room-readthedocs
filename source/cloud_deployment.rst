@@ -20,7 +20,8 @@ Kurento room demo installer
 ===========================
 
 To build the installation binaries from the source code, follow the instructions
-from the README file that can be found in the project ``kurento-room-demo``.
+from the README file that can be found in the project 
+`kurento-room-demo <https://github.com/Kurento/kurento-room/tree/master/kurento-room-demo>`_.
 
 Running the application
 =======================

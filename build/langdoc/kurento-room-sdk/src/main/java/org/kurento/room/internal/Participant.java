@@ -77,7 +77,7 @@ public class Participant {
 
 		for (Participant other : room.getParticipants())
 			if (!other.getName().equals(this.name))
-				addSubscriber(other.getName());
+				getNewOrExistingSubscriber(other.getName());
 	}
 
 	public void createPublishingEndpoint() {
@@ -216,12 +216,7 @@ public class Participant {
 		log.debug("PARTICIPANT {}: Creating a subscriber endpoint to user {}",
 				this.name, senderName);
 
-		SubscriberEndpoint subscriber =
-				new SubscriberEndpoint(web, this, senderName, pipeline);
-		SubscriberEndpoint oldSubscriber =
-				this.subscribers.putIfAbsent(senderName, subscriber);
-		if (oldSubscriber != null)
-			subscriber = oldSubscriber;
+		SubscriberEndpoint subscriber = getNewOrExistingSubscriber(senderName);
 
 		try {
 			CountDownLatch subscriberLatch = new CountDownLatch(1);
@@ -297,7 +292,7 @@ public class Participant {
 
 	public void mutePublishedMedia(MutedMediaType muteType) {
 		if (muteType == null)
-			throw new RoomException(Code.MUTE_MEDIA_ERROR_CODE,
+			throw new RoomException(Code.MEDIA_MUTE_ERROR_CODE,
 					"Mute type cannot be null");
 		this.getPublisher().mute(muteType);
 	}
@@ -312,7 +307,7 @@ public class Participant {
 
 	public void muteSubscribedMedia(Participant sender, MutedMediaType muteType) {
 		if (muteType == null)
-			throw new RoomException(Code.MUTE_MEDIA_ERROR_CODE,
+			throw new RoomException(Code.MEDIA_MUTE_ERROR_CODE,
 					"Mute type cannot be null");
 		String senderName = sender.getName();
 		SubscriberEndpoint subscriberEndpoint = subscribers.get(senderName);
@@ -357,11 +352,15 @@ public class Participant {
 
 	public void close() {
 		log.debug("PARTICIPANT {}: Closing user", this.name);
+		if (isClosed()) {
+			log.warn("PARTICIPANT {}: Already closed", this.name);
+			return;
+		}
 		this.closed = true;
 		for (String remoteParticipantName : subscribers.keySet()) {
 			SubscriberEndpoint subscriber =
 					this.subscribers.get(remoteParticipantName);
-			if (subscriber.getEndpoint() != null) {
+			if (subscriber != null && subscriber.getEndpoint() != null) {
 				releaseSubscriberEndpoint(remoteParticipantName, subscriber);
 				log.debug("PARTICIPANT {}: Released subscriber endpoint to {}",
 						this.name, remoteParticipantName);
@@ -374,19 +373,26 @@ public class Participant {
 		releasePublisherEndpoint();
 	}
 
-	public SubscriberEndpoint addSubscriber(String newUserName) {
+	/**
+	 * Returns a {@link SubscriberEndpoint} for the given username. The endpoint
+	 * is created if not found.
+	 * 
+	 * @param remoteName name of another user
+	 * @return the endpoint instance
+	 */
+	public SubscriberEndpoint getNewOrExistingSubscriber(String remoteName) {
 		SubscriberEndpoint sendingEndpoint =
-				new SubscriberEndpoint(web, this, newUserName, pipeline);
+				new SubscriberEndpoint(web, this, remoteName, pipeline);
 		SubscriberEndpoint existingSendingEndpoint =
-				this.subscribers.putIfAbsent(newUserName, sendingEndpoint);
+				this.subscribers.putIfAbsent(remoteName, sendingEndpoint);
 		if (existingSendingEndpoint != null) {
 			sendingEndpoint = existingSendingEndpoint;
 			log.trace(
 					"PARTICIPANT {}: Already exists a subscriber endpoint to user {}",
-					this.name, newUserName);
+					this.name, remoteName);
 		} else
 			log.debug("PARTICIPANT {}: New subscriber endpoint to user {}",
-					this.name, newUserName);
+					this.name, remoteName);
 		return sendingEndpoint;
 	}
 
@@ -394,7 +400,8 @@ public class Participant {
 		if (this.name.equals(endpointName))
 			this.publisher.addIceCandidate(iceCandidate);
 		else
-			this.addSubscriber(endpointName).addIceCandidate(iceCandidate);
+			this.getNewOrExistingSubscriber(endpointName).addIceCandidate(
+					iceCandidate);
 	}
 
 	public void sendIceCandidate(String endpointName, IceCandidate candidate) {

@@ -1,7 +1,6 @@
 /var/lib/jenkins/workspace/Development/kurento_room_doc_readthedocs_merged/doc-kurento-room/build/langdoc/kurento-room-sdk/src/main/java/org/kurento/room/api/UserNotificationService.java
-/var/lib/jenkins/workspace/Development/kurento_room_doc_readthedocs_merged/doc-kurento-room/build/langdoc/kurento-room-sdk/src/main/java/org/kurento/room/internal/DefaultRoomEventHandler.java
 /var/lib/jenkins/workspace/Development/kurento_room_doc_readthedocs_merged/doc-kurento-room/build/langdoc/kurento-room-sdk/src/main/java/org/kurento/room/endpoint/SdpType.java
-/var/lib/jenkins/workspace/Development/kurento_room_doc_readthedocs_merged/doc-kurento-room/build/langdoc/kurento-room-sdk/src/main/java/org/kurento/room/api/RoomEventHandler.java
+/var/lib/jenkins/workspace/Development/kurento_room_doc_readthedocs_merged/doc-kurento-room/build/langdoc/kurento-room-sdk/src/main/java/org/kurento/room/internal/ProtocolElements.java
 /var/lib/jenkins/workspace/Development/kurento_room_doc_readthedocs_merged/doc-kurento-room/build/langdoc/kurento-room-sdk/src/main/java/org/kurento/room/internal/Participant.java
 /var/lib/jenkins/workspace/Development/kurento_room_doc_readthedocs_merged/doc-kurento-room/build/langdoc/kurento-room-sdk/src/main/java/org/kurento/room/api/KurentoClientSessionInfo.java
 /var/lib/jenkins/workspace/Development/kurento_room_doc_readthedocs_merged/doc-kurento-room/build/langdoc/kurento-room-sdk/src/main/java/org/kurento/room/internal/DefaultKurentoClientSessionInfo.java
@@ -9,10 +8,11 @@
 /var/lib/jenkins/workspace/Development/kurento_room_doc_readthedocs_merged/doc-kurento-room/build/langdoc/kurento-room-sdk/src/main/java/org/kurento/room/RoomManager.java
 /var/lib/jenkins/workspace/Development/kurento_room_doc_readthedocs_merged/doc-kurento-room/build/langdoc/kurento-room-sdk/src/main/java/org/kurento/room/endpoint/MediaEndpoint.java
 /var/lib/jenkins/workspace/Development/kurento_room_doc_readthedocs_merged/doc-kurento-room/build/langdoc/kurento-room-sdk/src/main/java/org/kurento/room/api/RoomHandler.java
-/var/lib/jenkins/workspace/Development/kurento_room_doc_readthedocs_merged/doc-kurento-room/build/langdoc/kurento-room-sdk/src/main/java/org/kurento/room/SyncRoomManager.java
 /var/lib/jenkins/workspace/Development/kurento_room_doc_readthedocs_merged/doc-kurento-room/build/langdoc/kurento-room-sdk/src/main/java/org/kurento/room/endpoint/SubscriberEndpoint.java
-/var/lib/jenkins/workspace/Development/kurento_room_doc_readthedocs_merged/doc-kurento-room/build/langdoc/kurento-room-sdk/src/main/java/org/kurento/room/exception/AdminException.java
 /var/lib/jenkins/workspace/Development/kurento_room_doc_readthedocs_merged/doc-kurento-room/build/langdoc/kurento-room-sdk/src/main/java/org/kurento/room/api/MutedMediaType.java
+/var/lib/jenkins/workspace/Development/kurento_room_doc_readthedocs_merged/doc-kurento-room/build/langdoc/kurento-room-sdk/src/main/java/org/kurento/room/NotificationRoomManager.java
+/var/lib/jenkins/workspace/Development/kurento_room_doc_readthedocs_merged/doc-kurento-room/build/langdoc/kurento-room-sdk/src/main/java/org/kurento/room/api/NotificationRoomHandler.java
+/var/lib/jenkins/workspace/Development/kurento_room_doc_readthedocs_merged/doc-kurento-room/build/langdoc/kurento-room-sdk/src/main/java/org/kurento/room/internal/DefaultNotificationRoomHandler.java
 /var/lib/jenkins/workspace/Development/kurento_room_doc_readthedocs_merged/doc-kurento-room/build/langdoc/kurento-room-sdk/src/main/java/org/kurento/room/exception/RoomException.java
 /var/lib/jenkins/workspace/Development/kurento_room_doc_readthedocs_merged/doc-kurento-room/build/langdoc/kurento-room-sdk/src/main/java/org/kurento/room/api/KurentoClientProvider.java
 /var/lib/jenkins/workspace/Development/kurento_room_doc_readthedocs_merged/doc-kurento-room/build/langdoc/kurento-room-sdk/src/main/java/org/kurento/room/api/pojo/ParticipantRequest.java

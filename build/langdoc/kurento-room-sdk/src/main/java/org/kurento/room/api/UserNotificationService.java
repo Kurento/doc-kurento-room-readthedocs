@@ -16,20 +16,22 @@ package org.kurento.room.api;
 
 import org.kurento.room.api.pojo.ParticipantRequest;
 import org.kurento.room.exception.RoomException;
-import org.kurento.room.internal.DefaultRoomEventHandler;
+import org.kurento.room.internal.DefaultNotificationRoomHandler;
 
 /**
  * This specification was designed so that the room manager could send
  * notifications or responses back to the remote peers whilst remaining isolated
  * from the transport or communications layers. The notification API will be
- * used by the default implementation of {@link RoomEventHandler} (provided by
- * the room SDK - {@link DefaultRoomEventHandler}). JSON-RPC messages
- * specification was used to define the following primitives.It is expected but
- * not required for the client-server communications to use this protocol. It is
- * left for the integrator to provide an implementation for this API. If the
- * developer chooses another mechanism to communicate with the client, they will
- * have to use their own implementation of RoomEventHandler which will completly
- * decouple the communication details from the room API.
+ * used by the default implementation of {@link NotificationRoomHandler} (provided by
+ * the room SDK - {@link DefaultNotificationRoomHandler}).
+ * <p/>
+ * JSON-RPC messages specification was used to define the following
+ * primitives.It is expected but not required for the client-server
+ * communications to use this protocol. It is left for the integrator to provide
+ * an implementation for this API. If the developer chooses another mechanism to
+ * communicate with the client, they will have to use their own implementation
+ * of NotificationRoomHandler which will completly decouple the communication details
+ * from the room API.
  * 
  * @author <a href="mailto:rvlad@naevatec.com">Radu Tom Vlad</a>
  */
@@ -40,7 +42,7 @@ public interface UserNotificationService {
 	 * 
 	 * @param participantRequest instance of {@link ParticipantRequest} POJO
 	 * @param result Object containing information that depends on the invoked
-	 *        method. It’d normally be a JSON element-type object.
+	 *        method. It'd normally be a JSON element-type object.
 	 */
 	void sendResponse(ParticipantRequest participantRequest, Object result);
 
@@ -59,14 +61,14 @@ public interface UserNotificationService {
 
 	/**
 	 * Sends a notification to a remote peer. This falls outside the normal
-	 * exchange of messages (client requests - server answers) so there’s no
+	 * exchange of messages (client requests - server answers) so there's no
 	 * need for a request identifier.
 	 * 
 	 * @param participantId identifier of the targeted participant
 	 * @param method String with the name of the method or event to be invoked
 	 *        on the client
 	 * @param params Object containing information that depends on the invoked
-	 *        method. It’d normally be a JSON element-type object.
+	 *        method. It'd normally be a JSON element-type object.
 	 */
 	void sendNotification(String participantId, String method, Object params);
 

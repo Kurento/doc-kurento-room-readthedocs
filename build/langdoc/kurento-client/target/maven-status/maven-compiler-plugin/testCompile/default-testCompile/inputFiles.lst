@@ -3,13 +3,14 @@
 /var/lib/jenkins/workspace/Development/kurento_room_doc_readthedocs_merged/doc-kurento-room/build/langdoc/kurento-client/src/test/java/org/kurento/client/internal/test/model/client/SampleEnum.java
 /var/lib/jenkins/workspace/Development/kurento_room_doc_readthedocs_merged/doc-kurento-room/build/langdoc/kurento-client/src/test/java/org/kurento/client/internal/test/ConstructionTest.java
 /var/lib/jenkins/workspace/Development/kurento_room_doc_readthedocs_merged/doc-kurento-room/build/langdoc/kurento-client/src/test/java/org/kurento/client/internal/test/model/client/MediaServerFactory.java
+/var/lib/jenkins/workspace/Development/kurento_room_doc_readthedocs_merged/doc-kurento-room/build/langdoc/kurento-client/src/test/java/org/kurento/client/internal/test/KmsUrlServiceLoaderTest.java
 /var/lib/jenkins/workspace/Development/kurento_room_doc_readthedocs_merged/doc-kurento-room/build/langdoc/kurento-client/src/test/java/org/kurento/client/internal/test/RomJsonConverterTest.java
 /var/lib/jenkins/workspace/Development/kurento_room_doc_readthedocs_merged/doc-kurento-room/build/langdoc/kurento-client/src/test/java/org/kurento/client/internal/test/RomClientWeakRemoteObjects.java
 /var/lib/jenkins/workspace/Development/kurento_room_doc_readthedocs_merged/doc-kurento-room/build/langdoc/kurento-client/src/test/java/org/kurento/client/internal/test/WebSocketRomTest.java
 /var/lib/jenkins/workspace/Development/kurento_room_doc_readthedocs_merged/doc-kurento-room/build/langdoc/kurento-client/src/test/java/org/kurento/client/internal/test/model/Sample2.java
 /var/lib/jenkins/workspace/Development/kurento_room_doc_readthedocs_merged/doc-kurento-room/build/langdoc/kurento-client/src/test/java/org/kurento/client/internal/test/model/client/ComplexParam.java
-/var/lib/jenkins/workspace/Development/kurento_room_doc_readthedocs_merged/doc-kurento-room/build/langdoc/kurento-client/src/test/java/org/kurento/client/internal/test/SyncConstMethodsTest.java
 /var/lib/jenkins/workspace/Development/kurento_room_doc_readthedocs_merged/doc-kurento-room/build/langdoc/kurento-client/src/test/java/org/kurento/client/internal/test/model/SampleRemoteClass.java
+/var/lib/jenkins/workspace/Development/kurento_room_doc_readthedocs_merged/doc-kurento-room/build/langdoc/kurento-client/src/test/java/org/kurento/client/internal/test/SyncConstMethodsTest.java
 /var/lib/jenkins/workspace/Development/kurento_room_doc_readthedocs_merged/doc-kurento-room/build/langdoc/kurento-client/src/test/java/org/kurento/client/internal/test/model/SampleRemoteClassImpl.java
 /var/lib/jenkins/workspace/Development/kurento_room_doc_readthedocs_merged/doc-kurento-room/build/langdoc/kurento-client/src/test/java/org/kurento/client/internal/test/model/Sample2Impl.java
 /var/lib/jenkins/workspace/Development/kurento_room_doc_readthedocs_merged/doc-kurento-room/build/langdoc/kurento-client/src/test/java/org/kurento/client/internal/test/RomInterfaceImplTest.java

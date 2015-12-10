@@ -48,11 +48,11 @@ implementing the client-side code for web browsers that support WebRTC.
 
 Demo application
 ================
-This project, named kurento-room-demo, contains the client-side implementation
+This project, named **kurento-room-demo**, contains the client-side implementation
 (HTML, Javascript, graphic resources) of the Rooms API and embeds the room
 server to provide the functionality required for group communications (the
 so-called rooms). Upon launch and using the SpringBoot framework, it starts the
-main application of the module kurento-room-server which exposes the rooms API
+main application of the module **kurento-room-server** which exposes the rooms API
 through an WebSocket interface. The client part has been implemented using
 Angular JS and lumX and it's using the room's  JS library for the client-side
 (``KurentoRoom.js``).
@@ -73,6 +73,3 @@ The demo allows web clients accessing the application's URI to:
   face overlay filter that adds a hat on top of a recognized human face)
 - select which video source to display in the larger area of the browser from
   the available thumbnails
-
-
-

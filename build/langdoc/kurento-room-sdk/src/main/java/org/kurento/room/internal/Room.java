@@ -44,8 +44,7 @@ public class Room {
 
 	private final static Logger log = LoggerFactory.getLogger(Room.class);
 
-	private final ConcurrentMap<String, Participant> participants =
-			new ConcurrentHashMap<String, Participant>();
+	private final ConcurrentMap<String, Participant> participants = new ConcurrentHashMap<String, Participant>();
 	private final String name;
 
 	private MediaPipeline pipeline;
@@ -59,12 +58,18 @@ public class Room {
 
 	private AtomicInteger activePublishers = new AtomicInteger(0);
 
+	private Object pipelineCreateLock = new Object();
+	private Object pipelineReleaseLock = new Object();
+	private volatile boolean pipelineReleased = false;
+	private boolean destroyKurentoClient;
+
 	public Room(String roomName, KurentoClient kurentoClient,
-			RoomHandler roomHandler) {
+			RoomHandler roomHandler, boolean destroyKurentoClient) {
 		this.name = roomName;
 		this.kurentoClient = kurentoClient;
+		this.destroyKurentoClient = destroyKurentoClient;
 		this.roomHandler = roomHandler;
-		log.info("ROOM {} has been created", roomName);
+		log.debug("New ROOM instance, named '{}'", roomName);
 	}
 
 	public String getName() {
@@ -95,55 +100,10 @@ public class Room {
 								+ name + "'");
 		}
 
-		if (pipeline == null) {
-			log.info("ROOM {}: Creating MediaPipeline", name);
-			try {
-				kurentoClient
-						.createMediaPipeline(new Continuation<MediaPipeline>() {
-							@Override
-							public void onSuccess(MediaPipeline result)
-									throws Exception {
-								pipeline = result;
-								pipelineLatch.countDown();
-								log.debug("ROOM {}: Created MediaPipeline",
-										name);
-							}
+		createPipeline();
 
-							@Override
-							public void onError(Throwable cause)
-									throws Exception {
-								pipelineLatch.countDown();
-								log.error(
-										"ROOM {}: Failed to create MediaPipeline",
-										name, cause);
-							}
-						});
-			} catch (Exception e) {
-				log.error("Unable to create media pipeline for room '{}'",
-						name, e);
-				pipelineLatch.countDown();
-			}
-			if (getPipeline() == null)
-				throw new RoomException(Code.CANNOT_CREATE_ROOM_ERROR_CODE,
-						"Unable to create media pipeline for room '" + name
-								+ "'");
-
-			pipeline.addErrorListener(new EventListener<ErrorEvent>() {
-				@Override
-				public void onEvent(ErrorEvent event) {
-					String desc =
-							event.getType() + ": " + event.getDescription()
-									+ "(errCode=" + event.getErrorCode() + ")";
-					log.warn("ROOM {}: Pipeline error encountered: {}", name,
-							desc);
-					roomHandler
-							.onPipelineError(name, getParticipantIds(), desc);
-				}
-			});
-		}
-
-		participants.put(participantId, new Participant(participantId,
-				userName, this, this.pipeline, webParticipant));
+		participants.put(participantId, new Participant(participantId, userName,
+				this, getPipeline(), webParticipant));
 
 		log.info("ROOM {}: Added participant {}", name, userName);
 	}
@@ -155,7 +115,7 @@ public class Room {
 		for (Participant participant1 : participants.values()) {
 			if (participant.equals(participant1))
 				continue;
-			participant1.addSubscriber(participant.getName());
+			participant1.getNewOrExistingSubscriber(participant.getName());
 		}
 
 		log.debug(
@@ -235,27 +195,17 @@ public class Room {
 
 			participants.clear();
 
-			if (pipeline != null) {
-				pipeline.release(new Continuation<Void>() {
-
-					@Override
-					public void onSuccess(Void result) throws Exception {
-						log.trace("ROOM {}: Released Pipeline", Room.this.name);
-					}
-
-					@Override
-					public void onError(Throwable cause) throws Exception {
-						log.warn("PARTICIPANT " + Room.this.name
-								+ ": Could not release Pipeline", cause);
-					}
-				});
-			}
+			closePipeline();
 
 			log.debug("Room {} closed", this.name);
 
+			if (destroyKurentoClient) {
+				kurentoClient.destroy();
+			}
+
 			this.closed = true;
 		} else {
-			log.warn("Closing an already closed room {}", this.name);
+			log.warn("Closing an already closed room '{}'", this.name);
 		}
 	}
 
@@ -275,8 +225,8 @@ public class Room {
 
 	private void checkClosed() {
 		if (closed)
-			throw new RoomException(Code.ROOM_CLOSED_ERROR_CODE, "The room '"
-					+ name + "' is closed");
+			throw new RoomException(Code.ROOM_CLOSED_ERROR_CODE,
+					"The room '" + name + "' is closed");
 	}
 
 	private void removeParticipant(Participant participant) {
@@ -302,5 +252,79 @@ public class Room {
 
 	public void deregisterPublisher() {
 		this.activePublishers.decrementAndGet();
+	}
+
+	private void createPipeline() {
+		synchronized (pipelineCreateLock) {
+			if (pipeline != null)
+				return;
+			log.info("ROOM {}: Creating MediaPipeline", name);
+			try {
+				kurentoClient
+						.createMediaPipeline(new Continuation<MediaPipeline>() {
+							@Override
+							public void onSuccess(MediaPipeline result)
+									throws Exception {
+								pipeline = result;
+								pipelineLatch.countDown();
+								log.debug("ROOM {}: Created MediaPipeline",
+										name);
+							}
+
+							@Override
+							public void onError(Throwable cause)
+									throws Exception {
+								pipelineLatch.countDown();
+								log.error(
+										"ROOM {}: Failed to create MediaPipeline",
+										name, cause);
+							}
+						});
+			} catch (Exception e) {
+				log.error("Unable to create media pipeline for room '{}'", name,
+						e);
+				pipelineLatch.countDown();
+			}
+			if (getPipeline() == null)
+				throw new RoomException(Code.ROOM_CANNOT_BE_CREATED_ERROR_CODE,
+						"Unable to create media pipeline for room '" + name
+								+ "'");
+
+			pipeline.addErrorListener(new EventListener<ErrorEvent>() {
+				@Override
+				public void onEvent(ErrorEvent event) {
+					String desc = event.getType() + ": "
+							+ event.getDescription() + "(errCode="
+							+ event.getErrorCode() + ")";
+					log.warn("ROOM {}: Pipeline error encountered: {}", name,
+							desc);
+					roomHandler.onPipelineError(name, getParticipantIds(),
+							desc);
+				}
+			});
+		}
+	}
+
+	private void closePipeline() {
+		synchronized (pipelineReleaseLock) {
+			if (pipeline == null || pipelineReleased)
+				return;
+			getPipeline().release(new Continuation<Void>() {
+
+				@Override
+				public void onSuccess(Void result) throws Exception {
+					log.debug("ROOM {}: Released Pipeline", Room.this.name);
+					pipelineReleased = true;
+				}
+
+				@Override
+				public void onError(Throwable cause) throws Exception {
+					log.warn(
+							"ROOM {}: Could not successfully release Pipeline",
+							Room.this.name, cause);
+					pipelineReleased = true;
+				}
+			});
+		}
 	}
 }
