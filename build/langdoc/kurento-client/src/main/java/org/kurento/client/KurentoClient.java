@@ -12,6 +12,7 @@
  * Lesser General Public License for more details.
  *
  */
+
 package org.kurento.client;
 
 import java.io.IOException;
@@ -44,162 +45,154 @@ import com.google.common.base.StandardSystemProperty;
  */
 public class KurentoClient {
 
-	private static final int KEEPALIVE_TIME = 4 * 60 * 1000;
+  private static final int KEEPALIVE_TIME = 4 * 60 * 1000;
 
-	private static Logger log = LoggerFactory.getLogger(KurentoClient.class);
+  private static Logger log = LoggerFactory.getLogger(KurentoClient.class);
 
-	protected RomManager manager;
+  protected RomManager manager;
 
-	private long requesTimeout = PropertiesManager
-	        .getProperty("kurento.client.requestTimeout", 10000);
+  private long requesTimeout = PropertiesManager.getProperty("kurento.client.requestTimeout",
+      10000);
 
-	private String id;
+  private String id;
 
-	private static KmsUrlLoader kmsUrlLoader;
+  private ServerManager serverManager;
 
-	public static synchronized String getKmsUrl(String id,
-	        Properties properties) {
+  private static KmsUrlLoader kmsUrlLoader;
 
-		if (kmsUrlLoader == null) {
+  public static synchronized String getKmsUrl(String id, Properties properties) {
 
-			Path configFile = Paths.get(
-			        StandardSystemProperty.USER_HOME.value(), ".kurento",
-			        "config.properties");
+    if (kmsUrlLoader == null) {
 
-			kmsUrlLoader = new KmsUrlLoader(configFile);
-		}
+      Path configFile = Paths.get(StandardSystemProperty.USER_HOME.value(), ".kurento",
+          "config.properties");
 
-		Object load = properties.get("loadPoints");
-		if (load == null) {
-			return kmsUrlLoader.getKmsUrl(id);
-		} else {
-			if (load instanceof Number) {
-				return kmsUrlLoader.getKmsUrlLoad(id,
-				        ((Number) load).intValue());
-			} else {
-				return kmsUrlLoader.getKmsUrlLoad(id,
-				        Integer.parseInt(load.toString()));
-			}
-		}
-	}
+      kmsUrlLoader = new KmsUrlLoader(configFile);
+    }
 
-	public static KurentoClient create() {
-		return create(new Properties());
-	}
+    Object load = properties.get("loadPoints");
+    if (load == null) {
+      return kmsUrlLoader.getKmsUrl(id);
+    } else {
+      if (load instanceof Number) {
+        return kmsUrlLoader.getKmsUrlLoad(id, ((Number) load).intValue());
+      } else {
+        return kmsUrlLoader.getKmsUrlLoad(id, Integer.parseInt(load.toString()));
+      }
+    }
+  }
 
-	public static KurentoClient create(Properties properties) {
-		String id = UUID.randomUUID().toString();
-		KurentoClient client = create(getKmsUrl(id, properties), properties);
-		client.setId(id);
-		return client;
-	}
+  public static KurentoClient create() {
+    return create(new Properties());
+  }
 
-	private void setId(String id) {
-		this.id = id;
-	}
+  public static KurentoClient create(Properties properties) {
+    String id = UUID.randomUUID().toString();
+    KurentoClient client = create(getKmsUrl(id, properties), properties);
+    client.setId(id);
+    return client;
+  }
 
-	public static KurentoClient create(String websocketUrl) {
-		return create(websocketUrl, new Properties());
-	}
+  private void setId(String id) {
+    this.id = id;
+  }
 
-	public static KurentoClient create(String websocketUrl,
-	        Properties properties) {
-		log.info("Connecting to kms in {}", websocketUrl);
-		JsonRpcClientWebSocket client = new JsonRpcClientWebSocket(
-		        websocketUrl);
-		client.enableHeartbeat(KEEPALIVE_TIME);
-		client.setLabel("KurentoClient");
-		return new KurentoClient(client);
-	}
+  public static KurentoClient create(String websocketUrl) {
+    return create(websocketUrl, new Properties());
+  }
 
-	public static KurentoClient create(String websocketUrl,
-	        KurentoConnectionListener listener) {
-		return create(websocketUrl, listener, new Properties());
-	}
+  public static KurentoClient create(String websocketUrl, Properties properties) {
+    log.info("Connecting to kms in {}", websocketUrl);
+    JsonRpcClientWebSocket client = new JsonRpcClientWebSocket(websocketUrl);
+    client.enableHeartbeat(KEEPALIVE_TIME);
+    client.setLabel("KurentoClient");
+    return new KurentoClient(client);
+  }
 
-	public static KurentoClient create(String websocketUrl,
-	        KurentoConnectionListener listener, Properties properties) {
-		log.info("Connecting to KMS in {}", websocketUrl);
-		JsonRpcClientWebSocket client = new JsonRpcClientWebSocket(websocketUrl,
-		        JsonRpcConnectionListenerKurento.create(listener));
-		client.enableHeartbeat(KEEPALIVE_TIME);
-		client.setLabel("KurentoClient");
-		return new KurentoClient(client);
+  public static KurentoClient create(String websocketUrl, KurentoConnectionListener listener) {
+    return create(websocketUrl, listener, new Properties());
+  }
 
-	}
+  public static KurentoClient create(String websocketUrl, KurentoConnectionListener listener,
+      Properties properties) {
+    log.info("Connecting to KMS in {}", websocketUrl);
+    JsonRpcClientWebSocket client = new JsonRpcClientWebSocket(websocketUrl,
+        JsonRpcConnectionListenerKurento.create(listener));
+    client.enableHeartbeat(KEEPALIVE_TIME);
+    client.setLabel("KurentoClient");
+    return new KurentoClient(client);
 
-	KurentoClient(JsonRpcClient client) {
-		this.manager = new RomManager(new RomClientJsonRpcClient(client));
-		client.setRequestTimeout(requesTimeout);
-		if (client instanceof JsonRpcClientWebSocket) {
-			((JsonRpcClientWebSocket) client).enableHeartbeat(KEEPALIVE_TIME);
-		}
-		try {
-			client.connect();
-		} catch (IOException e) {
-			throw new KurentoException("Exception connecting to KMS", e);
-		}
-	}
+  }
 
-	/**
-	 * Creates a new {@link MediaPipeline} in the media server
-	 *
-	 * @return The media pipeline
-	 */
-	public MediaPipeline createMediaPipeline() {
-		return new AbstractBuilder<MediaPipeline>(MediaPipeline.class, manager)
-		        .build();
-	}
+  KurentoClient(JsonRpcClient client) {
+    this.manager = new RomManager(new RomClientJsonRpcClient(client));
+    client.setRequestTimeout(requesTimeout);
+    if (client instanceof JsonRpcClientWebSocket) {
+      ((JsonRpcClientWebSocket) client).enableHeartbeat(KEEPALIVE_TIME);
+    }
+    try {
+      client.connect();
+    } catch (IOException e) {
+      throw new KurentoException("Exception connecting to KMS", e);
+    }
+  }
 
-	/**
-	 * Creates a new {@link MediaPipeline} in the media server
-	 *
-	 * @param cont
-	 *            An asynchronous callback handler. If the element was
-	 *            successfully created, the {@code onSuccess} method from the
-	 *            handler will receive a {@link MediaPipeline} stub from the
-	 *            media server.
-	 * @throws KurentoException
-	 *
-	 */
-	public void createMediaPipeline(final Continuation<MediaPipeline> cont)
-	        throws KurentoException {
-		new AbstractBuilder<MediaPipeline>(MediaPipeline.class, manager)
-		        .buildAsync(cont);
-	}
+  /**
+   * Creates a new {@link MediaPipeline} in the media server
+   *
+   * @return The media pipeline
+   */
+  public MediaPipeline createMediaPipeline() {
+    return new AbstractBuilder<MediaPipeline>(MediaPipeline.class, manager).build();
+  }
 
-	public MediaPipeline createMediaPipeline(Transaction tx) {
-		return new AbstractBuilder<MediaPipeline>(MediaPipeline.class, manager)
-		        .build(tx);
-	}
+  /**
+   * Creates a new {@link MediaPipeline} in the media server
+   *
+   * @param cont
+   *          An asynchronous callback handler. If the element was successfully created, the
+   *          {@code onSuccess} method from the handler will receive a {@link MediaPipeline} stub
+   *          from the media server.
+   * @throws KurentoException
+   *
+   */
+  public void createMediaPipeline(final Continuation<MediaPipeline> cont) throws KurentoException {
+    new AbstractBuilder<MediaPipeline>(MediaPipeline.class, manager).buildAsync(cont);
+  }
 
-	@PreDestroy
-	public void destroy() {
-		log.info("Closing KurentoClient");
-		manager.destroy();
-		if (kmsUrlLoader != null) {
-			kmsUrlLoader.clientDestroyed(id);
-		}
-	}
+  public MediaPipeline createMediaPipeline(Transaction tx) {
+    return new AbstractBuilder<MediaPipeline>(MediaPipeline.class, manager).build(tx);
+  }
 
-	public boolean isClosed() {
-		return manager.getRomClient().isClosed();
-	}
+  @PreDestroy
+  public void destroy() {
+    log.info("Closing KurentoClient");
+    manager.destroy();
+    if (kmsUrlLoader != null) {
+      kmsUrlLoader.clientDestroyed(id);
+    }
+  }
 
-	public static KurentoClient createFromJsonRpcClient(
-	        JsonRpcClient jsonRpcClient) {
-		return new KurentoClient(jsonRpcClient);
-	}
+  public boolean isClosed() {
+    return manager.getRomClient().isClosed();
+  }
 
-	public Transaction beginTransaction() {
-		return new TransactionImpl(manager);
-	}
+  public static KurentoClient createFromJsonRpcClient(JsonRpcClient jsonRpcClient) {
+    return new KurentoClient(jsonRpcClient);
+  }
 
-	public ServerManager getServerManager() {
-		return getById("manager_ServerManager", ServerManager.class);
-	}
+  public Transaction beginTransaction() {
+    return new TransactionImpl(manager);
+  }
 
-	public <T extends KurentoObject> T getById(String id, Class<T> clazz) {
-		return manager.getById(id, clazz);
-	}
+  public ServerManager getServerManager() {
+    if(serverManager == null){ 
+      serverManager = getById("manager_ServerManager", ServerManager.class);
+    }
+    return serverManager;
+  }
+
+  public <T extends KurentoObject> T getById(String id, Class<T> clazz) {
+    return manager.getById(id, clazz);
+  }
 }

@@ -1,2 +1,2 @@
-/var/lib/jenkins/workspace/Development/kurento_room_doc_readthedocs_merged/doc-kurento-room/build/langdoc/kurento-room-sdk/src/test/java/org/kurento/room/NotificationRoomManagerWithDefaultHandlerTest.java
-/var/lib/jenkins/workspace/Development/kurento_room_doc_readthedocs_merged/doc-kurento-room/build/langdoc/kurento-room-sdk/src/test/java/org/kurento/room/RoomManagerTest.java
+/opt/kurento/doc-kurento-room/build/langdoc/kurento-room-sdk/src/test/java/org/kurento/room/RoomManagerTest.java
+/opt/kurento/doc-kurento-room/build/langdoc/kurento-room-sdk/src/test/java/org/kurento/room/NotificationRoomManagerWithDefaultHandlerTest.java

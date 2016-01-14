@@ -2,7 +2,7 @@
 WebSocket API for Room Server
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The Kurento room server exposes a Websocket at http://localhost:8080/room, where
+The Kurento room server exposes a Websocket at ``wss://localhost:8443/room``, where
 the hostname and port depend on the current setup. The WebSocket enables the
 Kurento room app to instantly push events to the clients, as soon as they
 happen.

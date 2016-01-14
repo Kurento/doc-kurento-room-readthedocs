@@ -392,12 +392,12 @@ Init resources
 
 In order to join a room, call the initialization function from
 ``KurentoRoom``, providing the server's URI for listening JSON-RPC requests. In
-this case, the room server listens for WebSocket connections on the request
+this case, the room server listens for secure WebSocket connections on the request
 path ``/room``:
 
 .. sourcecode:: java
 
-   var wsUri = 'ws://' + location.host + '/room';
+   var wsUri = 'wss://' + location.host + '/room';
 
 You must also provide the room and username:
 
