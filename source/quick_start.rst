@@ -2,14 +2,46 @@
 Quick start
 %%%%%%%%%%%
 
-Running the demo
-----------------
-
 For a quick initial contact with the framework, we recommend running the demo
-application and observing the exchange of Websocket messages between the clients
+application and observing the exchange of WebSocket messages between the clients
 and the server. 
 
 Currently, the demo is only supported for Ubuntu 14.04 LTS 64bits.
+
+Functionalities
+---------------
+
+This project, named **kurento-room-demo**, contains the client-side implementation
+(HTML, Javascript, graphic resources) of the Rooms API and embeds the room
+server to provide the functionality required for group communications (the
+so-called rooms).
+
+Upon launch and using the SpringBoot framework, it starts the main application 
+of the module **kurento-room-server** which exposes the rooms API through an 
+WebSocket interface. 
+
+The client part has been implemented using Angular JS and lumX and it's using 
+the room's Javascript library for the client-side (``KurentoRoom.js``).
+
+This application allows web clients to:
+
+- login inside a room (creating the room if it doesn't exist)
+- leave the room
+- publish their media stream
+- mute their video and/or audio
+- enter fullscreen
+- automatically subscribe to any stream published in the room and play it on
+  the screen (video) and through the system speakers (audio)
+- unsubscribe from a stream
+- unpublish their media
+- send messages to the other peers
+- apply or remove a media filter over their published video stream (using a
+  face overlay filter that adds a hat on top of a recognized human face)
+- select which video source to display in the larger area of the browser from
+  the available thumbnails
+
+Running the demo
+----------------
 
 After cloning the tutorial, it can be executed directly from the terminal by 
 using Maven's ``exec`` plugin. To make sure the demo can be built and executed 

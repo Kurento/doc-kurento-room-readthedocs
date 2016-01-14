@@ -6,6 +6,19 @@ This tutorial is a guide for developing a multiconference  application using the
 Room API SDK. It is based on the development of the ``kurento-room-server``,
 ``kurento-room-client-js`` and ``kurento-room-demo``.
 
+The next figure tries to explain the different components of the demo and the
+communication channels between them.  
+
+..
+   Image source:
+   https://docs.google.com/a/naevatec.com/drawings/d/1I3Upj-vMlEtBkt0InWNKQ2ChpzhoS73wf7dgvDqcjug/edit?usp=sharing
+
+.. figure:: images/room-demo.png 
+   :align:   center 
+   :alt: Kurento Room Demo integration
+   
+   *Kurento Room Demo integration*
+
 Server-side code
 ================
 
@@ -17,19 +30,20 @@ Furthermore, this class with all its configuration can then be imported into
 application classes of other Spring projects (using Spring's ``@Import``
 annotation).
 
-Room management (w/ notifications)
-----------------------------------
+Room management
+---------------
 
 For managing rooms and their users, the server uses the Room SDK library.  We've
-chosen the notification-flavored API, namely the class
-``NotificationRoomManager``. We have to define the manager as a Spring bean
-that will be injected as a dependency when needed (``@Autowired`` annotation).
+chosen the notification-flavored API, namely the class ``NotificationRoomManager``. 
+We have to define the manager as a Spring bean that will be injected as a 
+dependency when needed (using the ``@Autowired`` annotation).
 
-But first, we need a UserNotificationService implementation to provide to the
-``NotificationRoomManager`` constructor, this will be an object of type
-``JsonRpcNotificationService`` that will store JSON-RPC sessions in order to
-support sending responses and notifications back to the clients. We also
-require a ``KurentoClientProvider`` instance that we've named ``KMSManager``:
+But first, we need a **UserNotificationService** implementation to provide to the
+``NotificationRoomManager`` constructor. We'll use an instance of the type
+``JsonRpcNotificationService`` that will store the WebSocket sessions for sending 
+responses and notifications back to the clients. 
+
+We also require a ``KurentoClientProvider`` instance that we've named ``KMSManager``:
 
 .. code-block:: java
 
@@ -249,7 +263,7 @@ extended version of ``JsonRpcUserControl`` was created,
 ``DemoJsonRpcUserControl``.
 
 This class overrides the method ``customRequest(...)`` to allow toggling the
-``FaceOverlayFilter`` which adds or removes the hat from the publisher's head.
+``FaceOverlayFilter``, which adds or removes the hat from the publisher's head.
 It stores the filter object as an attribute in the WebSocket session so that
 it'd be easier to remove it:
 
@@ -319,7 +333,7 @@ it'd be easier to remove it:
 Dependencies
 ------------
 
-There are several dependencies in its pom.xml file, Kurento Room Server, Kurento
+There are several dependencies in its ``pom.xml`` file, Kurento Room Server, Kurento
 Room Client JS (for the client-side library) and a Spring logging library. We
 had to manually exclude some transitive dependencies in order to avoid
 conflicts::

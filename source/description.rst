@@ -21,8 +21,8 @@ provides the means to interconnect the end-users through a Kurento Media Server
 instance. 
 
 ..
-   Image source: //TODO !!!
-   https://docs.google.com/a/naevatec.com/drawings/d/....
+   Image source:
+   https://docs.google.com/a/naevatec.com/drawings/d/1E1OPouyXDJzdM1P1D1nnHKd5NILkwWK_q-VEoGWBB5E/edit?usp=sharing
 
 .. figure:: images/room-top-arch.png
    :align:   center 
@@ -30,8 +30,8 @@ instance.
 
    *Architecture of a Room application*
 
-The API's core module, :ref:`Room SDK <core-label>`, is a Java library for the server-side
-which offers the main functionality for managing multi-conference sessions. 
+The API's core module, :ref:`Room SDK <core-label>`, is a Java library for the 
+server-side and has the main functionality of managing multi-conference sessions.
 
 Additionally, we provide :ref:`extra components <extra-label>` that can be used when 
 developing applications that follow the architecture depicted above:
@@ -44,8 +44,8 @@ developing applications that follow the architecture depicted above:
   (works with the Room Server only)
 
 ..
-   Image source: //TODO !!!
-   https://docs.google.com/a/naevatec.com/drawings/d/....
+   Image source:
+   https://docs.google.com/a/naevatec.com/drawings/d/1Vnrz3kjxg8ssu7bmB8xckRUYmxGpicNJH_XJ93Lhvn8/edit?usp=sharing
 
 .. figure:: images/room-components-integration.png
    :align:   center 
@@ -72,6 +72,11 @@ Java language. Some of the benefits from using this library:
 This component requires access to at least one instance of a Kurento Media Server 
 for WebRTC media handling.
 
+Developers can integrate this API directly into their application, but it's
+important to understand that this library doesn't possess, on its own, the 
+ability to communicate with the clients. Further details can be found in the 
+:doc:`core API section <java_api_integration>`.
+
 .. _extra-label:
 
 Other components
@@ -80,8 +85,9 @@ Other components
 Our *server* implementation, the Room Server, packs the functionality from the Room 
 SDK with technologies such as Spring Boot and JSON-RPC over WebSockets. As such,
 it combines the client communications component and the core Room API, providing
-a fully-fledged Rooms server application. Can be easily integrated into other applications
-that use the Spring Boot framework.
+a fully-fledged Rooms server application. 
+
+Can be easily integrated into other applications that use the Spring Boot framework.
 
 Both *client* libraries are designed to be used in combination with the Room Server,
 as they use the same JSON-RPC API.
@@ -93,7 +99,10 @@ On the other hand, the Javascript client also controls the browser's media
 initialization and negotiation details, enabling the developer to focus on application
 functionality.
 
-At the moment, there is no iOS client available.
+At the moment, there is **no iOS client** available.
+
+Also, please observe that the server's WebSocket API has a limitation concerning an 
+**user's name**, which is that it cannot contain **lower dashes**.
 
 Integration example
 -------------------
@@ -107,53 +116,11 @@ whatever component they need in order to build their application: some might
 need some minor modifications on the client side, whilst others would want to 
 inject their logic on server side and might even have to modify the SDK.
 
-For example, the demo shows how to integrate some of the provided components together with
-the client-side technology Angular JS and some small modifications of the server
-(adds a image filter for the video streams and a custom message type).
+For example, the demo shows how to integrate some of the provided components 
+together with the client-side technology Angular JS and some small modifications 
+of the server (adds a image filter for the video streams and a custom message type).
 
-..
-   Image source:
-   https://docs.google.com/a/naevatec.com/drawings/d/1I3Upj-vMlEtBkt0InWNKQ2ChpzhoS73wf7dgvDqcjug/edit?usp=sharing
-
-.. figure:: images/Room-intro.png 
-   :align:   center 
-   :alt: Kurento Room integration
-   
-   *Kurento Room integration*
-
-We provide a :doc:`quick start <quick_start>` guide for the demo's installation
+We provide a :doc:`quick_start` guide for the demo's installation
 and execution.
 
-Development hints
------------------
-
-These are some of the design and architecture requirements that an application 
-has to fulfill in order to use the Room API:
-
-- include the SDK module to its dependencies list
-- create one of the two `RoomManager` types as a singleton instance by 
-  providing implementations for the following interfaces: 
-
-  - ``RoomEventHandler``
-  - ``KurentoClientProvider``
-
-- develop the client-side of the application for devices that support WebRTC
-  (*hint:* or use our **client-js** library and take a look at the demo's client 
-  implementation)
-- design a room signaling protocol that will be used between the clients and
-  the server (*hint:* or use the WebSockets API from ``kurento-room-server``) 
-- implement a handler for clients' requests on the server-side, that will
-  use the ``RoomManager`` to process these requests (*hint:* JSON-RPC handler
-  from ``kurento-room-server``)
-- choose a response and notification mechanism for the communication with the
-  clients (*hint:* JSON-RPC notification service from ``kurento-room-server``)
-
-About the technology stacks that can or should be used to implement a Rooms 
-application: 
-
-- WebSockets for the communications between the server and the clients
-- Spring and Spring Boot for the easy configuration and integration with some 
-  of Kurento's modules. It also provides a WebSockets library.
-
-And of course, the main requirement is at least one installation of the Kurento
-Media Server, accessible to the room application.
+There's also a short :doc:`developer_guide` for applications based on this API.

@@ -2,8 +2,7 @@
 Demo deployment
 %%%%%%%%%%%%%%%
 
-This section explains how to install, configure and deploy the Room demo application 
-and how to publish the API. 
+This section explains how to install, configure and deploy the Room demo application. 
 
 On machines which meet the following requirements, one can install Kurento Room 
 applications as a system service (e.g. ``kurento-room-demo``). There's also the 
@@ -24,6 +23,13 @@ Kurento room demo installer
 Currently, there are no binary releases of Kurento Room Demo. In order to deploy 
 a new demo server, it is needed to build it from sources.
 
+.. sourcecode:: bash
+
+   $ git clone git@github.com:Kurento/kurento-room.git
+   $ cd kurento-room
+   # checkout the latest tag
+   $ git checkout $(git describe --abbrev=0 --tags)
+
 Demo binaries
 #############
 
@@ -36,8 +42,7 @@ together with its required modules:
    $ cd kurento-room
    $ mvn clean package -Pdefault -am -pl kurento-room-demo
 
-Now unzip the generated execution binaries (where ``x.y.z`` is the current 
-version and could include the ``-SNAPSHOT`` suffix):
+Now unzip the generated execution binaries (where ``x.y.z`` is the current version):
 
 .. sourcecode:: bash
 

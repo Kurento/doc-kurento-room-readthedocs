@@ -4,11 +4,20 @@ Client JavaScript API
 
 The developer of room applications can use this API when implementing the web interface.
 
-The library is contained by the Javascript file ``KurentoRoom.js`` from the module ``kurento-room-client-js``. 
+It is a JavaScript library build upon other public APIs like Kurento Utils JS, 
+Kurento JSON-RPC Client JS, EventEmitter, etc. This module can be added as a 
+Maven dependency to projects implementing the client-side code for web browsers 
+that support WebRTC.
+
+The library is contained by the Javascript file ``KurentoRoom.js`` from the 
+module ``kurento-room-client-js``. 
+
 The main classes of this library are the following:
 
- - **KurentoRoom**: main class that initializes the room and the local stream, also used to communicate with the server
- - **KurentoRoom.Room**: the room abstraction, provides access to local and remote participants and their streams
+ - **KurentoRoom**: main class that initializes the room and the local stream, 
+   also used to communicate with the server
+ - **KurentoRoom.Room**: the room abstraction, provides access to local and 
+   remote participants and their streams
  - **KurentoRoom.Participant**: a peer (local or remote) in the room
  - **KurentoRoom.Stream**: wrapper for media streams published in the room
 
@@ -21,13 +30,20 @@ Example:
 
     var kurento = KurentoRoom(wsUri, function (error, kurento) {...});
 
-Through this initialization function, we indicate the WebSocket URI that will be used to send and receive messages from the server.
+Through this initialization function, we indicate the WebSocket URI that will be 
+used to send and receive messages from the server.
 
-The result of opening the WebSocket connection is announced through a callback that is passed as parameter. The callback's signature also includes as parameter a reference to the own ``KurentoRoom`` object, giving access to its API when the connection was established successfully.
+The result of opening the WebSocket connection is announced through a callback 
+that is passed as parameter. The callback's signature also includes as parameter 
+a reference to the own ``KurentoRoom`` object, giving access to its API when the 
+connection was established successfully.
 
-The interface of ``KurentoRoom`` includes the creation of the Room and of the local stream and also, for convenience, the following:
+The interface of ``KurentoRoom`` includes the creation of the Room and of the 
+local stream and also, for convenience, the following:
 
-- Disconnect an active participant, be it remote or local media. This method allows to unsubscribe from receiving media from another peer or to end publishing the local media:
+- Disconnect an active participant, be it remote or local media. This method 
+  allows to unsubscribe from receiving media from another peer or to end publishing 
+  the local media:
 
 .. sourcecode:: javascript
 
@@ -45,7 +61,8 @@ The interface of ``KurentoRoom`` includes the creation of the Room and of the lo
 
      kurento.sendMessage(room, user, message);
 
-- Send a custom request whose parameters and response handling is left to the developer. In the demo application it is used to toggle the hat filter.
+- Send a custom request whose parameters and response handling is left to the 
+  developer. In the demo application it is used to toggle the hat filter.
 
 .. sourcecode:: javascript
 
@@ -70,7 +87,9 @@ This constructor requires a parameter which consists of the following attributes
 
 - **room**: mandatory, the name of the room
 - **user**: mandatory, the name of the peer inside the room
-- **subscribeToStreams**: optional, can be true (default value) or false. If false, the user won't get automatic subscription to the published streams, but will have to explicitly subscribe in order to receive media.
+- **subscribeToStreams**: optional, can be true (default value) or false. If false, 
+  the user won't get automatic subscription to the published streams, but will 
+  have to explicitly subscribe in order to receive media.
 
 connect() method
 ----------------
@@ -80,7 +99,8 @@ The room interface's main component is the connect method:
 
     room.connect();
 
-Instead of using a callback for dealing with the result of this operation, the client must subscribe to events emitted by the room:
+Instead of using a callback for dealing with the result of this operation, the 
+client must subscribe to events emitted by the room:
 
 room-connected event
 --------------------
@@ -123,7 +143,9 @@ Example:
 
 - **data.room**: the room's name
 
-Emitted as a result of a server notification that the room has been forcibly closed. Receiving this event is advised to be followed by an orderly exit from the room (alert the user and close all resources associated with the room).
+Emitted as a result of a server notification that the room has been forcibly 
+closed. Receiving this event is advised to be followed by an orderly exit from 
+the room (alert the user and close all resources associated with the room).
 
 participant-joined event
 ------------------------
@@ -240,7 +262,9 @@ Example:
 
 - **data.error**: the error message
 
-The server is notifying of an exception in the media server. The application should inform the user about the error and, in most cases, should proceed with an orderly exit from the room.
+The server is notifying of an exception in the media server. The application 
+should inform the user about the error and, in most cases, should proceed with 
+an orderly exit from the room.
 
 newMessage event
 ----------------
@@ -255,14 +279,19 @@ Example:
 - **data.user**: the sender
 - **data.message**: the text message
 
-Upon reception of a message from a peer in the room (the sender is also notified using this event).
+Upon reception of a message from a peer in the room (the sender is also notified 
+using this event).
 
 KurentoRoom.Participant
 =======================
 
-This is more of an internal data structure (the client shouldn't create instances of this type), used to group distinct media streams from the same room peer. Currently the room server only supports one stream per user.
+This is more of an internal data structure (the client shouldn't create instances 
+of this type), used to group distinct media streams from the same room peer. 
+Currently the room server only supports one stream per user.
 
-It is a component in the data object for several emitted room events (``room-connected``, ``participant-joined``, ``participant-left``, ``participant-published``).
+It is a component in the data object for several emitted room events (
+``room-connected``, ``participant-joined``, ``participant-left``, 
+``participant-published``).
 
 KurentoRoom.Stream
 ==================
@@ -284,13 +313,15 @@ The initialization of the local stream requires the following parameters:
 init method
 -----------
 
-The stream interface's main component is the init method, which will trigger a request towards the user to grant access to the local camera and microphone:
+The stream interface's main component is the init method, which will trigger a 
+request towards the user to grant access to the local camera and microphone:
 
 .. sourcecode:: javascript
 
     localStream.init();
 
-Instead of using a callback for dealing with the result of this operation, the client must subscribe to events emitted by the stream:
+Instead of using a callback for dealing with the result of this operation, the 
+client must subscribe to events emitted by the stream:
 
 access-accepted event
 ---------------------
@@ -322,6 +353,8 @@ The identifier of the stream, usually ``webcam``.
 getGlobalID() method
 --------------------
 
-Calculates a global identifier by mixing the owner's id (the participant name) and the local id. E.g. ``user1_webcam``.
+Calculates a global identifier by mixing the owner's id (the participant name) 
+and the local id. E.g. ``user1_webcam``.
 
-There are several other methods exposed by the ``Stream`` interface, they will be described in the tutorial for making a room application.
+There are several other methods exposed by the ``Stream`` interface, they will 
+be described in the tutorial for making a room application.

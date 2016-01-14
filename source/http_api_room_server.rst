@@ -1,12 +1,15 @@
-%%%%%%%%%%%%%%%%%%%%%%%%
-Http API for Room Server
-%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%
+REST APIs
+%%%%%%%%%
 
-Server Http REST API
-====================
+Apart from the WebSocket API, clients can also interact with the Room Server using
+a more conventional Http REST API. 
 
-There is one conventional Http REST primitive that can be used to obtain the
-available rooms.
+Room Server API
+===============
+
+The Room Server component publishes a REST service with only one primitive,
+that can be used to obtain the available rooms.
 
 1 - Get all rooms
 -----------------
@@ -33,14 +36,13 @@ Returns a list with all the available rooms' names.
 | 200 OK | Query successfully executed |
 +--------+-----------------------------+
 
-Demo Http REST API
-==================
+Room Demo API
+=============
 
-To demonstrate one of the server methods that RoomManager implements, the demo
-application provides an Http REST primitive that can be used to close a given
-room directly from the server (and evict the existing participants). It also
-specifies a method that allows the clients to read the configuration loopback
-parameters.
+The demo application provides an additional REST service with two primitives:
+ 
+ - close a given room directly from the server and evict the existing participants 
+ - one that sends the configuration loopback parameters to the client-side
 
 1 - Close room
 --------------
@@ -94,5 +96,3 @@ video (only local, remote or both).
 +--------+-----------------------------+
 | 200 OK | Query successfully executed |
 +--------+-----------------------------+
-
-

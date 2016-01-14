@@ -1,37 +1,71 @@
-%%%%%%%%%%%%%%%%%%%%
-Java API Integration
-%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%
+Rooms Core API
+%%%%%%%%%%%%%%
 
-The Kurento room manager represents an SDK for any developer that wants to
-implement the Room server-side application. They can build their application on
-top of the manager's Java API and implement their desired business logic
-without having to consider room or media-specific details.
+The Rooms API is based on the **Room Manager** abstraction. This manager can organize 
+and control multi-party group calls with the aid of Kurento technologies. 
 
-We provide two flavors of room manager that present the same methods but with
-different signatures:
+We understand this library as an SDK for any developer that wants to implement 
+a Room server-side application.
 
-- a straightforward implementation whose methods are executed in a synchronous
-  manner - ``RoomManager``
-- a notification room manager, whose methods would trigger responses or
-  notifications that are to be sent back to the remote parties (especially in
-  the case of client-originated requests) - ``NotificationRoomManager``
+The Room Manager's Java API takes care of the room and media-specific details, freeing
+the programmer from low-level or repetitive tasks (inherent to every multi-conference 
+application) and allowing her to focus more on the application's functionality or 
+business logic.
 
-The entities that are controlled by these APIs are the following:
+Understanding the API
+=====================
 
-- **rooms** - virtual groups of peers, an user can be part of only one  room
-  at a time. To identify them we use their names.
-- **participants** - virtual representation of a user. The application must
-  provide a string representation of the user at communication (or transport)
-  level that should suffice to uniquely identify the participant (the parameter
-  ``participantId``).
+The manager deals with two main concepts:
+
+- **rooms** - virtual groups of peers, with the limitation that an user can be 
+  belong to only one at a time. To identify them we use their names.
+- **participants** - virtual representation of a end-user. The application will
+  provide a string representation of the user level that should suffice to 
+  uniquely identify this participant.
+
+Given the applicaction's nature, it's only natural that the end-users will 
+try to connect to existing rooms (or create new ones) and publish or receive 
+media streams from other peers.
+
+When using our SDK, the application's job is to receive and translate messages 
+from the end-users' side into Room API primitives that will be responded by an 
+instance of the Room Manager class.
+
+Some of these methods not only deal with room management, but also with 
+the media capabilities required by the participants. The underlying media 
+processing is performed through a Kurento library called ``KurentoClient``,
+which can raise events when certain conditions are met for some of the media
+objects created by the manager. In turn, the information gathered by 
+handling these events is sometimes required to be notified to the end-user.
+The manager notifies the application of the most important events by using an 
+interface called **Room Handler**, for which the application must provide an
+implementation. 
+
+..
+   Image source:
+   https://docs.google.com/a/naevatec.com/drawings/d/17wBlhu7k8Pu3piAwseAbF4L_8ezgCdP2rcMUkZksCe4/edit?usp=sharing
+
+.. figure:: images/room-manager.png
+   :align:   center 
+   :alt: Room Manager integration
+
+   *Room Manager integration*
+
+We provide two types of Room Manager that expose almost the same interface (the
+same method names but with different signatures):
+
+- ``org.kurento.room.RoomManager``: the default implementation.
+- ``org.kurento.room.NotificationRoomManager``: an implementation that defines 
+  a model for sending the notifications or the responses back to the clients.
 
 RoomManager
 ===========
 
-There are several requirements for anyone willing to instantiate a regular room
-manager, and they are to provide implementations for:
+There are two requirements for creating a new (regular) room manager, and they 
+are to provide implementations for:
 
-- a room handler in charge of events triggered by internal media objects
+- the room handler in charge of events triggered by internal media objects
 - a Kurento Client manager that will be used to obtain instances of Kurento Client
 
 For client-originated requests, the application is required to inform the
@@ -64,11 +98,11 @@ The following is a table detailing the server events that will resort to methods
 | media element error    | onMediaElementError |
 +------------------------+---------------------+
 
-Notifications design - the NotificationRoomManager
-==================================================
+NotificationRoomManager
+=======================
 
-Once again, there are two requirements for anyone willing to instantiate a
-notification room manager, and they are to provide implementations for:
+There are two requirements when instantiating a notification room manager, and 
+they are to provide implementations for:
 
  - a communication interface that can send messages or notifications back  to
    the application's end users AND/OR a notification room event handler that
@@ -91,6 +125,19 @@ The notification managing API considers two different types of methods:
    They could execute asynchronously and the caller should not expect a result,
    but use the response handler if it's required to further analyze and process
    the client's request.
+
+The following diagram describes the components that make up the system when using
+the notifications room manager:
+
+..
+   Image source:
+   https://docs.google.com/a/naevatec.com/drawings/d/1sAng_Gp3CtZHuTOacHJT8_tlcEdgmUIRvaQy9OrhpUM/edit?usp=sharing
+
+.. figure:: images/room-manager-notifications.png 
+   :align:   center 
+   :alt:  Notification Room Manager 
+
+   *Notification Room Manager*
 
 Notifications design - UserNotificationService
 ==============================================
@@ -160,37 +207,27 @@ The following is a table detailing the methods from the
 +---------------------------------------+-----------------------------+
 
 KurentoClientProvider
----------------------
+=====================
 
-This service interface was designed so that the room manager could  obtain a
+This service interface was designed so that the room manager could obtain a
 Kurento Client instance at any time, without requiring knowledge about the
 placement of the KMS instances.
 
 It is left for the integrator to provide an implementation for this API.
 
 POJOs
------
+=====
 
-- ``UserParticipant`` - is a class that links the  participant's identifier
-  with her user name and the if the user is currently streaming media.
-- ``ParticipantRequest`` - is a class that links  participant's identifier
+The following classes are used in the requests and responses defined by the
+Rooms API.  
+
+- ``UserParticipant`` - links the participant's identifier with her user name 
+  and a flag telling if the user is currently streaming media.
+- ``ParticipantRequest`` - links the participant's identifier
   with a request id (optional identifier of the request at the communications
   level, included when responding back to the client; is nullable and will be
-  copied as is). Used in the notification variant of the RoomManager.
+  copied as is). Used in the notification variant of the **Room Manager**.
 - ``RoomException`` - runtime exception wrapper, includes:
 
    - ``code`` - Number that indicates the error type that occurred
    - ``message`` - String providing a short description of the error
-
-Room SDK integration diagram (with notifications)
-=================================================
-
-..
-   Image source:
-   https://docs.google.com/a/naevatec.com/drawings/d/1sAng_Gp3CtZHuTOacHJT8_tlcEdgmUIRvaQy9OrhpUM/edit?usp=sharing
-
-.. figure:: images/Room-stack.png 
-   :align:   center 
-   :alt:  Room SDK integration diagram
-
-   *Room SDK integration diagram*
