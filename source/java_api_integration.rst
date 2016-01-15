@@ -3,7 +3,7 @@ Rooms Core API
 %%%%%%%%%%%%%%
 
 The Rooms API is based on the **Room Manager** abstraction. This manager can organize 
-and control multi-party group calls with the aid of Kurento technologies. 
+and control multi-party group calls with the aid of :term:`Kurento` technologies. 
 
 We understand this library as an SDK for any developer that wants to implement 
 a Room server-side application.
@@ -24,17 +24,16 @@ The manager deals with two main concepts:
   provide a string representation of the user level that should suffice to 
   uniquely identify this participant.
 
-Given the applicaction's nature, it's only natural that the end-users will 
-try to connect to existing rooms (or create new ones) and publish or receive 
-media streams from other peers.
+Given the nature of the applications using our API, it's expected that the 
+end-users will try to connect to existing rooms (or create new ones) and 
+publish or receive media streams from other peers.
 
-When using our SDK, the application's job is to receive and translate messages 
-from the end-users' side into Room API primitives that will be responded by an 
-instance of the Room Manager class.
+When using this SDK, the application's job is to receive and translate *messages* 
+from the end-users' side into *requests* for a Room Manager instance.
 
-Some of these methods not only deal with room management, but also with 
+Some of API's methods not only deal with room management, but also with 
 the media capabilities required by the participants. The underlying media 
-processing is performed through a Kurento library called ``KurentoClient``,
+processing is performed through a library called :term:`Kurento Client`,
 which can raise events when certain conditions are met for some of the media
 objects created by the manager. In turn, the information gathered by 
 handling these events is sometimes required to be notified to the end-user.
@@ -65,8 +64,8 @@ RoomManager
 There are two requirements for creating a new (regular) room manager, and they 
 are to provide implementations for:
 
-- the room handler in charge of events triggered by internal media objects
-- a Kurento Client manager that will be used to obtain instances of Kurento Client
+- the Room Handler in charge of events triggered by internal media objects
+- a Kurento Client Manager that will be used to obtain instances of Kurento Client
 
 For client-originated requests, the application is required to inform the
 remote parties of the outcome of executing the requests, such as informing all
@@ -79,14 +78,16 @@ result and to act upon it.
 Events - RoomHandler
 ====================
 
-In order to act upon events raised by media objects, such as new ICE Candidates gathered or media errors, 
-the application has to provide an event handler. Generally speaking, these 
-are user-orientated events, so the application should notify the corresponding users.
+In order to act upon events raised by media objects, such as new :term:`ICE` 
+candidates gathered or media errors, the application has to provide an event
+handler. Generally speaking, these are user-orientated events, so the application 
+should notify the corresponding users.
 
 Room and RoomHandler relations
 ------------------------------
 
-The following is a table detailing the server events that will resort to methods from RoomHandler.
+The following is a table detailing the server events that will resort to methods 
+from Room Handler.
 
 +------------------------+---------------------+
 | **Events**             | **RoomHandler**     |
@@ -104,10 +105,10 @@ NotificationRoomManager
 There are two requirements when instantiating a notification room manager, and 
 they are to provide implementations for:
 
- - a communication interface that can send messages or notifications back  to
+ - a communication interface that can send messages or notifications back to
    the application's end users AND/OR a notification room event handler that
    will take the control over the notifications' lifecycle
- - a Kurento Client manager that will be used to obtain concrete instances
+ - a Kurento Client Manager that will be used to obtain concrete instances
    of Kurento Client
 
 The room event handler has been designed to provide feedback to the application
@@ -148,13 +149,13 @@ from the transport or communications layers. The notification API is used by
 the our implementation of the ``NotificationRoomHandler`` (the class
 ``DefaultNotificationRoomHandler``).
 
-The API's methods were defined based on the protocol JSON-RPC and  its messages
+The API's methods were defined based on the protocol :term:`JSON-RPC` and its messages
 format. It is expected but not required for the client-server communications to
 use this protocol.
 
-It is left for the integrator to provide an implementation for this API.
+It is left for the developer to provide an implementation for this API.
 
-If the developer chooses another mechanism to communicate with the client,  they
+If the developer chooses another mechanism to communicate with the client, they
 will have to use their own implementation of ``NotificationRoomHandler`` which
 will completely decouple the communication details from the room API.
 
@@ -209,11 +210,11 @@ The following is a table detailing the methods from the
 KurentoClientProvider
 =====================
 
-This service interface was designed so that the room manager could obtain a
-Kurento Client instance at any time, without requiring knowledge about the
-placement of the KMS instances.
+This service was designed so that the room manager could obtain a Kurento Client 
+instance at any time, without requiring knowledge about the placement of the 
+:term:`KMS` instances.
 
-It is left for the integrator to provide an implementation for this API.
+It is left for the developer to provide an implementation for this interface.
 
 POJOs
 =====

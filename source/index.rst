@@ -24,5 +24,6 @@ Table of Contents
    demo_deployment.rst
    code_structure.rst
    javadoc.rst
+   glossary.rst
 
 * :ref:`genindex`

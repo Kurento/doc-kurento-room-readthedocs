@@ -2,8 +2,8 @@
 REST APIs
 %%%%%%%%%
 
-Apart from the WebSocket API, clients can also interact with the Room Server using
-a more conventional Http REST API. 
+Apart from the :term:`WebSocket` API, clients can also interact with the Room Server 
+component using a more conventional :term:`Http` :term:`REST` API. 
 
 Room Server API
 ===============
@@ -19,8 +19,8 @@ Returns a list with all the available rooms' names.
 - **Request method and URL**: ``GET /getAllRooms``
 - **Request Content-Type**: NONE
 - **Request parameters**: NONE
-- **Response elements**: Returns an entity of type application/json including
-  a POJO of type Set<String> with the following information:
+- **Response elements**: Returns an entity of type ``application/json`` including
+  a *POJO* of type ``Set<String>`` with the following information:
 
 +---------+----------+---------------------------------+
 | Element | Optional | Description                     |
@@ -72,14 +72,14 @@ Closes the room
 2 - Get client configuration
 ----------------------------
 
-Returns a ClientConfig POJO that can be used to configure the source for the own
+Returns a ``ClientConfig`` *POJO* that can be used to configure the source for the own
 video (only local, remote or both).
 
 - **Request method and URL**: ``GET /getClientConfig``
 - **Request Content-Type**: NONE
 - **Request parameters**: NONE
-- **Response elements**: Returns an entity of type application/json including
-  a POJO of type ClientConfig with the following information:
+- **Response elements**: Returns an entity of type ``application/json`` including
+  a *POJO* of type ``ClientConfig`` with the following information:
 
 +------------------+----------+---------------------------------------------------------------------+
 | Element          | Optional | Description                                                         |

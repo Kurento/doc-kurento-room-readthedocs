@@ -3,7 +3,7 @@ Quick start
 %%%%%%%%%%%
 
 For a quick initial contact with the framework, we recommend running the demo
-application and observing the exchange of WebSocket messages between the clients
+application and observing the exchange of :term:`WebSocket` messages between the clients
 and the server. 
 
 Currently, the demo is only supported for Ubuntu 14.04 LTS 64bits.
@@ -12,16 +12,16 @@ Functionalities
 ---------------
 
 This project, named **kurento-room-demo**, contains the client-side implementation
-(HTML, Javascript, graphic resources) of the Rooms API and embeds the room
+(HTML, JavaScript, graphic resources) of the Rooms API and embeds the room
 server to provide the functionality required for group communications (the
 so-called rooms).
 
-Upon launch and using the SpringBoot framework, it starts the main application 
+Upon launch and using the :term:`SpringBoot` framework, it starts the main application 
 of the module **kurento-room-server** which exposes the rooms API through an 
 WebSocket interface. 
 
-The client part has been implemented using Angular JS and lumX and it's using 
-the room's Javascript library for the client-side (``KurentoRoom.js``).
+The client part has been implemented using :term:`AngularJS` and :term:`lumX` and it's using 
+the room's JavaScript library for the client-side (``KurentoRoom.js``).
 
 This application allows web clients to:
 
@@ -44,9 +44,9 @@ Running the demo
 ----------------
 
 After cloning the tutorial, it can be executed directly from the terminal by 
-using Maven's ``exec`` plugin. To make sure the demo can be built and executed 
-correclty, a stable release (or tag) is checked out before proceeding with the 
-build (prevents missing dependencies, given that in Kurento **master** is the 
+using the :term:`Maven` ``exec`` plugin. To make sure the demo can be built and executed 
+correctly, a stable release (or tag) is checked out before proceeding with the 
+build (prevents missing dependencies, given that in :term:`Kurento` **master** is the 
 development branch):
 
 .. sourcecode:: bash
@@ -58,7 +58,7 @@ development branch):
    $ cd kurento-room-demo
    $ mvn compile exec:java
 
-Now open the following URL in a WebRTC-compatible browser and connect to a new
+Now open the following URL in a :term:`WebRTC`-compatible browser and connect to a new
 room by providing the desired user and room names: https://localhost:8443.
 
 Configuring the demo
@@ -120,7 +120,7 @@ the demo server:
    $ mvn compile exec:java -Dkms.uris=[\"ws://192.168.1.99:9001/kurento\"]
 
 In this example, we've instructed the demo to use a different URI of a running 
-KMS instance when creating the ``KurentoClient`` required by the Room API.
+:term:`KMS` instance when creating the :term:`KurentoClient` required by the Room API.
 
 More details on the demo's configuration and execution can be found in the
 :doc:`deployment </demo_deployment>` section.

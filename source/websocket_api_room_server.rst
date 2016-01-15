@@ -2,10 +2,13 @@
 WebSocket API for Room Server
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The Kurento room server exposes a Websocket at ``wss://localhost:8443/room``, where
-the hostname and port depend on the current setup. The WebSocket enables the
-Kurento room app to instantly push events to the clients, as soon as they
-happen.
+The Room Server component exposes a :term:`WebSocket` with the default URI 
+``wss://localhost:8443/room``, where the hostname and port depend on the current 
+setup.
+
+For a Room application integrating the server component, this WebSocket enables 
+to not only receive client messages but also instantly push events to the clients, 
+as soon as they happen.
 
 The exchanged messages between server and clients are
 `JSON-RPC 2.0 <http://www.jsonrpc.org/specification>`_ requests and responses.
@@ -18,9 +21,9 @@ WebSocket messages
 1 - Join room
 -------------
 
-Represents a client's request to join a room. If the room
-does not exist, it is created. To obtain the available rooms, the client should
-previously use the REST method getAllRooms.
+Represents a client's request to join a room. If the room does not exist, it is 
+created. To obtain the available rooms, the client should previously use the 
+:term:`REST` method ``getAllRooms``.
 
 - **Method**: joinRoom
 
@@ -72,8 +75,8 @@ user joining in.
 -----------------
 
 Represents a client's request to start streaming her local media to anyone
-inside  the room. The user can use the SDP answer from the response to display
-her local media after having passed through the KMS server (as opposed or
+inside  the room. The user can use the :term:`SDP` answer from the response to display
+her local media after having passed through the :term:`KMS` server (as opposed or
 besides using just the local stream), and thus check what other users in the
 room are receiving from her stream. The loopback can be enabled using the
 corresponding parameter.
@@ -216,9 +219,9 @@ Represents a client's request to stop receiving media from a given publisher.
 9 - Send ICE Candidate
 ----------------------
 
-Request that carries info about an ICE candidate gathered on the client  side.
-This information is required to implement the trickle ICE mechanism. Should be
-sent whenever an icecandidate event is created by a RTCPeerConnection.
+Request that carries info about an :term:`ICE` candidate gathered on the client  side.
+This information is required to implement the :term:`trickle ICE` mechanism. Should be
+sent whenever an **ICECandidate** event is created by a :term:`RTCPeerConnection`.
 
 - **Method**: onIceCandidate
 
@@ -372,7 +375,7 @@ Broadcast event that propagates a written message to all room participants.
 ----------------------
 
 Event sent by server to all participants affected by an error event intercepted
-on a pipeline or media element.
+on a :term:`media pipeline` or :term:`media element`.
 
 - **Method**: mediaError
 

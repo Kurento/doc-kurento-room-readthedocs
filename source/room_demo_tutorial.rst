@@ -3,11 +3,12 @@ Room demo tutorial
 %%%%%%%%%%%%%%%%%%
 
 This tutorial is a guide for developing a multiconference  application using the
-Room API SDK. It is based on the development of the ``kurento-room-server``,
-``kurento-room-client-js`` and ``kurento-room-demo``.
+Room SDK. It is based on the development of the demo application found in 
+``kurento-room-demo``, which in turn depends on the ``kurento-room-sdk``, 
+``kurento-room-server`` and ``kurento-room-client-js`` components.
 
-The next figure tries to explain the different components of the demo and the
-communication channels between them.  
+The next figure tries to explain the integration of these components and 
+the communication channels between them.
 
 ..
    Image source:
@@ -22,7 +23,7 @@ communication channels between them.
 Server-side code
 ================
 
-The main class of the room server library project is a Spring Boot application
+The main class of the room server library project is a :term:`Spring Boot` application
 class, ``KurentoRoomServerApp``. In this class we'll be instantiating Spring
 beans for the different components that make up the server-side.
 
@@ -56,7 +57,7 @@ Signaling
 ---------
 
 For interacting with the clients, our demo application will be using the
-JSON-RPC server library developed by Kurento. This library is using for the
+:term:`JSON-RPC` server library developed by :term:`Kurento`. This library is using for the
 transport protocol the WebSockets library provided by the Spring framework.
 
 We register a handler (which extends ``DefaultJsonRpcHandler``) for incoming
@@ -64,7 +65,7 @@ JSON-RPC messages so that we can process each request depending on its method
 name. This handler implements the WebSocket API described earlier.
 
 The request path is indicated when adding the handler in the method
-``registerJsonRpcHandlers(...)``  of the JsonRpcConfigurer API, which is
+``registerJsonRpcHandlers(...)``  of the ``JsonRpcConfigurer`` API, which is
 implemented by the Spring application:
 
 .. sourcecode:: java
@@ -215,8 +216,8 @@ WebSocket handler, in case of connection timeouts or errors):
 Dependencies
 ------------
 
-Kurento Spring applications are managed using Maven. Our server library has  two
-explicit dependencies in its ``pom.xml`` file, Kurento Room SDK and Kurento
+Kurento Spring applications are managed using :term:`Maven`. Our server library 
+has  two explicit dependencies in its ``pom.xml`` file, Kurento Room SDK and Kurento
 JSON-RPC server::
 
    <dependencies>
@@ -367,16 +368,16 @@ conflicts::
 Client-side code
 ================
 
-This section describes the code from the AngularJS application
-contained by kurento-room-demo. The Angular-specific code won't be explained,
+This section describes the code from the :term:`AngularJS` application
+contained by ``kurento-room-demo``. The Angular-specific code won't be explained,
 as our goal is to understand the room mechanism (the reader shouldn't worry as
 the indications below will also serve for a client app developed with plain or
-conventional Javascript).
+conventional JavaScript).
 
 Libraries
 ---------
 
-Include the required Javascript files::
+Include the required JavaScript files::
 
 	<script src="./js/jquery-2.1.1.min.js"></script>
 	<script src="./js/jquery-ui.min.js"></script>
@@ -386,9 +387,11 @@ Include the required Javascript files::
 	<script src="./js/EventEmitter.js"></script>
 	<script src="./js/KurentoRoom.js"></script>
 
-* **jQuery**: is a cross-platform JavaScript library designed to simplify the client-side scripting of HTML.
+* **jQuery**: is a cross-platform JavaScript library designed to simplify the 
+  client-side scripting of HTML.
 
-* **Adapter.js**: is a WebRTC JavaScript utility library maintained by Google that abstracts away browser differences.
+* **Adapter.js**: is a WebRTC JavaScript utility library maintained by Google 
+  that abstracts away browser differences.
 
 * **EventEmitter**: implements an events library for the browser.
 
@@ -398,7 +401,7 @@ Include the required Javascript files::
 * **kurento-utils**: is a Kurento utility library aimed to simplify the WebRTC
   management in the browser.
 
-* **KurentoRoom**: script is the library described earlier which is included
+* **KurentoRoom**: this script is the library described earlier which is included
   by the ``kurento-room-client-js`` project.
 
 Init resources
@@ -425,7 +428,7 @@ If the WebSocket initialization failed, the ``error`` object will not be null an
 we should check the server's configuration or status.
 
 Otherwise, we're good to go and we can create a Room and the local Stream
-objects.  Please observe that the constraints from the options passed to the
+objects. Please observe that the constraints from the options passed to the
 local stream (audio, video, data) are being ignored at the moment:
 
 .. sourcecode:: java
@@ -596,7 +599,7 @@ HTML tag). The video element will have autoplay on and no play controls. If the
 stream is local, the video will be muted.
 
 It's expected that an element with the identifier ``thumbnailId`` to exist and
-to be selectable. This element will be displayed (jQuery .show() method) when a
+to be selectable. This element will be displayed (``jQuery .show()`` method) when a
 WebRTC stream can be assigned to the src attribute of the video element.
 
 **stream.playThumbnail(thumbnailId)**:
@@ -612,6 +615,6 @@ The style of the name tag is specified by the CSS class ``name``.
 
 The size of the thumbnail must be defined by the application. In
 the room demo, thumbnails start with a width of 14% which will be used until there
-are more than 7 publishers in the room (7 x 14% = 98%). From this point on,
+are more than 7 publishers in the room (``7 x 14% = 98%``). From this point on,
 another formula will be used for calculating the width, 98% divided by the
 number of publishers.

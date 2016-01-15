@@ -18,3 +18,4 @@ Table of Contents
    room_demo_tutorial.rst
    demo_deployment.rst
    code_structure.rst
+   glossary.rst

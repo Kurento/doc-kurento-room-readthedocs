@@ -4,12 +4,12 @@ Client JavaScript API
 
 The developer of room applications can use this API when implementing the web interface.
 
-It is a JavaScript library build upon other public APIs like Kurento Utils JS, 
-Kurento JSON-RPC Client JS, EventEmitter, etc. This module can be added as a 
-Maven dependency to projects implementing the client-side code for web browsers 
-that support WebRTC.
+It is a JavaScript library build upon other public APIs like :term:`Kurento Utils` JS, 
+Kurento :term:`JSON-RPC` Client JS, EventEmitter, etc. This module can be added as a 
+:term:`Maven` dependency to projects implementing the client-side code for web browsers 
+that support :term:`WebRTC`.
 
-The library is contained by the Javascript file ``KurentoRoom.js`` from the 
+The library is contained by the JavaScript file ``KurentoRoom.js`` from the 
 module ``kurento-room-client-js``. 
 
 The main classes of this library are the following:
@@ -30,7 +30,7 @@ Example:
 
     var kurento = KurentoRoom(wsUri, function (error, kurento) {...});
 
-Through this initialization function, we indicate the WebSocket URI that will be 
+Through this initialization function, we indicate the :term:`WebSocket` URI that will be 
 used to send and receive messages from the server.
 
 The result of opening the WebSocket connection is announced through a callback 

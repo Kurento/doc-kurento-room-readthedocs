@@ -6,10 +6,7 @@
 # so when this variable is updated, it should be also updated in conf.py
 
 DOC_VERSION = 6.2.1-dev
-KMS_VERSION = 6.2.1-dev
-CLIENT_JAVA_VERSION = 6.2.1-SNAPSHOT
-CLIENT_JS_VERSION = 6.2.1-dev
-UTILS_JS_VERSION = 6.2.1-dev
+MAVEN_VERSION = 6.2.1-SNAPSHOT
 
 # You can set these variables from the command line.
 SPHINXOPTS    =
@@ -62,9 +59,7 @@ clean:
 html:
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
 	find $(BUILDDIR)/html -name "*.html" -exec sed -i -e "s@|DOC_VERSION|@$(DOC_VERSION)@" {} \;
-	find $(BUILDDIR)/html -name "*.html" -exec sed -i -e "s@|CLIENT_JAVA_VERSION|@$(CLIENT_JAVA_VERSION)@" {} \;
-	find $(BUILDDIR)/html -name "*.html" -exec sed -i -e "s@|CLIENT_JS_VERSION|@$(CLIENT_JS_VERSION)@" {} \;
-	find $(BUILDDIR)/html -name "*.html" -exec sed -i -e "s@|UTILS_JS_VERSION|@$(UTILS_JS_VERSION)@" {} \;
+	find $(BUILDDIR)/html -name "*.html" -exec sed -i -e "s@|MAVEN_VERSION|@$(MAVEN_VERSION)@" {} \;
 	./fixlinks.sh
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
@@ -105,7 +100,7 @@ langdoc:
 	  
 	  # kurento-room-sdk javadoc
 	  rm -rf $(BUILDDIR)/langdoc/kurento-room-sdk
-	  cd  $(BUILDDIR)/langdoc && git clone https://github.com/Kurento/kurento-room.git && cd kurento-room && git checkout kurento-room-$(CLIENT_JAVA_VERSION) || git checkout $(CLIENT_JAVA_VERSION) || echo "Using master branch"
+	  cd  $(BUILDDIR)/langdoc && git clone https://github.com/Kurento/kurento-room.git && cd kurento-room && git checkout kurento-room-$(MAVEN_VERSION) || git checkout $(MAVEN_VERSION) || echo "Using master branch"
 	  mv $(BUILDDIR)/langdoc/kurento-room/kurento-room-sdk $(BUILDDIR)/langdoc/kurento-room-sdk
 	  rsync -av --exclude 'target' $(BUILDDIR)/langdoc/kurento-room-sdk/* $(BUILDDIR)/langdoc/kurento-room-sdk
 	  cd $(BUILDDIR)/langdoc/kurento-room-sdk && mvn clean package -DskipTests
@@ -113,8 +108,8 @@ langdoc:
 	  # kurento-client javadoc
 	  rm -rf $(BUILDDIR)/langdoc/kurento-client
 	  cd  $(BUILDDIR)/langdoc && git clone https://github.com/Kurento/kurento-java.git && \
-	  cd kurento-java && git checkout kurento-java-$(CLIENT_JAVA_VERSION) || \
-	  git checkout $(CLIENT_JAVA_VERSION) || echo "Using master branch"
+	  cd kurento-java && git checkout kurento-java-$(MAVEN_VERSION) || \
+	  git checkout $(MAVEN_VERSION) || echo "Using master branch"
 	  mv $(BUILDDIR)/langdoc/kurento-java/kurento-client $(BUILDDIR)/langdoc
 	  cd $(BUILDDIR)/langdoc/kurento-client && mvn clean package -DskipTests
 	  rsync -av $(BUILDDIR)/langdoc/kurento-client/target/generated-sources/kmd/* $(BUILDDIR)/langdoc/kurento-client/src/main/java/
@@ -146,9 +141,7 @@ devhelp:
 epub:
 	$(SPHINXBUILD) -b epub $(ALLSPHINXOPTS) $(BUILDDIR)/epub
 	find $(BUILDDIR)/epub -name "*.html" -exec sed -i -e "s@|DOC_VERSION|@$(DOC_VERSION)@" {} \;
-	find $(BUILDDIR)/epub -name "*.html" -exec sed -i -e "s@|CLIENT_JAVA_VERSION|@$(CLIENT_JAVA_VERSION)@" {} \;
-	find $(BUILDDIR)/epub -name "*.html" -exec sed -i -e "s@|CLIENT_JS_VERSION|@$(CLIENT_JS_VERSION)@" {} \;
-	find $(BUILDDIR)/epub -name "*.html" -exec sed -i -e "s@|UTILS_JS_VERSION|@$(UTILS_JS_VERSION)@" {} \;
+	find $(BUILDDIR)/epub -name "*.html" -exec sed -i -e "s@|MAVEN_VERSION|@$(MAVEN_VERSION)@" {} \;
 	$(SPHINXBUILD) -b epub $(ALLSPHINXOPTS) $(BUILDDIR)/epub
 	@echo
 	@echo "Build finished. The epub file is in $(BUILDDIR)/epub."
@@ -164,9 +157,7 @@ latexpdf:
 	$(SPHINXBUILD) -b latex $(ALLSPHINXOPTS) $(BUILDDIR)/latex
 	@echo "Running LaTeX files through pdflatex..."
 	find $(BUILDDIR)/latex -name "*.tex" -exec sed -i -e "s@.textbar..DOC_VERSION.textbar..@$(DOC_VERSION)@" {} \;
-	find $(BUILDDIR)/latex -name "*.tex" -exec sed -i -e "s@.textbar..CLIENT_JAVA_VERSION.textbar..@$(CLIENT_JAVA_VERSION)@" {} \;
-	find $(BUILDDIR)/latex -name "*.tex" -exec sed -i -e "s@.textbar..CLIENT_JS_VERSION.textbar..@$(CLIENT_JS_VERSION)@" {} \;
-	find $(BUILDDIR)/latex -name "*.tex" -exec sed -i -e "s@.textbar..UTILS_JS_VERSION.textbar..@$(UTILS_JS_VERSION)@" {} \;
+	find $(BUILDDIR)/latex -name "*.tex" -exec sed -i -e "s@.textbar..MAVEN_VERSION.textbar..@$(MAVEN_VERSION)@" {} \;
 	$(MAKE) -C $(BUILDDIR)/latex all-pdf
 	@echo "pdflatex finished; the PDF files are in $(BUILDDIR)/latex."
 
@@ -225,9 +216,6 @@ dist: clean langdoc html epub latexpdf
 readthedocs: clean langdoc
 	find ./source -name "*.html" -exec sed -i -e "s@|DOC_VERSION|@$(DOC_VERSION)@" {} \;
 	find ./source -name "*.rst" -exec sed -i -e "s@|DOC_VERSION|@$(DOC_VERSION)@" {} \;
-	find ./source -name "*.rst" -exec sed -i -e "s@|KMS_VERSION|@$(KMS_VERSION)@" {} \;
-	find ./source -name "*.rst" -exec sed -i -e "s@|CLIENT_JAVA_VERSION|@$(CLIENT_JAVA_VERSION)@" {} \;
-	find ./source -name "*.rst" -exec sed -i -e "s@|CLIENT_JS_VERSION|@$(CLIENT_JS_VERSION)@" {} \;
-	find ./source -name "*.rst" -exec sed -i -e "s@|UTILS_JS_VERSION|@$(UTILS_JS_VERSION)@" {} \;
+	find ./source -name "*.rst" -exec sed -i -e "s@|MAVEN_VERSION|@$(MAVEN_VERSION)@" {} \;
 	find ./source -name "*.rst" -exec sed -i "s/langdoc/_static\/langdoc/g" {} \;
 	cp -r $(BUILDDIR)/html/langdoc ./source/themes/sphinx_rtd_theme/static

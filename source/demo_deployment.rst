@@ -11,9 +11,10 @@ possibility to manually run the demo using the provided script.
 System requirements:
 
 - Ubuntu 14.04
+- :term:`Git` (to obtain the source code)
 - JDK 7 or 8
-- Maven
-- Kurento Media Server or connection with at least a running instance (to
+- :term:`Maven` (for building from sources)
+- :term:`Kurento Media Server` or connection with at least a running instance (to
   install follow the official
   `guide <http://www.kurento.org/docs/current/installation_guide.html>`_)
 
@@ -155,7 +156,7 @@ self-signed certificate, which is located in the same folder as the JAR
 executable file.
 
 The keystore's configuration is read from the ``application.properties`` file, a 
-specific Spring Boot configuration file. 
+specific :term:`Spring Boot` configuration file. 
 Any changes like the keystore's name or password can be applied directly into 
 this file.
 
@@ -175,8 +176,8 @@ In order to disable HTTPS, remove or rename the file, or remove those lines that
 contain **ssl** and change the value of ``server.port`` to a more suitable value 
 (recommended only if using a secure proxy with SSL).
 
-``server.address`` is an IP address that tells the embedded Tomcat to bind 
-to (default value is *0.0.0.0* where it listens on all available addresses).
+``server.address`` configures the IP address where the embedded Tomcat container binds
+to (default value is *0.0.0.0*, where it listens on all available addresses).
 It is useful when securing the application, by indicating the loopback IP and 
 serving all connections through a secure proxy.
 
