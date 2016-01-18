@@ -134,9 +134,8 @@ or W3C relevant documents. Some of the terms are specific to :term:`kurento`.
 
     Media Element
     Media Elements
-        A :java:type:`MediaElement` is a module that encapsulates a specific
-        media capability.  For example, a :java:type:`RecorderEndpoint`,
-        a Video :java:type:`PlayerEndpoint`
+        A **Media Element** is a module that encapsulates a specific
+        media capability. For example **RecorderEndpoint**, **PlayerEndpoint**, etc.
 
     Media Pipeline
         A :index:`Media Pipeline <single: Media; Pipeline>` is a chain of media elements, where the output

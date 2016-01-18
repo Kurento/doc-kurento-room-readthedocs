@@ -27,8 +27,7 @@ needs_sphinx = '1.2' # For html_extra_path to javadoc, jsdoc, ...
 
 # Add any Sphinx extension module names here, as strings. They can be extensions
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
-# extensions = ['sphinx.ext.graphviz', 'sphinx.ext.todo']
-extensions = ['javasphinx', 'sphinx.ext.graphviz', 'sphinx.ext.todo', 'domains']
+extensions = ['sphinx.ext.graphviz', 'sphinx.ext.todo', 'domains']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -298,11 +297,6 @@ epub_copyright = u'2015, Kurento'
 
 # Allow duplicate toc entries.
 #epub_tocdup = True
-
-# For javasphinx search
-javadoc_url_map = {
-    'org.kurento.client': ('kurento-java-client', 'sphinx'),
-}
 
 graphviz_output_format = 'svg'
 
