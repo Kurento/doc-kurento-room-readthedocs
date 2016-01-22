@@ -12,8 +12,16 @@ System requirements:
 
 - Ubuntu 14.04
 - :term:`Git` (to obtain the source code)
-- JDK 7 or 8
+- Java JDK version 7 or 8
 - :term:`Maven` (for building from sources)
+- :term:`Bower` (which in turn requires :term:`Node.js`)
+
+  .. sourcecode:: bash
+  
+   curl -sL https://deb.nodesource.com/setup | sudo bash -
+   sudo apt-get install -y nodejs
+   npm install -g bower
+
 - :term:`Kurento Media Server` or connection with at least a running instance (to
   install follow the official
   `guide <http://www.kurento.org/docs/current/installation_guide.html>`_)
@@ -41,32 +49,37 @@ together with its required modules:
 .. sourcecode:: bash
 
    $ cd kurento-room
-   $ mvn clean package -Pdefault -am -pl kurento-room-demo
+   $ mvn clean package -am -pl kurento-room-demo -DskipTests
 
-Now unzip the generated execution binaries (where ``x.y.z`` is the current version):
+Now unzip the generated execution binaries:
 
 .. sourcecode:: bash
 
    $ cd kurento-room-demo/target
-   $ unzip kurento-room-demo-x.y.z.zip
+   $ unzip kurento-room-demo-6.3.0.zip
 
+The directory structure of the uncompressed binaries:
+
+ - ``bin/`` - contains the installation and execution scripts
+ - ``files/`` - the demo's executable JAR file and other configuration files 
+ - ``sysfiles/`` - used when installing as a system service
 
 .. _server-configuration:
 
 Configuration
 #############
 
-The configuration file, ``kroomdemo.conf.json`` is located in the ``config``
-folder inside the uncompressed installation binaries. When installing the
-demo application as a system service, the configuration files will be located 
+The configuration file, ``kurento-room-demo.conf.json`` is located in the ``files``
+folder, when executing the demo with normal user privileges. 
+When installing the demo application as a system service, the configuration files will be located 
 inside ``/etc/kurento``.
 
 .. sourcecode:: bash
 
-   $ cd kurento-room-demo-x.y.z
-   $ vim config/kroomdemo.conf.json
+   $ cd kurento-room-demo-6.3.0
+   $ vim files/kurento-room-demo.conf.json
    ## or ##
-   $ vim /etc/kurento/kroomdemo.conf.json
+   $ vim /etc/kurento/kurento-room-demo.conf.json
 
 The default content of this file:
 
@@ -155,8 +168,13 @@ The application uses a Java keystore - ``keystore.jks`` - containing a
 self-signed certificate, which is located in the same folder as the JAR 
 executable file.
 
-The keystore's configuration is read from the ``application.properties`` file, a 
-specific :term:`Spring Boot` configuration file. 
+The keystore's configuration is read from a typical ``application.properties`` file, 
+read by the :term:`Spring Boot` framework when booting up the application. Although
+the default name can be used during development, for installation purposes we've 
+changed the name to ``kurento-room-demo.properties``. It can be edited directly
+in the ``files/`` folder or in the service's configuration folder (``/etc/kurento``) after
+installing the demo.
+
 Any changes like the keystore's name or password can be applied directly into 
 this file.
 
@@ -185,26 +203,26 @@ Logging configuration
 #####################
 
 The default logging configuration can be overwritten by editing the file 
-``kroomdemo-log4j.properties``, also found in the ``config`` folder (or
-``/etc/kurento`` for system-wide installations).
+``kurento-room-demo-log4j.properties``, also found in the ``files`` folder (or
+``/etc/kurento/`` for system-wide installations).
 
 .. sourcecode:: bash
 
-   $ cd kurento-room-demo-x.y.z
-   $ vim config/kroomdemo-log4j.properties
+   $ cd kurento-room-demo-6.3.0
+   $ vim files/kurento-room-demo-log4j.properties
    ## or ##
-   $ vim /etc/kurento/kroomdemo-log4j.properties
+   $ vim /etc/kurento/kurento-room-demo-log4j.properties
 
 In it, the location of the server's output log file can be set up, the default 
-location will be ``kurento-room-demo-x.y.z/logs/`` (or ``/var/log/kurento/`` 
+location will be ``kurento-room-demo-6.3.0/logs/`` (or ``/var/log/kurento/`` 
 for system-wide installations).
 
-To change it, replace the ``${kroomdemo.log.file}`` variable for an 
+To change it, replace the ``${application.log.file}`` variable for an 
 absolute path on your system:
 
 .. sourcecode:: bash
 
-   log4j.appender.file.File=${kroomdemo.log.file}
+   log4j.appender.file.File=${application.log.file}
 
 Running the application
 =======================
@@ -230,7 +248,7 @@ execute the start script:
 
 .. sourcecode:: bash
 
-   $ cd kurento-room-demo-x.y.z
+   $ cd kurento-room-demo-6.3.0
    $ ./bin/start.sh
 
 Run as daemon
@@ -241,17 +259,17 @@ binaries. **sudo** privileges are required to install it as a service:
 
 .. sourcecode:: bash
 
-   $ cd kurento-room-demo-x.y.z
+   $ cd kurento-room-demo-6.3.0
    $ sudo ./bin/install.sh
 
-The service **kroomdemo** will be automatically started.
+The service **kurento-room-demo** will be automatically started.
 
 Now, you can configure the Room demo server as stated in the 
 :ref:`previous section <server-configuration>` and restart the service.
 
 .. sourcecode:: bash
    
-   $ sudo service kroomdemo {start|stop|status|restart|reload}
+   $ sudo service kurento-room-demo {start|stop|status|restart|reload}
 
 Troubleshooting
 ###############
@@ -261,7 +279,7 @@ execute the *fat jar* from the **lib** folder:
 
 .. sourcecode:: bash
 
-   $ cd kurento-room-demo-x.y.z/lib
+   $ cd kurento-room-demo-6.3.0/lib
    $ java -jar kurento-room-demo.jar
 
 Version upgrade
