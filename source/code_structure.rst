@@ -23,11 +23,13 @@ The git repository contains a Maven project with the following modules:
   WebSockets, Kurento Utils). Can be used to implement the client-side of a room 
   application.
 - `kurento-room/kurento-room-demo <https://github.com/Kurento/kurento-room/tree/master/kurento-room-demo>`_ - 
-  demonstration project, contains the client-side implementation (HTML, 
-  Javascript, graphic resources) and embeds the room server to provide the 
+  demonstration project, contains the client-side implementation (HTML, Javascript, 
+  :term:`AngularJS`, :term:`lumx`, graphic resources) and depends on the Room Server to provide the 
   functionality required for group communications (the so-called rooms).
+- `kurento-room/kurento-room-basicapp <https://github.com/Kurento/kurento-room/tree/master/kurento-room-basicapp>`_ - 
+  basic demonstration project, similar to ``kurento-room-demo`` but with a lighter client-side 
+  implementation (without any Javascript frameworks).
 - `kurento-room/kurento-room-test <https://github.com/Kurento/kurento-room/tree/master/kurento-room-test>`_ - 
-  includes integration tests for the room server application and the demo.
-- `kurento-room/kurento-room-demo-test <https://github.com/Kurento/kurento-room/tree/master/kurento-room-demo-test>`_ - 
-  includes integration tests for the demo application.
+  a framework for functional tests of room applications. Required by tests from the demo and basicapp
+  modules.
   

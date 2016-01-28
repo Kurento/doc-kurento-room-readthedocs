@@ -5,8 +5,9 @@
 # IMPORTANT: Notice that DOC_VERSION should be the same as variable "release" in conf.py,
 # so when this variable is updated, it should be also updated in conf.py
 
-DOC_VERSION = 6.2.1-dev
-MAVEN_VERSION = 6.2.1-SNAPSHOT
+DOC_VERSION = 6.3.1
+KURENTO_JAVA_VERSION = 6.3.0
+MAVEN_VERSION = 6.3.1
 
 # You can set these variables from the command line.
 SPHINXOPTS    =
@@ -92,28 +93,28 @@ htmlhelp:
 
 langdoc:
 	  @echo "Doclint arg for javadoc (if java version >= 1.8): $(DOCLINT)"
-	  
+
 	  mkdir -p $(BUILDDIR)/langdoc
 	  rm -rf $(BUILDDIR)/langdoc/kurento-room && rm -rf $(BUILDDIR)/langdoc/kurento-java
 	  mkdir -p $(BUILDDIR)/html/langdoc/javadoc
-	  
-	  
+
+
 	  # kurento-room-sdk javadoc
 	  rm -rf $(BUILDDIR)/langdoc/kurento-room-sdk
 	  cd  $(BUILDDIR)/langdoc && git clone https://github.com/Kurento/kurento-room.git && cd kurento-room && git checkout kurento-room-$(MAVEN_VERSION) || git checkout $(MAVEN_VERSION) || echo "Using master branch"
 	  mv $(BUILDDIR)/langdoc/kurento-room/kurento-room-sdk $(BUILDDIR)/langdoc/kurento-room-sdk
 	  rsync -av --exclude 'target' $(BUILDDIR)/langdoc/kurento-room-sdk/* $(BUILDDIR)/langdoc/kurento-room-sdk
 	  cd $(BUILDDIR)/langdoc/kurento-room-sdk && mvn clean package -DskipTests
-	  
+
 	  # kurento-client javadoc
 	  rm -rf $(BUILDDIR)/langdoc/kurento-client
 	  cd  $(BUILDDIR)/langdoc && git clone https://github.com/Kurento/kurento-java.git && \
-	  cd kurento-java && git checkout kurento-java-$(MAVEN_VERSION) || \
-	  git checkout $(MAVEN_VERSION) || echo "Using master branch"
+	  cd kurento-java && git checkout kurento-java-$(KURENTO_JAVA_VERSION) || \
+	  git checkout $(KURENTO_JAVA_VERSION) || echo "Using master branch"
 	  mv $(BUILDDIR)/langdoc/kurento-java/kurento-client $(BUILDDIR)/langdoc
 	  cd $(BUILDDIR)/langdoc/kurento-client && mvn clean package -DskipTests
 	  rsync -av $(BUILDDIR)/langdoc/kurento-client/target/generated-sources/kmd/* $(BUILDDIR)/langdoc/kurento-client/src/main/java/
-	   
+
 	  javadoc $(DOCLINT) -windowtitle "Kurento Room SDK Javadoc" \
 	    -d $(BUILDDIR)/html/langdoc/javadoc \
 	    -sourcepath $(BUILDDIR)/langdoc/kurento-room-sdk/src/main/java/:$(BUILDDIR)/langdoc/kurento-client/src/main/java/ \
@@ -212,7 +213,7 @@ dist: clean langdoc html epub latexpdf
 	@echo
 	cp $(BUILDDIR)/epub/KurentoRoom.epub $(BUILDDIR)/latex/KurentoRoom.pdf $(BUILDDIR)/html &&\
 	tar zcvf $(BUILDDIR)/dist/docs-kurento-room-$(DOC_VERSION).tgz -C $(BUILDDIR)/html .
-	
+
 readthedocs: clean langdoc
 	find ./source -name "*.html" -exec sed -i -e "s@|DOC_VERSION|@$(DOC_VERSION)@" {} \;
 	find ./source -name "*.rst" -exec sed -i -e "s@|DOC_VERSION|@$(DOC_VERSION)@" {} \;

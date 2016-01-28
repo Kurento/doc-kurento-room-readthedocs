@@ -51,7 +51,7 @@ development branch):
 
 .. sourcecode:: bash
 
-   $ git clone git@github.com:Kurento/kurento-room.git
+   $ git clone https://github.com/Kurento/kurento-room.git
    $ cd kurento-room
    # checkout the latest tag
    $ git checkout $(git describe --abbrev=0 --tags)
