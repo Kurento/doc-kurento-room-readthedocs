@@ -58,7 +58,11 @@ public class KurentoClient {
 
   private ServerManager serverManager;
 
+  private JsonRpcClient client;
+
   private static KmsUrlLoader kmsUrlLoader;
+
+  private String label;
 
   public static synchronized String getKmsUrl(String id, Properties properties) {
 
@@ -82,6 +86,10 @@ public class KurentoClient {
     }
   }
 
+  private void setId(String id) {
+    this.id = id;
+  }
+
   public static KurentoClient create() {
     return create(new Properties());
   }
@@ -93,10 +101,6 @@ public class KurentoClient {
     return client;
   }
 
-  private void setId(String id) {
-    this.id = id;
-  }
-
   public static KurentoClient create(String websocketUrl) {
     return create(websocketUrl, new Properties());
   }
@@ -104,9 +108,14 @@ public class KurentoClient {
   public static KurentoClient create(String websocketUrl, Properties properties) {
     log.info("Connecting to kms in {}", websocketUrl);
     JsonRpcClientWebSocket client = new JsonRpcClientWebSocket(websocketUrl);
-    client.enableHeartbeat(KEEPALIVE_TIME);
-    client.setLabel("KurentoClient");
+    configureJsonRpcClient(client);
     return new KurentoClient(client);
+  }
+
+  protected static void configureJsonRpcClient(JsonRpcClientWebSocket client) {
+    client.enableHeartbeat(KEEPALIVE_TIME);
+    updateLabel(client, null);
+    client.setSendCloseMessage(true);
   }
 
   public static KurentoClient create(String websocketUrl, KurentoConnectionListener listener) {
@@ -118,13 +127,13 @@ public class KurentoClient {
     log.info("Connecting to KMS in {}", websocketUrl);
     JsonRpcClientWebSocket client = new JsonRpcClientWebSocket(websocketUrl,
         JsonRpcConnectionListenerKurento.create(listener));
-    client.enableHeartbeat(KEEPALIVE_TIME);
-    client.setLabel("KurentoClient");
+    configureJsonRpcClient(client);
     return new KurentoClient(client);
 
   }
 
-  KurentoClient(JsonRpcClient client) {
+  protected KurentoClient(JsonRpcClient client) {
+    this.client = client;
     this.manager = new RomManager(new RomClientJsonRpcClient(client));
     client.setRequestTimeout(requesTimeout);
     if (client instanceof JsonRpcClientWebSocket) {
@@ -138,7 +147,7 @@ public class KurentoClient {
   }
 
   /**
-   * Creates a new {@link MediaPipeline} in the media server
+   * Creates a new {@link MediaPipeline} in the media server.
    *
    * @return The media pipeline
    */
@@ -147,7 +156,7 @@ public class KurentoClient {
   }
 
   /**
-   * Creates a new {@link MediaPipeline} in the media server
+   * Creates a new {@link MediaPipeline} in the media server.
    *
    * @param cont
    *          An asynchronous callback handler. If the element was successfully created, the
@@ -186,7 +195,7 @@ public class KurentoClient {
   }
 
   public ServerManager getServerManager() {
-    if(serverManager == null){ 
+    if (serverManager == null) {
       serverManager = getById("manager_ServerManager", ServerManager.class);
     }
     return serverManager;
@@ -194,5 +203,26 @@ public class KurentoClient {
 
   public <T extends KurentoObject> T getById(String id, Class<T> clazz) {
     return manager.getById(id, clazz);
+  }
+
+  public String getSessionId() {
+    return client.getSession().getSessionId();
+  }
+
+  public void setLabel(String label) {
+    this.label = label;
+    updateLabel(client, label);
+  }
+
+  public String getLabel() {
+    return label;
+  }
+
+  private static void updateLabel(JsonRpcClient client, String label) {
+    String clientLabel = "KurentoClient";
+    if (label != null) {
+      clientLabel += ":" + label;
+    }
+    client.setLabel(clientLabel);
   }
 }

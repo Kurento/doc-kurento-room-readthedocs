@@ -1,5 +1,5 @@
 %%%%%%%%%%%%%%%%%%
-Room demo tutorial
+Room Demo tutorial
 %%%%%%%%%%%%%%%%%%
 
 This tutorial is a guide for developing a multiconference  application using the
@@ -29,7 +29,7 @@ beans for the different components that make up the server-side.
 
 Furthermore, this class with all its configuration can then be imported into
 application classes of other Spring projects (using Spring's ``@Import``
-annotation).
+annotation or extending the server Spring Boot application class).
 
 Room management
 ---------------
@@ -57,23 +57,27 @@ Signaling
 ---------
 
 For interacting with the clients, our demo application will be using the
-:term:`JSON-RPC` server library developed by :term:`Kurento`. This library is using for the
-transport protocol the WebSockets library provided by the Spring framework.
+:term:`JSON-RPC` server library developed by :term:`Kurento`. This library is 
+using for the transport protocol the WebSockets library provided by the Spring 
+framework.
 
-We register a handler (which extends ``DefaultJsonRpcHandler``) for incoming
-JSON-RPC messages so that we can process each request depending on its method
-name. This handler implements the WebSocket API described earlier.
+We register a handler for incoming JSON-RPC messages so that we can process 
+each request depending on its method name. This handler implements the WebSocket 
+API described earlier.
 
-The request path is indicated when adding the handler in the method
-``registerJsonRpcHandlers(...)``  of the ``JsonRpcConfigurer`` API, which is
-implemented by the Spring application:
+The request path is indicated when adding the handler in the method 
+``registerJsonRpcHandlers(...)`` of the ``JsonRpcConfigurer`` API (implemented 
+by our Spring application class).
+
+The handler class requires some dependencies which are passed using its constructor, 
+the user control component and the user notifications service (these are explained below).
 
 .. sourcecode:: java
 
    @Bean
    @ConditionalOnMissingBean
    public RoomJsonRpcHandler roomHandler() {
-      return new RoomJsonRpcHandler();
+      return new RoomJsonRpcHandler(userControl(), notificationService());
    }
 
    @Override
@@ -217,8 +221,9 @@ Dependencies
 ------------
 
 Kurento Spring applications are managed using :term:`Maven`. Our server library 
-has  two explicit dependencies in its ``pom.xml`` file, Kurento Room SDK and Kurento
-JSON-RPC server::
+has several explicit dependencies in its ``pom.xml`` file, Kurento Room SDK 
+and Kurento JSON-RPC server are the ones used for implementing the server's 
+functionality, while the other ones are used for testing::
 
    <dependencies>
       <dependency>
@@ -228,6 +233,27 @@ JSON-RPC server::
       <dependency>
          <groupId>org.kurento</groupId>
          <artifactId>kurento-jsonrpc-server</artifactId>
+         <exclusions>
+            <exclusion>
+               <groupId>org.springframework.boot</groupId>
+               <artifactId>spring-boot-starter-logging</artifactId>
+            </exclusion>
+         </exclusions>
+      </dependency>
+      <dependency>
+         <groupId>org.kurento</groupId>
+         <artifactId>kurento-room-test</artifactId>
+         <scope>test</scope>
+      </dependency>
+      <dependency>
+         <groupId>org.kurento</groupId>
+         <artifactId>kurento-room-client</artifactId>
+         <scope>test</scope>
+      </dependency>
+      <dependency>
+         <groupId>org.mockito</groupId>
+         <artifactId>mockito-core</artifactId>
+         <scope>test</scope>
       </dependency>
    </dependencies>
 
@@ -236,13 +262,12 @@ Demo customization of the server-side
 
 The demo adds a bit of customization to the room server by extending and
 replacing some of its Spring beans. All this is done in the new Spring Boot
-application class of the demo, ``KurentoRoomDemoApp``, that imports the
+application class of the demo, ``KurentoRoomDemoApp``, that extends the
 original application class of the server:
 
 .. sourcecode:: java
 
-   @Import(KurentoRoomServerApp.class)
-   public class KurentoRoomDemoApp {
+   public class KurentoRoomDemoApp extends KurentoRoomServerApp {
       ...
       public static void main(String[] args) throws Exception {
          SpringApplication.run(KurentoRoomDemoApp.class, args);
@@ -335,33 +360,38 @@ Dependencies
 ------------
 
 There are several dependencies in its ``pom.xml`` file, Kurento Room Server, Kurento
-Room Client JS (for the client-side library) and a Spring logging library. We
-had to manually exclude some transitive dependencies in order to avoid
-conflicts::
+Room Client JS (for the client-side library), a Spring logging library and Kurento Room
+Test for the test implementation. We had to manually exclude some transitive dependencies 
+in order to avoid conflicts::
 
     <dependencies>
        <dependency>
-          <groupId>org.kurento</groupId>
-          <artifactId>kurento-room-server</artifactId>
-          <exclusions>
-             <exclusion>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-logging</artifactId>
-             </exclusion>
-             <exclusion>
-                <groupId>org.apache.commons</groupId>
-                <artifactId>commons-logging</artifactId>
-             </exclusion>
-          </exclusions>
-       </dependency>
-       <dependency>
-          <groupId>org.kurento</groupId>
-          <artifactId>kurento-room-client-js</artifactId>
-       </dependency>
-       <dependency>
-          <groupId>org.springframework.boot</groupId>
-          <artifactId>spring-boot-starter-log4j</artifactId>
-       </dependency>
+         <groupId>org.kurento</groupId>
+         <artifactId>kurento-room-server</artifactId>
+         <exclusions>
+            <exclusion>
+               <groupId>org.springframework.boot</groupId>
+               <artifactId>spring-boot-starter-logging</artifactId>
+            </exclusion>
+            <exclusion>
+               <groupId>org.apache.commons</groupId>
+               <artifactId>commons-logging</artifactId>
+            </exclusion>
+         </exclusions>
+      </dependency>
+      <dependency>
+         <groupId>org.kurento</groupId>
+         <artifactId>kurento-room-client-js</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>org.kurento</groupId>
+         <artifactId>kurento-room-test</artifactId>
+         <scope>test</scope>
+      </dependency>
+      <dependency>
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-starter-log4j</artifactId>
+      </dependency>
     </dependencies>
 
 

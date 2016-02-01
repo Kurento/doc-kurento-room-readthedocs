@@ -100,8 +100,10 @@ functionality.
 
 At the moment, there is **no iOS client** available.
 
-Also, please observe that the server's WebSocket API has a limitation concerning an 
-**user's name**, which is that it cannot contain **lower dashes**.
+.. note::
+   
+   Please observe that the server's WebSocket API has a limitation concerning an 
+   **user's name**, it can't contain **lower dashes** (``_``).
 
 Integration example
 -------------------
@@ -110,10 +112,12 @@ The **Room Demo** module is a :term:`Single-Page Application` based on the Room 
 Room JavaScript Client. It enables users to simultaneously establish multiple 
 connections to other users connected to the same session or room.
 
-Please note that even though the core module is the Room SDK, developers are free to pick 
-whatever component they need in order to build their application: some might 
-need some minor modifications on the client side, whilst others would want to 
-inject their logic on server side and might even have to modify the SDK.
+.. note::
+
+   Even though the core module is the Room SDK, developers are free to pick 
+   whatever component they need in order to build their application: some might 
+   need some minor modifications on the client side, whilst others would want to 
+   inject their logic on server side and might even have to modify the SDK.
 
 For example, the demo shows how to integrate some of the provided components 
 together with the client-side technology :term:`AngularJS` and some small modifications 

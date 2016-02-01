@@ -51,7 +51,7 @@ development branch):
 
 .. sourcecode:: bash
 
-   $ git clone git@github.com:Kurento/kurento-room.git
+   $ git clone https://github.com/Kurento/kurento-room.git
    $ cd kurento-room
    # checkout the latest tag
    $ git checkout $(git describe --abbrev=0 --tags)
@@ -64,10 +64,10 @@ room by providing the desired user and room names: https://localhost:8443.
 Configuring the demo
 --------------------
 
-There are a couple of interesting options or properties that might have to be
-modified for the demo to function properly.
+There are several options or properties that might require to be modified in order for the demo to 
+function properly.
 
-The properties file, **kroomdemo.conf.json**, used in the demo's execution as 
+The properties file, **kurento-room-demo.conf.json**, used in the demo's execution as 
 described above, is located in the folder ``src/main/resources`` and its 
 contents are the following:
 
@@ -112,8 +112,7 @@ contents are the following:
       }
    }
 
-These properties can be overwritten on the command-line when starting 
-the demo server:
+These properties can be overwritten on the command-line when starting the demo server:
 
 .. sourcecode:: bash
 
@@ -122,5 +121,7 @@ the demo server:
 In this example, we've instructed the demo to use a different URI of a running 
 :term:`KMS` instance when creating the :term:`KurentoClient` required by the Room API.
 
-More details on the demo's configuration and execution can be found in the
-:doc:`deployment </demo_deployment>` section.
+.. note::
+
+   More details on the demo's configuration and execution can be found in the 
+   :doc:`deployment </demo_deployment>` section.
