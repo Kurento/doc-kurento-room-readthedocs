@@ -396,6 +396,86 @@ public interface MediaElement extends MediaObject {
 
 /**
  *
+ * Returns if there is media flowing from the pipeline to the MediaElement through a pad
+ *
+ * @param mediaType
+ *       One of {@link #MediaType.AUDIO} or {@link #MediaType.VIDEO}
+ * @param sinkMediaDescription
+ *       Description of the sink
+ * @return TRUE if there is media, FALSE in other case *
+ **/
+  boolean isMediaFlowingIn(@org.kurento.client.internal.server.Param("mediaType") org.kurento.client.MediaType mediaType, @org.kurento.client.internal.server.Param("sinkMediaDescription") String sinkMediaDescription);
+
+/**
+ *
+ * Asynchronous version of isMediaFlowingIn:
+ * {@link Continuation#onSuccess} is called when the action is
+ * done. If an error occurs, {@link Continuation#onError} is called.
+ * @see MediaElement#isMediaFlowingIn
+ *
+ * @param mediaType
+ *       One of {@link #MediaType.AUDIO} or {@link #MediaType.VIDEO}
+ * @param sinkMediaDescription
+ *       Description of the sink
+ *
+ **/
+    void isMediaFlowingIn(@org.kurento.client.internal.server.Param("mediaType") org.kurento.client.MediaType mediaType, @org.kurento.client.internal.server.Param("sinkMediaDescription") String sinkMediaDescription, Continuation<Boolean> cont);
+
+/**
+ *
+ * Returns if there is media flowing from the pipeline to the MediaElement through a pad
+ *
+ * @param mediaType
+ *       One of {@link #MediaType.AUDIO} or {@link #MediaType.VIDEO}
+ * @param sinkMediaDescription
+ *       Description of the sink
+ * @return TRUE if there is media, FALSE in other case *
+ **/
+    TFuture<Boolean> isMediaFlowingIn(Transaction tx, @org.kurento.client.internal.server.Param("mediaType") org.kurento.client.MediaType mediaType, @org.kurento.client.internal.server.Param("sinkMediaDescription") String sinkMediaDescription);
+
+
+/**
+ *
+ * Returns if there is media flowing from the MediaElement to the pipeline through a pad
+ *
+ * @param mediaType
+ *       One of {@link #MediaType.AUDIO} or {@link #MediaType.VIDEO}
+ * @param sourceMediaDescription
+ *       Description of the source
+ * @return TRUE if there is media, FALSE in other case *
+ **/
+  boolean isMediaFlowingOut(@org.kurento.client.internal.server.Param("mediaType") org.kurento.client.MediaType mediaType, @org.kurento.client.internal.server.Param("sourceMediaDescription") String sourceMediaDescription);
+
+/**
+ *
+ * Asynchronous version of isMediaFlowingOut:
+ * {@link Continuation#onSuccess} is called when the action is
+ * done. If an error occurs, {@link Continuation#onError} is called.
+ * @see MediaElement#isMediaFlowingOut
+ *
+ * @param mediaType
+ *       One of {@link #MediaType.AUDIO} or {@link #MediaType.VIDEO}
+ * @param sourceMediaDescription
+ *       Description of the source
+ *
+ **/
+    void isMediaFlowingOut(@org.kurento.client.internal.server.Param("mediaType") org.kurento.client.MediaType mediaType, @org.kurento.client.internal.server.Param("sourceMediaDescription") String sourceMediaDescription, Continuation<Boolean> cont);
+
+/**
+ *
+ * Returns if there is media flowing from the MediaElement to the pipeline through a pad
+ *
+ * @param mediaType
+ *       One of {@link #MediaType.AUDIO} or {@link #MediaType.VIDEO}
+ * @param sourceMediaDescription
+ *       Description of the source
+ * @return TRUE if there is media, FALSE in other case *
+ **/
+    TFuture<Boolean> isMediaFlowingOut(Transaction tx, @org.kurento.client.internal.server.Param("mediaType") org.kurento.client.MediaType mediaType, @org.kurento.client.internal.server.Param("sourceMediaDescription") String sourceMediaDescription);
+
+
+/**
+ *
  * Get the connections information of the elements that are sending media to this element {@link module:core/abstracts.MediaElement MediaElement}
  * @return A list of the connections information that are sending media to this element. The list will be empty if no sources are found. *
  **/
@@ -801,6 +881,74 @@ public interface MediaElement extends MediaObject {
  **/
     TFuture<java.util.Map<String,org.kurento.client.Stats>> getStats(Transaction tx);
 
+
+/**
+ *
+ * Returns if there is media flowing from the pipeline to the MediaElement through a pad
+ *
+ * @param mediaType
+ *       One of {@link #MediaType.AUDIO} or {@link #MediaType.VIDEO}
+ * @return TRUE if there is media, FALSE in other case *
+ **/
+  boolean isMediaFlowingIn(@org.kurento.client.internal.server.Param("mediaType") org.kurento.client.MediaType mediaType);
+
+/**
+ *
+ * Asynchronous version of isMediaFlowingIn:
+ * {@link Continuation#onSuccess} is called when the action is
+ * done. If an error occurs, {@link Continuation#onError} is called.
+ * @see MediaElement#isMediaFlowingIn
+ *
+ * @param mediaType
+ *       One of {@link #MediaType.AUDIO} or {@link #MediaType.VIDEO}
+ *
+ **/
+    void isMediaFlowingIn(@org.kurento.client.internal.server.Param("mediaType") org.kurento.client.MediaType mediaType, Continuation<Boolean> cont);
+
+/**
+ *
+ * Returns if there is media flowing from the pipeline to the MediaElement through a pad
+ *
+ * @param mediaType
+ *       One of {@link #MediaType.AUDIO} or {@link #MediaType.VIDEO}
+ * @return TRUE if there is media, FALSE in other case *
+ **/
+    TFuture<Boolean> isMediaFlowingIn(Transaction tx, @org.kurento.client.internal.server.Param("mediaType") org.kurento.client.MediaType mediaType);
+
+
+/**
+ *
+ * Returns if there is media flowing from the MediaElement to the pipeline through a pad
+ *
+ * @param mediaType
+ *       One of {@link #MediaType.AUDIO} or {@link #MediaType.VIDEO}
+ * @return TRUE if there is media, FALSE in other case *
+ **/
+  boolean isMediaFlowingOut(@org.kurento.client.internal.server.Param("mediaType") org.kurento.client.MediaType mediaType);
+
+/**
+ *
+ * Asynchronous version of isMediaFlowingOut:
+ * {@link Continuation#onSuccess} is called when the action is
+ * done. If an error occurs, {@link Continuation#onError} is called.
+ * @see MediaElement#isMediaFlowingOut
+ *
+ * @param mediaType
+ *       One of {@link #MediaType.AUDIO} or {@link #MediaType.VIDEO}
+ *
+ **/
+    void isMediaFlowingOut(@org.kurento.client.internal.server.Param("mediaType") org.kurento.client.MediaType mediaType, Continuation<Boolean> cont);
+
+/**
+ *
+ * Returns if there is media flowing from the MediaElement to the pipeline through a pad
+ *
+ * @param mediaType
+ *       One of {@link #MediaType.AUDIO} or {@link #MediaType.VIDEO}
+ * @return TRUE if there is media, FALSE in other case *
+ **/
+    TFuture<Boolean> isMediaFlowingOut(Transaction tx, @org.kurento.client.internal.server.Param("mediaType") org.kurento.client.MediaType mediaType);
+
     /**
      * Add a {@link EventListener} for event {@link ElementConnectedEvent}. Synchronous call.
      *
@@ -877,6 +1025,82 @@ public interface MediaElement extends MediaObject {
      **/
     @org.kurento.client.internal.server.EventSubscription(ElementDisconnectedEvent.class)
     void removeElementDisconnectedListener(ListenerSubscription listenerSubscription, Continuation<Void> cont);
+    /**
+     * Add a {@link EventListener} for event {@link MediaFlowOutStateChangeEvent}. Synchronous call.
+     *
+     * @param  listener Listener to be called on MediaFlowOutStateChangeEvent
+     * @return ListenerSubscription for the given Listener
+     *
+     **/
+    @org.kurento.client.internal.server.EventSubscription(MediaFlowOutStateChangeEvent.class)
+    ListenerSubscription addMediaFlowOutStateChangeListener(EventListener<MediaFlowOutStateChangeEvent> listener);
+    /**
+     * Add a {@link EventListener} for event {@link MediaFlowOutStateChangeEvent}. Asynchronous call.
+     * Calls Continuation&lt;ListenerSubscription&gt; when it has been added.
+     *
+     * @param listener Listener to be called on MediaFlowOutStateChangeEvent
+     * @param cont     Continuation to be called when the listener is registered
+     *
+     **/
+    @org.kurento.client.internal.server.EventSubscription(MediaFlowOutStateChangeEvent.class)
+    void addMediaFlowOutStateChangeListener(EventListener<MediaFlowOutStateChangeEvent> listener, Continuation<ListenerSubscription> cont);
+    
+	/**
+     * Remove a {@link ListenerSubscription} for event {@link MediaFlowOutStateChangeEvent}. Synchronous call.
+     *
+     * @param listenerSubscription Listener subscription to be removed
+     *
+     **/
+    @org.kurento.client.internal.server.EventSubscription(MediaFlowOutStateChangeEvent.class)
+    void removeMediaFlowOutStateChangeListener(ListenerSubscription listenerSubscription);
+    /**
+     * Remove a {@link ListenerSubscription} for event {@link MediaFlowOutStateChangeEvent}. Asynchronous call.
+     * Calls Continuation&lt;Void&gt; when it has been removed.
+     *
+     * @param listenerSubscription Listener subscription to be removed
+     * @param cont                 Continuation to be called when the listener is removed
+     *
+     **/
+    @org.kurento.client.internal.server.EventSubscription(MediaFlowOutStateChangeEvent.class)
+    void removeMediaFlowOutStateChangeListener(ListenerSubscription listenerSubscription, Continuation<Void> cont);
+    /**
+     * Add a {@link EventListener} for event {@link MediaFlowInStateChangeEvent}. Synchronous call.
+     *
+     * @param  listener Listener to be called on MediaFlowInStateChangeEvent
+     * @return ListenerSubscription for the given Listener
+     *
+     **/
+    @org.kurento.client.internal.server.EventSubscription(MediaFlowInStateChangeEvent.class)
+    ListenerSubscription addMediaFlowInStateChangeListener(EventListener<MediaFlowInStateChangeEvent> listener);
+    /**
+     * Add a {@link EventListener} for event {@link MediaFlowInStateChangeEvent}. Asynchronous call.
+     * Calls Continuation&lt;ListenerSubscription&gt; when it has been added.
+     *
+     * @param listener Listener to be called on MediaFlowInStateChangeEvent
+     * @param cont     Continuation to be called when the listener is registered
+     *
+     **/
+    @org.kurento.client.internal.server.EventSubscription(MediaFlowInStateChangeEvent.class)
+    void addMediaFlowInStateChangeListener(EventListener<MediaFlowInStateChangeEvent> listener, Continuation<ListenerSubscription> cont);
+    
+	/**
+     * Remove a {@link ListenerSubscription} for event {@link MediaFlowInStateChangeEvent}. Synchronous call.
+     *
+     * @param listenerSubscription Listener subscription to be removed
+     *
+     **/
+    @org.kurento.client.internal.server.EventSubscription(MediaFlowInStateChangeEvent.class)
+    void removeMediaFlowInStateChangeListener(ListenerSubscription listenerSubscription);
+    /**
+     * Remove a {@link ListenerSubscription} for event {@link MediaFlowInStateChangeEvent}. Asynchronous call.
+     * Calls Continuation&lt;Void&gt; when it has been removed.
+     *
+     * @param listenerSubscription Listener subscription to be removed
+     * @param cont                 Continuation to be called when the listener is removed
+     *
+     **/
+    @org.kurento.client.internal.server.EventSubscription(MediaFlowInStateChangeEvent.class)
+    void removeMediaFlowInStateChangeListener(ListenerSubscription listenerSubscription, Continuation<Void> cont);
     
 
 

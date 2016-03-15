@@ -23,6 +23,7 @@
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/target/generated-sources/kmd/org/kurento/client/MediaStateChangedEvent.java
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/target/generated-sources/kmd/org/kurento/client/MediaEvent.java
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/target/generated-sources/kmd/org/kurento/client/Dispatcher.java
+/opt/kurento/doc-kurento-room/build/langdoc/kurento-client/target/generated-sources/kmd/org/kurento/client/PausedEvent.java
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/src/main/java/org/kurento/client/internal/server/Param.java
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/target/generated-sources/kmd/org/kurento/module/KurentoModuleInfo.java
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/target/generated-sources/kmd/org/kurento/client/Fraction.java
@@ -34,6 +35,8 @@
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/src/main/java/org/kurento/client/internal/client/RomEventHandler.java
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/src/main/java/org/kurento/client/internal/server/EventSubscription.java
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/src/main/java/org/kurento/client/internal/RemoteClass.java
+/opt/kurento/doc-kurento-room/build/langdoc/kurento-client/target/generated-sources/kmd/org/kurento/client/RecordingEvent.java
+/opt/kurento/doc-kurento-room/build/langdoc/kurento-client/target/generated-sources/kmd/org/kurento/client/MediaFlowState.java
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/target/generated-sources/kmd/org/kurento/client/AlphaBlending.java
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/src/main/java/org/kurento/client/internal/client/RemoteObjectEventListener.java
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/target/generated-sources/kmd/org/kurento/client/HttpPostEndpoint.java
@@ -57,6 +60,7 @@
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/target/generated-sources/kmd/org/kurento/client/Endpoint.java
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/target/generated-sources/kmd/org/kurento/client/Tag.java
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/target/generated-sources/kmd/org/kurento/client/OnKeySoftLimitEvent.java
+/opt/kurento/doc-kurento-room/build/langdoc/kurento-client/target/generated-sources/kmd/org/kurento/client/NewCandidatePairSelectedEvent.java
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/src/main/java/org/kurento/client/internal/client/DefaultInvocationHandler.java
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/src/main/java/org/kurento/client/TFuture.java
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/src/main/java/org/kurento/client/Properties.java
@@ -75,6 +79,7 @@
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/src/main/java/org/kurento/client/KurentoClient.java
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/src/main/java/org/kurento/client/internal/client/operation/InvokeOperation.java
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/src/main/java/org/kurento/client/internal/transport/jsonrpc/RomJsonRpcConstants.java
+/opt/kurento/doc-kurento-room/build/langdoc/kurento-client/target/generated-sources/kmd/org/kurento/client/IceCandidatePair.java
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/src/main/java/org/kurento/client/internal/transport/serialization/ObjectRefsManager.java
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/target/generated-sources/kmd/org/kurento/client/FaceOverlayFilter.java
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/src/main/java/org/kurento/client/internal/transport/serialization/ModuleClassesManager.java
@@ -83,11 +88,13 @@
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/target/generated-sources/kmd/org/kurento/client/StatsType.java
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/target/generated-sources/kmd/org/kurento/client/IceComponentState.java
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/target/generated-sources/kmd/org/kurento/client/MediaElement.java
+/opt/kurento/doc-kurento-room/build/langdoc/kurento-client/target/generated-sources/kmd/org/kurento/client/MediaFlowInStateChangeEvent.java
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/target/generated-sources/kmd/org/kurento/client/RembParams.java
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/target/generated-sources/kmd/org/kurento/client/OnDataChannelClosedEvent.java
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/src/main/java/org/kurento/client/internal/client/RomClient.java
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/target/generated-sources/kmd/org/kurento/client/MediaObject.java
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/target/generated-sources/kmd/org/kurento/client/Filter.java
+/opt/kurento/doc-kurento-room/build/langdoc/kurento-client/target/generated-sources/kmd/org/kurento/client/StoppedEvent.java
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/target/generated-sources/kmd/org/kurento/client/OnIceComponentStateChangedEvent.java
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/target/generated-sources/kmd/org/kurento/client/ElementStats.java
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/src/main/java/org/kurento/client/internal/transport/jsonrpc/RomServerJsonRpcHandler.java
@@ -109,12 +116,14 @@
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/target/generated-sources/kmd/org/kurento/client/OnIceGatheringDoneEvent.java
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/src/main/java/org/kurento/client/internal/client/RomClientObjectManager.java
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/target/generated-sources/kmd/org/kurento/client/CodeFoundEvent.java
+/opt/kurento/doc-kurento-room/build/langdoc/kurento-client/target/generated-sources/kmd/org/kurento/client/MediaLatencyStat.java
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/target/generated-sources/kmd/org/kurento/client/VideoCodec.java
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/target/generated-sources/kmd/org/kurento/client/GstreamerDotDetails.java
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/src/main/java/org/kurento/client/internal/ParamAnnotationUtils.java
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/target/generated-sources/kmd/org/kurento/client/UriEndpoint.java
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/target/generated-sources/kmd/org/kurento/client/HttpEndpoint.java
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/target/generated-sources/kmd/org/kurento/client/Composite.java
+/opt/kurento/doc-kurento-room/build/langdoc/kurento-client/target/generated-sources/kmd/org/kurento/client/MediaFlowOutStateChangeEvent.java
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/target/generated-sources/kmd/org/kurento/client/FilterType.java
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/target/generated-sources/kmd/org/kurento/client/ElementConnectedEvent.java
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/target/generated-sources/kmd/org/kurento/client/HubPort.java
