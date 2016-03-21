@@ -24,7 +24,7 @@ We also provide a way to run the demo without resorting to a system-wide install
 
 - :term:`Kurento Media Server` or connection with at least a running instance (to
   install follow the official
-  `guide <http://www.kurento.org/docs/current/installation_guide.html>`_)
+  `guide <http://doc-kurento.readthedocs.org/en/stable/installation_guide.html>`_)
 
 Installation procedures
 =======================
