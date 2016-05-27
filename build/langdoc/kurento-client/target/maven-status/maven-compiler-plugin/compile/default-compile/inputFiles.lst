@@ -23,6 +23,7 @@
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/target/generated-sources/kmd/org/kurento/client/MediaStateChangedEvent.java
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/target/generated-sources/kmd/org/kurento/client/MediaEvent.java
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/target/generated-sources/kmd/org/kurento/client/Dispatcher.java
+/opt/kurento/doc-kurento-room/build/langdoc/kurento-client/target/generated-sources/kmd/org/kurento/client/IceConnection.java
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/target/generated-sources/kmd/org/kurento/client/PausedEvent.java
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/src/main/java/org/kurento/client/internal/server/Param.java
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/target/generated-sources/kmd/org/kurento/module/KurentoModuleInfo.java

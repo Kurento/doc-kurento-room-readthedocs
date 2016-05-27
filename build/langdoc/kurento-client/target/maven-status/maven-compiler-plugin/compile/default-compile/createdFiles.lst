@@ -82,6 +82,7 @@ org/kurento/client/RTCPeerConnectionStats.class
 org/kurento/client/MediaState.class
 org/kurento/client/MediaFlowOutStateChangeEvent.class
 org/kurento/client/internal/server/EventSubscription.class
+org/kurento/client/IceConnection.class
 org/kurento/client/TransactionExecutionException.class
 org/kurento/client/internal/RemoteClass.class
 org/kurento/client/RTCStats.class

@@ -10,7 +10,7 @@
     .. record::, and :rcrd:
 
     :copyright: Copyright 2014 by the Kurento team.
-    :license: LGPL 2.1, see LICENSE for details.
+    :license: Apache 2.0, see LICENSE for details.
 """
 
 from sphinx import addnodes

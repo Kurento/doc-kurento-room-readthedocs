@@ -7,40 +7,248 @@ package org.kurento.client;
 
 /**
  *
- * Basic building blocks of the media server, that can be interconnected through the API. A {@link module:core/abstracts.MediaElement MediaElement} is a module that encapsulates a specific media capability. They can be connected to create media pipelines where those capabilities are applied, in sequence, to the stream going through the pipeline.
- *    {@link module:core/abstracts.MediaElement MediaElement} objects are classified by its supported media type (audio, video, etc.)
+ * <p>This is the basic building block of the media server, that can be interconnected inside a pipeline. A {@link module:core/abstracts.MediaElement MediaElement} is a module that encapsulates a specific media capability, and that is able to exchange media with other {@link module:core/abstracts.MediaElement MediaElement}s through an internal element called pad.
+ *       </p>
+ *       <p>
+ *       A pad can be defined as an input or output interface. Input pads are called sinks, and it's where the media elements receive media from other media elements. Output interfaces are called sources, and it's the pad used by the media element to feed media to other media elements. There can be only one sink pad per media element. On the other hand, the number of source pads is unconstrained. This means that a certain media element can receive media only from one element at a time, while it can send media to many others. Pads are created on demand, when the connect method is invoked. When two media elements are connected, one media pad is created for each type of media connected. For example, if you connect AUDIO and VIDEO between two media elements, each one will need to create two new pads: one for AUDIO and one for VIDEO.
+ *       </p>
+ *       <p>
+ *       When media elements are connected, it can be case that the encoding used by the elements is not the same, and thus it needs to be transcoded. This is something that is handled transparently by the media elements internals. In practice, the user needs not be aware that the transcodification is taking place. However, this process has a toll in the form of a higher CPU load, so connecting media elements that need media encoded in different formats is something to consider as a high load operation.
+ *       </p>
  *
  **/
 @org.kurento.client.internal.RemoteClass
 public interface MediaElement extends MediaObject {
 
+/**
+ *
+ * @deprecated
+ * Get Deprecated due to a typo. Use minOutputBitrate instead of this function. Minimum video bandwidth for transcoding.
+ *   Unit: bps(bits per second).
+ *   Default value: 0
+ *
+ **/
      int getMinOuputBitrate();
 
+/**
+ *
+ * @deprecated
+ * Get Deprecated due to a typo. Use minOutputBitrate instead of this function. Minimum video bandwidth for transcoding.
+ *   Unit: bps(bits per second).
+ *   Default value: 0
+ *
+ **/
      void getMinOuputBitrate(Continuation<Integer> cont);
 
+/**
+ *
+ * @deprecated
+ * Get Deprecated due to a typo. Use minOutputBitrate instead of this function. Minimum video bandwidth for transcoding.
+ *   Unit: bps(bits per second).
+ *   Default value: 0
+ *
+ **/
      TFuture<Integer> getMinOuputBitrate(Transaction tx);
 
+/**
+ *
+ * @deprecated
+ * Set Deprecated due to a typo. Use minOutputBitrate instead of this function. Minimum video bandwidth for transcoding.
+ *   Unit: bps(bits per second).
+ *   Default value: 0
+ *
+ **/
      void setMinOuputBitrate(@org.kurento.client.internal.server.Param("minOuputBitrate") int minOuputBitrate);
 
+/**
+ *
+ * @deprecated
+ * Set Deprecated due to a typo. Use minOutputBitrate instead of this function. Minimum video bandwidth for transcoding.
+ *   Unit: bps(bits per second).
+ *   Default value: 0
+ *
+ **/
      void setMinOuputBitrate(@org.kurento.client.internal.server.Param("minOuputBitrate") int minOuputBitrate, Continuation<Void> cont);
 
+/**
+ *
+ * @deprecated
+ * Set Deprecated due to a typo. Use minOutputBitrate instead of this function. Minimum video bandwidth for transcoding.
+ *   Unit: bps(bits per second).
+ *   Default value: 0
+ *
+ **/
      void setMinOuputBitrate(@org.kurento.client.internal.server.Param("minOuputBitrate") int minOuputBitrate, Transaction tx);
+/**
+ *
+ * Get Minimum video bitrate for transcoding.
+ *   Unit: bps(bits per second).
+ *   Default value: 0
+ *
+ **/
+     int getMinOutputBitrate();
+
+/**
+ *
+ * Get Minimum video bitrate for transcoding.
+ *   Unit: bps(bits per second).
+ *   Default value: 0
+ *
+ **/
+     void getMinOutputBitrate(Continuation<Integer> cont);
+
+/**
+ *
+ * Get Minimum video bitrate for transcoding.
+ *   Unit: bps(bits per second).
+ *   Default value: 0
+ *
+ **/
+     TFuture<Integer> getMinOutputBitrate(Transaction tx);
+
+/**
+ *
+ * Set Minimum video bitrate for transcoding.
+ *   Unit: bps(bits per second).
+ *   Default value: 0
+ *
+ **/
+     void setMinOutputBitrate(@org.kurento.client.internal.server.Param("minOutputBitrate") int minOutputBitrate);
+
+/**
+ *
+ * Set Minimum video bitrate for transcoding.
+ *   Unit: bps(bits per second).
+ *   Default value: 0
+ *
+ **/
+     void setMinOutputBitrate(@org.kurento.client.internal.server.Param("minOutputBitrate") int minOutputBitrate, Continuation<Void> cont);
+
+/**
+ *
+ * Set Minimum video bitrate for transcoding.
+ *   Unit: bps(bits per second).
+ *   Default value: 0
+ *
+ **/
+     void setMinOutputBitrate(@org.kurento.client.internal.server.Param("minOutputBitrate") int minOutputBitrate, Transaction tx);
+/**
+ *
+ * @deprecated
+ * Get Deprecated due to a typo. Use maxOutputBitrate instead of this function. Maximum video bandwidth for transcoding. 0 = unlimited.
+ *   Unit: bps(bits per second).
+ *   Default value: MAXINT
+ *
+ **/
      int getMaxOuputBitrate();
 
+/**
+ *
+ * @deprecated
+ * Get Deprecated due to a typo. Use maxOutputBitrate instead of this function. Maximum video bandwidth for transcoding. 0 = unlimited.
+ *   Unit: bps(bits per second).
+ *   Default value: MAXINT
+ *
+ **/
      void getMaxOuputBitrate(Continuation<Integer> cont);
 
+/**
+ *
+ * @deprecated
+ * Get Deprecated due to a typo. Use maxOutputBitrate instead of this function. Maximum video bandwidth for transcoding. 0 = unlimited.
+ *   Unit: bps(bits per second).
+ *   Default value: MAXINT
+ *
+ **/
      TFuture<Integer> getMaxOuputBitrate(Transaction tx);
 
+/**
+ *
+ * @deprecated
+ * Set Deprecated due to a typo. Use maxOutputBitrate instead of this function. Maximum video bandwidth for transcoding. 0 = unlimited.
+ *   Unit: bps(bits per second).
+ *   Default value: MAXINT
+ *
+ **/
      void setMaxOuputBitrate(@org.kurento.client.internal.server.Param("maxOuputBitrate") int maxOuputBitrate);
 
+/**
+ *
+ * @deprecated
+ * Set Deprecated due to a typo. Use maxOutputBitrate instead of this function. Maximum video bandwidth for transcoding. 0 = unlimited.
+ *   Unit: bps(bits per second).
+ *   Default value: MAXINT
+ *
+ **/
      void setMaxOuputBitrate(@org.kurento.client.internal.server.Param("maxOuputBitrate") int maxOuputBitrate, Continuation<Void> cont);
 
+/**
+ *
+ * @deprecated
+ * Set Deprecated due to a typo. Use maxOutputBitrate instead of this function. Maximum video bandwidth for transcoding. 0 = unlimited.
+ *   Unit: bps(bits per second).
+ *   Default value: MAXINT
+ *
+ **/
      void setMaxOuputBitrate(@org.kurento.client.internal.server.Param("maxOuputBitrate") int maxOuputBitrate, Transaction tx);
+/**
+ *
+ * Get Maximum video bitrate for transcoding. 0 = unlimited.
+ *   Unit: bps(bits per second).
+ *   Default value: MAXINT
+ *
+ **/
+     int getMaxOutputBitrate();
+
+/**
+ *
+ * Get Maximum video bitrate for transcoding. 0 = unlimited.
+ *   Unit: bps(bits per second).
+ *   Default value: MAXINT
+ *
+ **/
+     void getMaxOutputBitrate(Continuation<Integer> cont);
+
+/**
+ *
+ * Get Maximum video bitrate for transcoding. 0 = unlimited.
+ *   Unit: bps(bits per second).
+ *   Default value: MAXINT
+ *
+ **/
+     TFuture<Integer> getMaxOutputBitrate(Transaction tx);
+
+/**
+ *
+ * Set Maximum video bitrate for transcoding. 0 = unlimited.
+ *   Unit: bps(bits per second).
+ *   Default value: MAXINT
+ *
+ **/
+     void setMaxOutputBitrate(@org.kurento.client.internal.server.Param("maxOutputBitrate") int maxOutputBitrate);
+
+/**
+ *
+ * Set Maximum video bitrate for transcoding. 0 = unlimited.
+ *   Unit: bps(bits per second).
+ *   Default value: MAXINT
+ *
+ **/
+     void setMaxOutputBitrate(@org.kurento.client.internal.server.Param("maxOutputBitrate") int maxOutputBitrate, Continuation<Void> cont);
+
+/**
+ *
+ * Set Maximum video bitrate for transcoding. 0 = unlimited.
+ *   Unit: bps(bits per second).
+ *   Default value: MAXINT
+ *
+ **/
+     void setMaxOutputBitrate(@org.kurento.client.internal.server.Param("maxOutputBitrate") int maxOutputBitrate, Transaction tx);
 
 
 /**
  *
- * Get the connections information of the elements that are sending media to this element {@link module:core/abstracts.MediaElement MediaElement}
+ * Gets information about the sink pads of this media element. Since sink pads are the interface through which a media element gets it's media, whatever is connected to an element's sink pad is formally a source of media. Media can be filtered by type, or by the description given to the pad though which both elements are connected.
  *
  * @param mediaType
  *       One of {@link #MediaType.AUDIO}, {@link #MediaType.VIDEO} or {@link #MediaType.DATA}
@@ -67,7 +275,7 @@ public interface MediaElement extends MediaObject {
 
 /**
  *
- * Get the connections information of the elements that are sending media to this element {@link module:core/abstracts.MediaElement MediaElement}
+ * Gets information about the sink pads of this media element. Since sink pads are the interface through which a media element gets it's media, whatever is connected to an element's sink pad is formally a source of media. Media can be filtered by type, or by the description given to the pad though which both elements are connected.
  *
  * @param mediaType
  *       One of {@link #MediaType.AUDIO}, {@link #MediaType.VIDEO} or {@link #MediaType.DATA}
@@ -80,13 +288,13 @@ public interface MediaElement extends MediaObject {
 
 /**
  *
- * Returns a list of the connections information of the elements that ere receiving media from this element.
+ * Gets information about the source pads of this media element. Since source pads connect to other media element's sinks, this is formally the sink of media from the element's perspective. Media can be filtered by type, or by the description given to the pad though which both elements are connected.
  *
  * @param mediaType
  *       One of {@link #MediaType.AUDIO}, {@link #MediaType.VIDEO} or {@link #MediaType.DATA}
  * @param description
  *       A textual description of the media source. Currently not used, aimed mainly for {@link #MediaType.DATA} sources
- * @return A list of the connections information that arereceiving media from this element. The list will be empty if no sinks are found. *
+ * @return A list of the connections information that are receiving media from this element. The list will be empty if no sources are found. *
  **/
   java.util.List<org.kurento.client.ElementConnectionData> getSinkConnections(@org.kurento.client.internal.server.Param("mediaType") org.kurento.client.MediaType mediaType, @org.kurento.client.internal.server.Param("description") String description);
 
@@ -107,20 +315,31 @@ public interface MediaElement extends MediaObject {
 
 /**
  *
- * Returns a list of the connections information of the elements that ere receiving media from this element.
+ * Gets information about the source pads of this media element. Since source pads connect to other media element's sinks, this is formally the sink of media from the element's perspective. Media can be filtered by type, or by the description given to the pad though which both elements are connected.
  *
  * @param mediaType
  *       One of {@link #MediaType.AUDIO}, {@link #MediaType.VIDEO} or {@link #MediaType.DATA}
  * @param description
  *       A textual description of the media source. Currently not used, aimed mainly for {@link #MediaType.DATA} sources
- * @return A list of the connections information that arereceiving media from this element. The list will be empty if no sinks are found. *
+ * @return A list of the connections information that are receiving media from this element. The list will be empty if no sources are found. *
  **/
     TFuture<java.util.List<org.kurento.client.ElementConnectionData>> getSinkConnections(Transaction tx, @org.kurento.client.internal.server.Param("mediaType") org.kurento.client.MediaType mediaType, @org.kurento.client.internal.server.Param("description") String description);
 
 
 /**
  *
- * Connects two elements, with the given restrictions, current {@link module:core/abstracts.MediaElement MediaElement} will start emmit media to sink element. Connection could take place in the future, when both media element show capabilities for connecting with the given restrictions
+ * <p>Connects two elements, with the media flowing from left to right: the elements that invokes the connect wil be the source of media, creating one sink pad for each type of media connected. The element given as parameter to the method will be the sink, and it will create one sink pad per media type connected.
+ *           </p>
+ *           <p>
+ *           If otherwise not specified, all types of media are connected by default (AUDIO, VIDEO and DATA). It is recommended to connect the specific types of media if not all of them will be used. For this purpose, the connect method can be invoked more than once on the same two elements, but with different media types.
+ *           </p>
+ *           <p>
+ *           The connection is unidirectional. If a bidirectional connection is desired, the position of the media elements must be inverted. For instance, webrtc1.connect(webrtc2) is connecting webrtc1 as source of webrtc2. In order to create a WebRTC one-2one conversation, the user would need to especify the connection on the other direction with webrtc2.connect(webrtc1).
+ *           </p>
+ *           <p>
+ *           Even though one media element can have one sink pad per type of media, only one media element can be connected to another at a given time. If a media element is connected to another, the former will become the source of the sink media element, regardles whether there was another element connected or not.
+ *           </p>
+ *           
  *
  * @param sink
  *       the target {@link module:core/abstracts.MediaElement MediaElement} that will receive media
@@ -155,7 +374,18 @@ public interface MediaElement extends MediaObject {
 
 /**
  *
- * Connects two elements, with the given restrictions, current {@link module:core/abstracts.MediaElement MediaElement} will start emmit media to sink element. Connection could take place in the future, when both media element show capabilities for connecting with the given restrictions
+ * <p>Connects two elements, with the media flowing from left to right: the elements that invokes the connect wil be the source of media, creating one sink pad for each type of media connected. The element given as parameter to the method will be the sink, and it will create one sink pad per media type connected.
+ *           </p>
+ *           <p>
+ *           If otherwise not specified, all types of media are connected by default (AUDIO, VIDEO and DATA). It is recommended to connect the specific types of media if not all of them will be used. For this purpose, the connect method can be invoked more than once on the same two elements, but with different media types.
+ *           </p>
+ *           <p>
+ *           The connection is unidirectional. If a bidirectional connection is desired, the position of the media elements must be inverted. For instance, webrtc1.connect(webrtc2) is connecting webrtc1 as source of webrtc2. In order to create a WebRTC one-2one conversation, the user would need to especify the connection on the other direction with webrtc2.connect(webrtc1).
+ *           </p>
+ *           <p>
+ *           Even though one media element can have one sink pad per type of media, only one media element can be connected to another at a given time. If a media element is connected to another, the former will become the source of the sink media element, regardles whether there was another element connected or not.
+ *           </p>
+ *           
  *
  * @param sink
  *       the target {@link module:core/abstracts.MediaElement MediaElement} that will receive media
@@ -172,7 +402,7 @@ public interface MediaElement extends MediaObject {
 
 /**
  *
- * Disconnects two elements, with the given restrictions, current {@link module:core/abstracts.MediaElement MediaElement} stops sending media to sink element. If the previously requested connection didn't took place it is also removed
+ * Disconnectes two media elements. This will release the source pads of the source media element, and the sink pads of the sink media element.
  *
  * @param sink
  *       the target {@link module:core/abstracts.MediaElement MediaElement} that will stop receiving media
@@ -207,7 +437,7 @@ public interface MediaElement extends MediaObject {
 
 /**
  *
- * Disconnects two elements, with the given restrictions, current {@link module:core/abstracts.MediaElement MediaElement} stops sending media to sink element. If the previously requested connection didn't took place it is also removed
+ * Disconnectes two media elements. This will release the source pads of the source media element, and the sink pads of the sink media element.
  *
  * @param sink
  *       the target {@link module:core/abstracts.MediaElement MediaElement} that will stop receiving media
@@ -224,7 +454,7 @@ public interface MediaElement extends MediaObject {
 
 /**
  *
- * Sets the type of data for the audio stream. MediaElements that do not support configuration of audio capabilities will raise an exception
+ * Sets the type of data for the audio stream. MediaElements that do not support configuration of audio capabilities will throw a MEDIA_OBJECT_ILLEGAL_PARAM_ERROR exception.
  *
  * @param caps
  *       The format for the stream of audio
@@ -247,7 +477,7 @@ public interface MediaElement extends MediaObject {
 
 /**
  *
- * Sets the type of data for the audio stream. MediaElements that do not support configuration of audio capabilities will raise an exception
+ * Sets the type of data for the audio stream. MediaElements that do not support configuration of audio capabilities will throw a MEDIA_OBJECT_ILLEGAL_PARAM_ERROR exception.
  *
  * @param caps
  *       The format for the stream of audio
@@ -258,7 +488,7 @@ public interface MediaElement extends MediaObject {
 
 /**
  *
- * Sets the type of data for the video stream. MediaElements that do not support configuration of video capabilities will raise an exception
+ * Sets the type of data for the video stream. MediaElements that do not support configuration of video capabilities will throw a MEDIA_OBJECT_ILLEGAL_PARAM_ERROR exception
  *
  * @param caps
  *       The format for the stream of video
@@ -281,7 +511,7 @@ public interface MediaElement extends MediaObject {
 
 /**
  *
- * Sets the type of data for the video stream. MediaElements that do not support configuration of video capabilities will raise an exception
+ * Sets the type of data for the video stream. MediaElements that do not support configuration of video capabilities will throw a MEDIA_OBJECT_ILLEGAL_PARAM_ERROR exception
  *
  * @param caps
  *       The format for the stream of video
@@ -292,7 +522,17 @@ public interface MediaElement extends MediaObject {
 
 /**
  *
- * Returns a string in dot (graphviz) format that represents the gstreamer elements inside
+ * This method returns a .dot file describing the topology of the media element. The element can be queried for certain type of data
+ *           <ul>
+ *             <li>SHOW_ALL: default value</li>
+ *             <li>SHOW_CAPS_DETAILS</li>
+ *             <li>SHOW_FULL_PARAMS</li>
+ *             <li>SHOW_MEDIA_TYPE</li>
+ *             <li>SHOW_NON_DEFAULT_PARAMS</li>
+ *             <li>SHOW_STATES</li>
+ *             <li>SHOW_VERBOSE</li>
+ *           </ul>
+ *           
  *
  * @param details
  *       Details of graph
@@ -315,7 +555,17 @@ public interface MediaElement extends MediaObject {
 
 /**
  *
- * Returns a string in dot (graphviz) format that represents the gstreamer elements inside
+ * This method returns a .dot file describing the topology of the media element. The element can be queried for certain type of data
+ *           <ul>
+ *             <li>SHOW_ALL: default value</li>
+ *             <li>SHOW_CAPS_DETAILS</li>
+ *             <li>SHOW_FULL_PARAMS</li>
+ *             <li>SHOW_MEDIA_TYPE</li>
+ *             <li>SHOW_NON_DEFAULT_PARAMS</li>
+ *             <li>SHOW_STATES</li>
+ *             <li>SHOW_VERBOSE</li>
+ *           </ul>
+ *           
  *
  * @param details
  *       Details of graph
@@ -362,7 +612,7 @@ public interface MediaElement extends MediaObject {
 
 /**
  *
- * Provides statistics collected for this endpoint
+ * Gets the statistics related to an endpoint. If no media type is specified, it returns statistics for all available types.
  *
  * @param mediaType
  *       One of {@link #MediaType.AUDIO} or {@link #MediaType.VIDEO}
@@ -385,7 +635,7 @@ public interface MediaElement extends MediaObject {
 
 /**
  *
- * Provides statistics collected for this endpoint
+ * Gets the statistics related to an endpoint. If no media type is specified, it returns statistics for all available types.
  *
  * @param mediaType
  *       One of {@link #MediaType.AUDIO} or {@link #MediaType.VIDEO}
@@ -396,7 +646,7 @@ public interface MediaElement extends MediaObject {
 
 /**
  *
- * Returns if there is media flowing from the pipeline to the MediaElement through a pad
+ * This method indicates whether the media element is receiving media of a certain type. The media sink pad can be identified individually, if needed. It is only supported for AUDIO and VIDEO types, raising a MEDIA_OBJECT_ILLEGAL_PARAM_ERROR otherwise. If the pad indicated does not exist, if will return false.
  *
  * @param mediaType
  *       One of {@link #MediaType.AUDIO} or {@link #MediaType.VIDEO}
@@ -423,7 +673,7 @@ public interface MediaElement extends MediaObject {
 
 /**
  *
- * Returns if there is media flowing from the pipeline to the MediaElement through a pad
+ * This method indicates whether the media element is receiving media of a certain type. The media sink pad can be identified individually, if needed. It is only supported for AUDIO and VIDEO types, raising a MEDIA_OBJECT_ILLEGAL_PARAM_ERROR otherwise. If the pad indicated does not exist, if will return false.
  *
  * @param mediaType
  *       One of {@link #MediaType.AUDIO} or {@link #MediaType.VIDEO}
@@ -436,7 +686,7 @@ public interface MediaElement extends MediaObject {
 
 /**
  *
- * Returns if there is media flowing from the MediaElement to the pipeline through a pad
+ * This method indicates whether the media element is emitting media of a certain type. The media source pad can be identified individually, if needed. It is only supported for AUDIO and VIDEO types, raising a MEDIA_OBJECT_ILLEGAL_PARAM_ERROR otherwise. If the pad indicated does not exist, if will return false.
  *
  * @param mediaType
  *       One of {@link #MediaType.AUDIO} or {@link #MediaType.VIDEO}
@@ -463,7 +713,7 @@ public interface MediaElement extends MediaObject {
 
 /**
  *
- * Returns if there is media flowing from the MediaElement to the pipeline through a pad
+ * This method indicates whether the media element is emitting media of a certain type. The media source pad can be identified individually, if needed. It is only supported for AUDIO and VIDEO types, raising a MEDIA_OBJECT_ILLEGAL_PARAM_ERROR otherwise. If the pad indicated does not exist, if will return false.
  *
  * @param mediaType
  *       One of {@link #MediaType.AUDIO} or {@link #MediaType.VIDEO}
@@ -476,7 +726,7 @@ public interface MediaElement extends MediaObject {
 
 /**
  *
- * Get the connections information of the elements that are sending media to this element {@link module:core/abstracts.MediaElement MediaElement}
+ * Gets information about the sink pads of this media element. Since sink pads are the interface through which a media element gets it's media, whatever is connected to an element's sink pad is formally a source of media. Media can be filtered by type, or by the description given to the pad though which both elements are connected.
  * @return A list of the connections information that are sending media to this element. The list will be empty if no sources are found. *
  **/
   java.util.List<org.kurento.client.ElementConnectionData> getSourceConnections();
@@ -493,7 +743,7 @@ public interface MediaElement extends MediaObject {
 
 /**
  *
- * Get the connections information of the elements that are sending media to this element {@link module:core/abstracts.MediaElement MediaElement}
+ * Gets information about the sink pads of this media element. Since sink pads are the interface through which a media element gets it's media, whatever is connected to an element's sink pad is formally a source of media. Media can be filtered by type, or by the description given to the pad though which both elements are connected.
  * @return A list of the connections information that are sending media to this element. The list will be empty if no sources are found. *
  **/
     TFuture<java.util.List<org.kurento.client.ElementConnectionData>> getSourceConnections(Transaction tx);
@@ -501,7 +751,7 @@ public interface MediaElement extends MediaObject {
 
 /**
  *
- * Get the connections information of the elements that are sending media to this element {@link module:core/abstracts.MediaElement MediaElement}
+ * Gets information about the sink pads of this media element. Since sink pads are the interface through which a media element gets it's media, whatever is connected to an element's sink pad is formally a source of media. Media can be filtered by type, or by the description given to the pad though which both elements are connected.
  *
  * @param mediaType
  *       One of {@link #MediaType.AUDIO}, {@link #MediaType.VIDEO} or {@link #MediaType.DATA}
@@ -524,7 +774,7 @@ public interface MediaElement extends MediaObject {
 
 /**
  *
- * Get the connections information of the elements that are sending media to this element {@link module:core/abstracts.MediaElement MediaElement}
+ * Gets information about the sink pads of this media element. Since sink pads are the interface through which a media element gets it's media, whatever is connected to an element's sink pad is formally a source of media. Media can be filtered by type, or by the description given to the pad though which both elements are connected.
  *
  * @param mediaType
  *       One of {@link #MediaType.AUDIO}, {@link #MediaType.VIDEO} or {@link #MediaType.DATA}
@@ -535,8 +785,8 @@ public interface MediaElement extends MediaObject {
 
 /**
  *
- * Returns a list of the connections information of the elements that ere receiving media from this element.
- * @return A list of the connections information that arereceiving media from this element. The list will be empty if no sinks are found. *
+ * Gets information about the source pads of this media element. Since source pads connect to other media element's sinks, this is formally the sink of media from the element's perspective. Media can be filtered by type, or by the description given to the pad though which both elements are connected.
+ * @return A list of the connections information that are receiving media from this element. The list will be empty if no sources are found. *
  **/
   java.util.List<org.kurento.client.ElementConnectionData> getSinkConnections();
 
@@ -552,19 +802,19 @@ public interface MediaElement extends MediaObject {
 
 /**
  *
- * Returns a list of the connections information of the elements that ere receiving media from this element.
- * @return A list of the connections information that arereceiving media from this element. The list will be empty if no sinks are found. *
+ * Gets information about the source pads of this media element. Since source pads connect to other media element's sinks, this is formally the sink of media from the element's perspective. Media can be filtered by type, or by the description given to the pad though which both elements are connected.
+ * @return A list of the connections information that are receiving media from this element. The list will be empty if no sources are found. *
  **/
     TFuture<java.util.List<org.kurento.client.ElementConnectionData>> getSinkConnections(Transaction tx);
 
 
 /**
  *
- * Returns a list of the connections information of the elements that ere receiving media from this element.
+ * Gets information about the source pads of this media element. Since source pads connect to other media element's sinks, this is formally the sink of media from the element's perspective. Media can be filtered by type, or by the description given to the pad though which both elements are connected.
  *
  * @param mediaType
  *       One of {@link #MediaType.AUDIO}, {@link #MediaType.VIDEO} or {@link #MediaType.DATA}
- * @return A list of the connections information that arereceiving media from this element. The list will be empty if no sinks are found. *
+ * @return A list of the connections information that are receiving media from this element. The list will be empty if no sources are found. *
  **/
   java.util.List<org.kurento.client.ElementConnectionData> getSinkConnections(@org.kurento.client.internal.server.Param("mediaType") org.kurento.client.MediaType mediaType);
 
@@ -583,18 +833,29 @@ public interface MediaElement extends MediaObject {
 
 /**
  *
- * Returns a list of the connections information of the elements that ere receiving media from this element.
+ * Gets information about the source pads of this media element. Since source pads connect to other media element's sinks, this is formally the sink of media from the element's perspective. Media can be filtered by type, or by the description given to the pad though which both elements are connected.
  *
  * @param mediaType
  *       One of {@link #MediaType.AUDIO}, {@link #MediaType.VIDEO} or {@link #MediaType.DATA}
- * @return A list of the connections information that arereceiving media from this element. The list will be empty if no sinks are found. *
+ * @return A list of the connections information that are receiving media from this element. The list will be empty if no sources are found. *
  **/
     TFuture<java.util.List<org.kurento.client.ElementConnectionData>> getSinkConnections(Transaction tx, @org.kurento.client.internal.server.Param("mediaType") org.kurento.client.MediaType mediaType);
 
 
 /**
  *
- * Connects two elements, with the given restrictions, current {@link module:core/abstracts.MediaElement MediaElement} will start emmit media to sink element. Connection could take place in the future, when both media element show capabilities for connecting with the given restrictions
+ * <p>Connects two elements, with the media flowing from left to right: the elements that invokes the connect wil be the source of media, creating one sink pad for each type of media connected. The element given as parameter to the method will be the sink, and it will create one sink pad per media type connected.
+ *           </p>
+ *           <p>
+ *           If otherwise not specified, all types of media are connected by default (AUDIO, VIDEO and DATA). It is recommended to connect the specific types of media if not all of them will be used. For this purpose, the connect method can be invoked more than once on the same two elements, but with different media types.
+ *           </p>
+ *           <p>
+ *           The connection is unidirectional. If a bidirectional connection is desired, the position of the media elements must be inverted. For instance, webrtc1.connect(webrtc2) is connecting webrtc1 as source of webrtc2. In order to create a WebRTC one-2one conversation, the user would need to especify the connection on the other direction with webrtc2.connect(webrtc1).
+ *           </p>
+ *           <p>
+ *           Even though one media element can have one sink pad per type of media, only one media element can be connected to another at a given time. If a media element is connected to another, the former will become the source of the sink media element, regardles whether there was another element connected or not.
+ *           </p>
+ *           
  *
  * @param sink
  *       the target {@link module:core/abstracts.MediaElement MediaElement} that will receive media
@@ -617,7 +878,18 @@ public interface MediaElement extends MediaObject {
 
 /**
  *
- * Connects two elements, with the given restrictions, current {@link module:core/abstracts.MediaElement MediaElement} will start emmit media to sink element. Connection could take place in the future, when both media element show capabilities for connecting with the given restrictions
+ * <p>Connects two elements, with the media flowing from left to right: the elements that invokes the connect wil be the source of media, creating one sink pad for each type of media connected. The element given as parameter to the method will be the sink, and it will create one sink pad per media type connected.
+ *           </p>
+ *           <p>
+ *           If otherwise not specified, all types of media are connected by default (AUDIO, VIDEO and DATA). It is recommended to connect the specific types of media if not all of them will be used. For this purpose, the connect method can be invoked more than once on the same two elements, but with different media types.
+ *           </p>
+ *           <p>
+ *           The connection is unidirectional. If a bidirectional connection is desired, the position of the media elements must be inverted. For instance, webrtc1.connect(webrtc2) is connecting webrtc1 as source of webrtc2. In order to create a WebRTC one-2one conversation, the user would need to especify the connection on the other direction with webrtc2.connect(webrtc1).
+ *           </p>
+ *           <p>
+ *           Even though one media element can have one sink pad per type of media, only one media element can be connected to another at a given time. If a media element is connected to another, the former will become the source of the sink media element, regardles whether there was another element connected or not.
+ *           </p>
+ *           
  *
  * @param sink
  *       the target {@link module:core/abstracts.MediaElement MediaElement} that will receive media
@@ -628,7 +900,18 @@ public interface MediaElement extends MediaObject {
 
 /**
  *
- * Connects two elements, with the given restrictions, current {@link module:core/abstracts.MediaElement MediaElement} will start emmit media to sink element. Connection could take place in the future, when both media element show capabilities for connecting with the given restrictions
+ * <p>Connects two elements, with the media flowing from left to right: the elements that invokes the connect wil be the source of media, creating one sink pad for each type of media connected. The element given as parameter to the method will be the sink, and it will create one sink pad per media type connected.
+ *           </p>
+ *           <p>
+ *           If otherwise not specified, all types of media are connected by default (AUDIO, VIDEO and DATA). It is recommended to connect the specific types of media if not all of them will be used. For this purpose, the connect method can be invoked more than once on the same two elements, but with different media types.
+ *           </p>
+ *           <p>
+ *           The connection is unidirectional. If a bidirectional connection is desired, the position of the media elements must be inverted. For instance, webrtc1.connect(webrtc2) is connecting webrtc1 as source of webrtc2. In order to create a WebRTC one-2one conversation, the user would need to especify the connection on the other direction with webrtc2.connect(webrtc1).
+ *           </p>
+ *           <p>
+ *           Even though one media element can have one sink pad per type of media, only one media element can be connected to another at a given time. If a media element is connected to another, the former will become the source of the sink media element, regardles whether there was another element connected or not.
+ *           </p>
+ *           
  *
  * @param sink
  *       the target {@link module:core/abstracts.MediaElement MediaElement} that will receive media
@@ -655,7 +938,18 @@ public interface MediaElement extends MediaObject {
 
 /**
  *
- * Connects two elements, with the given restrictions, current {@link module:core/abstracts.MediaElement MediaElement} will start emmit media to sink element. Connection could take place in the future, when both media element show capabilities for connecting with the given restrictions
+ * <p>Connects two elements, with the media flowing from left to right: the elements that invokes the connect wil be the source of media, creating one sink pad for each type of media connected. The element given as parameter to the method will be the sink, and it will create one sink pad per media type connected.
+ *           </p>
+ *           <p>
+ *           If otherwise not specified, all types of media are connected by default (AUDIO, VIDEO and DATA). It is recommended to connect the specific types of media if not all of them will be used. For this purpose, the connect method can be invoked more than once on the same two elements, but with different media types.
+ *           </p>
+ *           <p>
+ *           The connection is unidirectional. If a bidirectional connection is desired, the position of the media elements must be inverted. For instance, webrtc1.connect(webrtc2) is connecting webrtc1 as source of webrtc2. In order to create a WebRTC one-2one conversation, the user would need to especify the connection on the other direction with webrtc2.connect(webrtc1).
+ *           </p>
+ *           <p>
+ *           Even though one media element can have one sink pad per type of media, only one media element can be connected to another at a given time. If a media element is connected to another, the former will become the source of the sink media element, regardles whether there was another element connected or not.
+ *           </p>
+ *           
  *
  * @param sink
  *       the target {@link module:core/abstracts.MediaElement MediaElement} that will receive media
@@ -668,7 +962,18 @@ public interface MediaElement extends MediaObject {
 
 /**
  *
- * Connects two elements, with the given restrictions, current {@link module:core/abstracts.MediaElement MediaElement} will start emmit media to sink element. Connection could take place in the future, when both media element show capabilities for connecting with the given restrictions
+ * <p>Connects two elements, with the media flowing from left to right: the elements that invokes the connect wil be the source of media, creating one sink pad for each type of media connected. The element given as parameter to the method will be the sink, and it will create one sink pad per media type connected.
+ *           </p>
+ *           <p>
+ *           If otherwise not specified, all types of media are connected by default (AUDIO, VIDEO and DATA). It is recommended to connect the specific types of media if not all of them will be used. For this purpose, the connect method can be invoked more than once on the same two elements, but with different media types.
+ *           </p>
+ *           <p>
+ *           The connection is unidirectional. If a bidirectional connection is desired, the position of the media elements must be inverted. For instance, webrtc1.connect(webrtc2) is connecting webrtc1 as source of webrtc2. In order to create a WebRTC one-2one conversation, the user would need to especify the connection on the other direction with webrtc2.connect(webrtc1).
+ *           </p>
+ *           <p>
+ *           Even though one media element can have one sink pad per type of media, only one media element can be connected to another at a given time. If a media element is connected to another, the former will become the source of the sink media element, regardles whether there was another element connected or not.
+ *           </p>
+ *           
  *
  * @param sink
  *       the target {@link module:core/abstracts.MediaElement MediaElement} that will receive media
@@ -699,7 +1004,18 @@ public interface MediaElement extends MediaObject {
 
 /**
  *
- * Connects two elements, with the given restrictions, current {@link module:core/abstracts.MediaElement MediaElement} will start emmit media to sink element. Connection could take place in the future, when both media element show capabilities for connecting with the given restrictions
+ * <p>Connects two elements, with the media flowing from left to right: the elements that invokes the connect wil be the source of media, creating one sink pad for each type of media connected. The element given as parameter to the method will be the sink, and it will create one sink pad per media type connected.
+ *           </p>
+ *           <p>
+ *           If otherwise not specified, all types of media are connected by default (AUDIO, VIDEO and DATA). It is recommended to connect the specific types of media if not all of them will be used. For this purpose, the connect method can be invoked more than once on the same two elements, but with different media types.
+ *           </p>
+ *           <p>
+ *           The connection is unidirectional. If a bidirectional connection is desired, the position of the media elements must be inverted. For instance, webrtc1.connect(webrtc2) is connecting webrtc1 as source of webrtc2. In order to create a WebRTC one-2one conversation, the user would need to especify the connection on the other direction with webrtc2.connect(webrtc1).
+ *           </p>
+ *           <p>
+ *           Even though one media element can have one sink pad per type of media, only one media element can be connected to another at a given time. If a media element is connected to another, the former will become the source of the sink media element, regardles whether there was another element connected or not.
+ *           </p>
+ *           
  *
  * @param sink
  *       the target {@link module:core/abstracts.MediaElement MediaElement} that will receive media
@@ -714,7 +1030,7 @@ public interface MediaElement extends MediaObject {
 
 /**
  *
- * Disconnects two elements, with the given restrictions, current {@link module:core/abstracts.MediaElement MediaElement} stops sending media to sink element. If the previously requested connection didn't took place it is also removed
+ * Disconnectes two media elements. This will release the source pads of the source media element, and the sink pads of the sink media element.
  *
  * @param sink
  *       the target {@link module:core/abstracts.MediaElement MediaElement} that will stop receiving media
@@ -737,7 +1053,7 @@ public interface MediaElement extends MediaObject {
 
 /**
  *
- * Disconnects two elements, with the given restrictions, current {@link module:core/abstracts.MediaElement MediaElement} stops sending media to sink element. If the previously requested connection didn't took place it is also removed
+ * Disconnectes two media elements. This will release the source pads of the source media element, and the sink pads of the sink media element.
  *
  * @param sink
  *       the target {@link module:core/abstracts.MediaElement MediaElement} that will stop receiving media
@@ -748,7 +1064,7 @@ public interface MediaElement extends MediaObject {
 
 /**
  *
- * Disconnects two elements, with the given restrictions, current {@link module:core/abstracts.MediaElement MediaElement} stops sending media to sink element. If the previously requested connection didn't took place it is also removed
+ * Disconnectes two media elements. This will release the source pads of the source media element, and the sink pads of the sink media element.
  *
  * @param sink
  *       the target {@link module:core/abstracts.MediaElement MediaElement} that will stop receiving media
@@ -775,7 +1091,7 @@ public interface MediaElement extends MediaObject {
 
 /**
  *
- * Disconnects two elements, with the given restrictions, current {@link module:core/abstracts.MediaElement MediaElement} stops sending media to sink element. If the previously requested connection didn't took place it is also removed
+ * Disconnectes two media elements. This will release the source pads of the source media element, and the sink pads of the sink media element.
  *
  * @param sink
  *       the target {@link module:core/abstracts.MediaElement MediaElement} that will stop receiving media
@@ -788,7 +1104,7 @@ public interface MediaElement extends MediaObject {
 
 /**
  *
- * Disconnects two elements, with the given restrictions, current {@link module:core/abstracts.MediaElement MediaElement} stops sending media to sink element. If the previously requested connection didn't took place it is also removed
+ * Disconnectes two media elements. This will release the source pads of the source media element, and the sink pads of the sink media element.
  *
  * @param sink
  *       the target {@link module:core/abstracts.MediaElement MediaElement} that will stop receiving media
@@ -819,7 +1135,7 @@ public interface MediaElement extends MediaObject {
 
 /**
  *
- * Disconnects two elements, with the given restrictions, current {@link module:core/abstracts.MediaElement MediaElement} stops sending media to sink element. If the previously requested connection didn't took place it is also removed
+ * Disconnectes two media elements. This will release the source pads of the source media element, and the sink pads of the sink media element.
  *
  * @param sink
  *       the target {@link module:core/abstracts.MediaElement MediaElement} that will stop receiving media
@@ -834,7 +1150,17 @@ public interface MediaElement extends MediaObject {
 
 /**
  *
- * Returns a string in dot (graphviz) format that represents the gstreamer elements inside
+ * This method returns a .dot file describing the topology of the media element. The element can be queried for certain type of data
+ *           <ul>
+ *             <li>SHOW_ALL: default value</li>
+ *             <li>SHOW_CAPS_DETAILS</li>
+ *             <li>SHOW_FULL_PARAMS</li>
+ *             <li>SHOW_MEDIA_TYPE</li>
+ *             <li>SHOW_NON_DEFAULT_PARAMS</li>
+ *             <li>SHOW_STATES</li>
+ *             <li>SHOW_VERBOSE</li>
+ *           </ul>
+ *           
  * @return The dot graph *
  **/
   String getGstreamerDot();
@@ -851,7 +1177,17 @@ public interface MediaElement extends MediaObject {
 
 /**
  *
- * Returns a string in dot (graphviz) format that represents the gstreamer elements inside
+ * This method returns a .dot file describing the topology of the media element. The element can be queried for certain type of data
+ *           <ul>
+ *             <li>SHOW_ALL: default value</li>
+ *             <li>SHOW_CAPS_DETAILS</li>
+ *             <li>SHOW_FULL_PARAMS</li>
+ *             <li>SHOW_MEDIA_TYPE</li>
+ *             <li>SHOW_NON_DEFAULT_PARAMS</li>
+ *             <li>SHOW_STATES</li>
+ *             <li>SHOW_VERBOSE</li>
+ *           </ul>
+ *           
  * @return The dot graph *
  **/
     TFuture<String> getGstreamerDot(Transaction tx);
@@ -859,7 +1195,7 @@ public interface MediaElement extends MediaObject {
 
 /**
  *
- * Provides statistics collected for this endpoint
+ * Gets the statistics related to an endpoint. If no media type is specified, it returns statistics for all available types.
  * @return Delivers a successful result in the form of a RTC stats report. A RTC stats report represents a map between strings, identifying the inspected objects (RTCStats.id), and their corresponding RTCStats objects. *
  **/
   java.util.Map<String,org.kurento.client.Stats> getStats();
@@ -876,7 +1212,7 @@ public interface MediaElement extends MediaObject {
 
 /**
  *
- * Provides statistics collected for this endpoint
+ * Gets the statistics related to an endpoint. If no media type is specified, it returns statistics for all available types.
  * @return Delivers a successful result in the form of a RTC stats report. A RTC stats report represents a map between strings, identifying the inspected objects (RTCStats.id), and their corresponding RTCStats objects. *
  **/
     TFuture<java.util.Map<String,org.kurento.client.Stats>> getStats(Transaction tx);
@@ -884,7 +1220,7 @@ public interface MediaElement extends MediaObject {
 
 /**
  *
- * Returns if there is media flowing from the pipeline to the MediaElement through a pad
+ * This method indicates whether the media element is receiving media of a certain type. The media sink pad can be identified individually, if needed. It is only supported for AUDIO and VIDEO types, raising a MEDIA_OBJECT_ILLEGAL_PARAM_ERROR otherwise. If the pad indicated does not exist, if will return false.
  *
  * @param mediaType
  *       One of {@link #MediaType.AUDIO} or {@link #MediaType.VIDEO}
@@ -907,7 +1243,7 @@ public interface MediaElement extends MediaObject {
 
 /**
  *
- * Returns if there is media flowing from the pipeline to the MediaElement through a pad
+ * This method indicates whether the media element is receiving media of a certain type. The media sink pad can be identified individually, if needed. It is only supported for AUDIO and VIDEO types, raising a MEDIA_OBJECT_ILLEGAL_PARAM_ERROR otherwise. If the pad indicated does not exist, if will return false.
  *
  * @param mediaType
  *       One of {@link #MediaType.AUDIO} or {@link #MediaType.VIDEO}
@@ -918,7 +1254,7 @@ public interface MediaElement extends MediaObject {
 
 /**
  *
- * Returns if there is media flowing from the MediaElement to the pipeline through a pad
+ * This method indicates whether the media element is emitting media of a certain type. The media source pad can be identified individually, if needed. It is only supported for AUDIO and VIDEO types, raising a MEDIA_OBJECT_ILLEGAL_PARAM_ERROR otherwise. If the pad indicated does not exist, if will return false.
  *
  * @param mediaType
  *       One of {@link #MediaType.AUDIO} or {@link #MediaType.VIDEO}
@@ -941,7 +1277,7 @@ public interface MediaElement extends MediaObject {
 
 /**
  *
- * Returns if there is media flowing from the MediaElement to the pipeline through a pad
+ * This method indicates whether the media element is emitting media of a certain type. The media source pad can be identified individually, if needed. It is only supported for AUDIO and VIDEO types, raising a MEDIA_OBJECT_ILLEGAL_PARAM_ERROR otherwise. If the pad indicated does not exist, if will return false.
  *
  * @param mediaType
  *       One of {@link #MediaType.AUDIO} or {@link #MediaType.VIDEO}
