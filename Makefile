@@ -5,9 +5,9 @@
 # IMPORTANT: Notice that DOC_VERSION should be the same as variable "release" in conf.py,
 # so when this variable is updated, it should be also updated in conf.py
 
-DOC_VERSION = 6.3.2-dev
-KURENTO_JAVA_VERSION = 6.3.1-SNAPSHOT
-MAVEN_VERSION = 6.3.2-SNAPSHOT
+DOC_VERSION = 6.5.0
+KURENTO_JAVA_VERSION = 6.5.0
+MAVEN_VERSION = 6.5.0
 
 # You can set these variables from the command line.
 SPHINXOPTS    =

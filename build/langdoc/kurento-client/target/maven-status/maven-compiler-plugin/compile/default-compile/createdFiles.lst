@@ -44,6 +44,7 @@ org/kurento/client/RaiseBaseEvent.class
 org/kurento/client/HttpPostEndpoint$Builder.class
 org/kurento/client/internal/client/RemoteObject.class
 org/kurento/client/PlayerEndpoint$Builder.class
+org/kurento/client/IceComponentStateChangeEvent.class
 org/kurento/client/internal/client/RomClient.class
 org/kurento/client/OnDataChannelOpenedEvent.class
 org/kurento/client/internal/transport/serialization/ParamsFlattener$RomType.class
@@ -56,6 +57,7 @@ org/kurento/client/RTCCertificateStats.class
 org/kurento/client/Filter.class
 org/kurento/client/ObjectCreatedEvent.class
 org/kurento/client/ConnectionStateChangedEvent.class
+org/kurento/client/IceCandidateFoundEvent.class
 org/kurento/client/Composite$Builder.class
 org/kurento/client/StatsType.class
 org/kurento/client/GstreamerDotDetails.class
@@ -141,6 +143,7 @@ org/kurento/client/MediaSessionStartedEvent.class
 org/kurento/client/DispatcherOneToMany.class
 org/kurento/client/ErrorEvent.class
 org/kurento/client/internal/client/RemoteObject$1.class
+org/kurento/client/IceGatheringDoneEvent.class
 org/kurento/module/KurentoModuleInfo.class
 org/kurento/client/RTCRTPStreamStats.class
 org/kurento/client/KurentoConnectionListener.class
@@ -174,6 +177,7 @@ org/kurento/client/NewCandidatePairSelectedEvent.class
 org/kurento/client/HubPort$Builder.class
 org/kurento/client/JsonRpcConnectionListenerKurento.class
 org/kurento/client/HubPort.class
+org/kurento/client/DataChannelOpenEvent.class
 org/kurento/client/internal/server/KurentoServerException.class
 org/kurento/client/AlphaBlending$Builder.class
 org/kurento/client/internal/transport/jsonrpc/RomClientJsonRpcClient$1.class
@@ -188,6 +192,7 @@ org/kurento/client/internal/client/RemoteObject$4.class
 org/kurento/client/VideoCodec.class
 org/kurento/client/CryptoSuite.class
 org/kurento/client/internal/client/RemoteObject$ObjectStatus.class
+org/kurento/client/DataChannelCloseEvent.class
 org/kurento/client/internal/transport/jsonrpc/RomClientJsonRpcClient$2.class
 org/kurento/client/internal/client/RomManager$1.class
 org/kurento/client/internal/transport/serialization/ModuleClassesManager.class

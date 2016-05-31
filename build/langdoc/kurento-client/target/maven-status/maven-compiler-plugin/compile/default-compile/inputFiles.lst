@@ -3,6 +3,7 @@
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/target/generated-sources/kmd/org/kurento/client/RTCStats.java
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/src/main/java/org/kurento/client/internal/client/operation/ReleaseOperation.java
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/target/generated-sources/kmd/org/kurento/client/ConnectionStateChangedEvent.java
+/opt/kurento/doc-kurento-room/build/langdoc/kurento-client/target/generated-sources/kmd/org/kurento/client/IceComponentStateChangeEvent.java
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/src/main/java/org/kurento/client/internal/client/DefaultContinuation.java
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/src/main/java/org/kurento/client/internal/server/KurentoServerTransportException.java
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/target/generated-sources/kmd/org/kurento/client/ZBarFilter.java
@@ -43,6 +44,7 @@
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/target/generated-sources/kmd/org/kurento/client/HttpPostEndpoint.java
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/src/main/java/org/kurento/client/internal/client/ErrorLogContinuation.java
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/target/generated-sources/kmd/org/kurento/client/WebRtcEndpoint.java
+/opt/kurento/doc-kurento-room/build/langdoc/kurento-client/target/generated-sources/kmd/org/kurento/client/IceCandidateFoundEvent.java
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/src/main/java/org/kurento/client/Transaction.java
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/src/main/java/org/kurento/client/internal/server/RemoteObjectManager.java
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/target/generated-sources/kmd/org/kurento/client/OpenCVFilter.java
@@ -69,6 +71,7 @@
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/target/generated-sources/kmd/org/kurento/client/MediaSessionTerminatedEvent.java
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/target/generated-sources/kmd/org/kurento/client/SDES.java
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/src/main/java/org/kurento/client/internal/server/ProtocolException.java
+/opt/kurento/doc-kurento-room/build/langdoc/kurento-client/target/generated-sources/kmd/org/kurento/client/DataChannelCloseEvent.java
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/target/generated-sources/kmd/org/kurento/client/VideoCaps.java
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/target/generated-sources/kmd/org/kurento/client/RTCMediaStreamStats.java
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/src/main/java/org/kurento/client/internal/client/RemoteObject.java
@@ -124,6 +127,7 @@
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/target/generated-sources/kmd/org/kurento/client/UriEndpoint.java
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/target/generated-sources/kmd/org/kurento/client/HttpEndpoint.java
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/target/generated-sources/kmd/org/kurento/client/Composite.java
+/opt/kurento/doc-kurento-room/build/langdoc/kurento-client/target/generated-sources/kmd/org/kurento/client/IceGatheringDoneEvent.java
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/target/generated-sources/kmd/org/kurento/client/MediaFlowOutStateChangeEvent.java
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/target/generated-sources/kmd/org/kurento/client/FilterType.java
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/target/generated-sources/kmd/org/kurento/client/ElementConnectedEvent.java
@@ -157,3 +161,4 @@
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/target/generated-sources/kmd/org/kurento/client/Hub.java
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/target/generated-sources/kmd/org/kurento/client/MediaState.java
 /opt/kurento/doc-kurento-room/build/langdoc/kurento-client/target/generated-sources/kmd/org/kurento/client/BaseRtpEndpoint.java
+/opt/kurento/doc-kurento-room/build/langdoc/kurento-client/target/generated-sources/kmd/org/kurento/client/DataChannelOpenEvent.java

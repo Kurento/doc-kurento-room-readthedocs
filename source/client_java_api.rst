@@ -25,7 +25,7 @@ This client can be obtained as a Maven dependency with the following coordinates
    <dependency>
      <groupId>org.kurento</groupId>
      <artifactId>kurento-room-client</artifactId>
-     <version>6.3.2-SNAPSHOT</version>
+     <version>6.5.0</version>
    </dependency>
 
 With this dependency, the developer can use the class 
