@@ -23,6 +23,12 @@ or W3C relevant documents. Some of the terms are specific to :term:`kurento`.
         while exposing the package dependency model via an API that can be consumed by
         a build stack.
     
+    DataChannels
+        The WebRTC Peer-to-peer Data API lets a web application send and receive generic application data 
+        peer-to-peer. The API for sending and receiving data models the behavior of WebSockets.
+        
+        .. seealso:: http://www.html5rocks.com/en/tutorials/webrtc/datachannels/
+
     getUserMedia
         The ``getUserMedia()`` JavaScript method is related to WebRTC because 
         it's the gateway into that set of APIs. It provides the means to access 

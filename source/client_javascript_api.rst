@@ -309,6 +309,8 @@ The initialization of the local stream requires the following parameters:
 
       - **participant**: to whom belongs the stream
       - **id**: stream identifier (if null, will use the String webcam)
+      - **data**: enables :term:`DataChannels`, the application can use the 
+        :ref:`sendData()<sendData-label>`  method
 
 init method
 -----------
@@ -358,3 +360,11 @@ and the local id. E.g. ``user1_webcam``.
 
 There are several other methods exposed by the ``Stream`` interface, they will 
 be described in the tutorial for making a room application.
+
+.. _sendData-label:
+
+sendData() method
+-----------------
+
+If the stream is local (publishing), sends data to the server endpoint as specified
+by the :term:`DataChannels` protocol. 

@@ -31,11 +31,12 @@ created. To obtain the available rooms, the client should previously use the
 
   - **user** - user's name
   - **room** -  room's name
+  - **dataChannels** - optional boolean, enables :term:`DataChannels` for the publisher
 
 - **Example request**::
 
     {"jsonrpc":"2.0","method":"joinRoom",
-     "params":{"user":"USER1","room":"ROOM_1"},"id":0}
+     "params":{"user":"USER1","room":"ROOM_1","dataChannels":true},"id":0}
 
 - **Server response (result)**:
 

@@ -96,7 +96,7 @@ Join room
 
 .. sourcecode:: java
 
-   Map<String, List<String>> newPeers = client.joinRoom(room, username);
+   Map<String, List<String>> newPeers = client.joinRoom(room, username, dataChannels);
 
 This method sends the ``joinRoom`` message and returns a list containing the existing
 participants and their published streams. 
