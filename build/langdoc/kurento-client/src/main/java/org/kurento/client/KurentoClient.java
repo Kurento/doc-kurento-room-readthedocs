@@ -17,7 +17,6 @@
 
 package org.kurento.client;
 
-import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.UUID;
@@ -30,8 +29,9 @@ import org.kurento.client.internal.client.RomManager;
 import org.kurento.client.internal.transport.jsonrpc.RomClientJsonRpcClient;
 import org.kurento.commons.PropertiesManager;
 import org.kurento.commons.exception.KurentoException;
+import org.kurento.jsonrpc.client.AbstractJsonRpcClientWebSocket;
 import org.kurento.jsonrpc.client.JsonRpcClient;
-import org.kurento.jsonrpc.client.JsonRpcClientWebSocket;
+import org.kurento.jsonrpc.client.JsonRpcClientNettyWebSocket;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -49,12 +49,17 @@ public class KurentoClient {
 
   private static final int KEEPALIVE_TIME = 4 * 60 * 1000;
 
+  private static final long WARN_CONNECTION_TIME = 5000;
+
   private static Logger log = LoggerFactory.getLogger(KurentoClient.class);
 
   protected RomManager manager;
 
-  private long requesTimeout = PropertiesManager.getProperty("kurento.client.requestTimeout",
-      10000);
+  private long requesTimeout =
+      PropertiesManager.getProperty("kurento.client.requestTimeout", 10000);
+
+  private long connectionTimeout =
+      PropertiesManager.getProperty("kurento.client.connectionTimeout", 5000);
 
   private String id;
 
@@ -68,10 +73,14 @@ public class KurentoClient {
 
   public static synchronized String getKmsUrl(String id, Properties properties) {
 
+    if (properties == null) {
+      properties = new Properties();
+    }
+
     if (kmsUrlLoader == null) {
 
-      Path configFile = Paths.get(StandardSystemProperty.USER_HOME.value(), ".kurento",
-          "config.properties");
+      Path configFile =
+          Paths.get(StandardSystemProperty.USER_HOME.value(), ".kurento", "config.properties");
 
       kmsUrlLoader = new KmsUrlLoader(configFile);
     }
@@ -108,13 +117,13 @@ public class KurentoClient {
   }
 
   public static KurentoClient create(String websocketUrl, Properties properties) {
-    log.info("Connecting to kms in {}", websocketUrl);
-    JsonRpcClientWebSocket client = new JsonRpcClientWebSocket(websocketUrl);
+    log.debug("Connecting to kms in {}", websocketUrl);
+    JsonRpcClientNettyWebSocket client = new JsonRpcClientNettyWebSocket(websocketUrl);
     configureJsonRpcClient(client);
     return new KurentoClient(client);
   }
 
-  protected static void configureJsonRpcClient(JsonRpcClientWebSocket client) {
+  protected static void configureJsonRpcClient(AbstractJsonRpcClientWebSocket client) {
     client.enableHeartbeat(KEEPALIVE_TIME);
     client.setTryReconnectingForever(true);
     updateLabel(client, null);
@@ -134,24 +143,113 @@ public class KurentoClient {
 
   public static KurentoClient create(String websocketUrl, KurentoConnectionListener listener,
       Properties properties) {
-    log.info("Connecting to KMS in {}", websocketUrl);
-    JsonRpcClientWebSocket client = new JsonRpcClientWebSocket(websocketUrl,
+    log.debug("Connecting to KMS in {}", websocketUrl);
+    JsonRpcClientNettyWebSocket client = new JsonRpcClientNettyWebSocket(websocketUrl,
         JsonRpcConnectionListenerKurento.create(listener));
     configureJsonRpcClient(client);
     return new KurentoClient(client);
+  }
 
+  protected static KurentoClient create(String kmsWsUri, Properties properties,
+      final Handler connectedHandler, final Handler connectionFailedHandler,
+      final Handler reconnectingHandler, final Handler disconnectedHandler,
+      final ReconnectedHandler reconnectedHandler, Long tryReconnectingMaxTime,
+      Long connectionTimeout) {
+
+    String clientId = null;
+    if (kmsWsUri == null) {
+      clientId = UUID.randomUUID().toString();
+      kmsWsUri = getKmsUrl(clientId, properties);
+    }
+
+    KurentoClient kurentoClient = null;
+
+    log.debug("Connecting to KMS in {}", kmsWsUri);
+
+    JsonRpcClientNettyWebSocket client = new JsonRpcClientNettyWebSocket(kmsWsUri);
+
+    if (connectionTimeout != null) {
+      client.setConnectionTimeout(connectionTimeout.intValue());
+    }
+
+    if (connectedHandler != null) {
+      client.onConnected(new org.kurento.jsonrpc.client.Handler() {
+        @Override
+        public void run() {
+          connectedHandler.run();
+        }
+      });
+    }
+
+    if (connectionFailedHandler != null) {
+      client.onConnectionFailed(new org.kurento.jsonrpc.client.Handler() {
+        @Override
+        public void run() {
+          connectionFailedHandler.run();
+        }
+      });
+    }
+
+    if (reconnectingHandler != null) {
+      client.onReconnecting(new org.kurento.jsonrpc.client.Handler() {
+        @Override
+        public void run() {
+          reconnectingHandler.run();
+        }
+      });
+    }
+
+    if (disconnectedHandler != null) {
+      client.onDisconnected(new org.kurento.jsonrpc.client.Handler() {
+        @Override
+        public void run() {
+          disconnectedHandler.run();
+        }
+      });
+    }
+
+    if (reconnectedHandler != null) {
+      client.onReconnected(new org.kurento.jsonrpc.client.ReconnectedHandler() {
+        @Override
+        public void run(boolean sameServer) {
+          reconnectedHandler.run(sameServer);
+        }
+      });
+    }
+
+    configureJsonRpcClient(client);
+
+    if (tryReconnectingMaxTime != null) {
+      client.setTryReconnectingMaxTime(tryReconnectingMaxTime);
+    }
+
+    kurentoClient = new KurentoClient(client);
+
+    if (clientId != null) {
+      kurentoClient.setId(clientId);
+    }
+
+    return kurentoClient;
   }
 
   protected KurentoClient(JsonRpcClient client) {
     this.client = client;
     this.manager = new RomManager(new RomClientJsonRpcClient(client));
     client.setRequestTimeout(requesTimeout);
-    if (client instanceof JsonRpcClientWebSocket) {
-      ((JsonRpcClientWebSocket) client).enableHeartbeat(KEEPALIVE_TIME);
+    client.setConnectionTimeout((int) connectionTimeout);
+    if (client instanceof AbstractJsonRpcClientWebSocket) {
+      ((AbstractJsonRpcClientWebSocket) client).enableHeartbeat(KEEPALIVE_TIME);
     }
     try {
+      long start = System.currentTimeMillis();
       client.connect();
-    } catch (IOException e) {
+      long duration = System.currentTimeMillis() - start;
+
+      if (duration > WARN_CONNECTION_TIME) {
+        log.warn("Connected to KMS in {} millis (> {} millis)", duration, WARN_CONNECTION_TIME);
+      }
+
+    } catch (Exception e) {
       throw new KurentoException("Exception connecting to KMS", e);
     }
   }
@@ -216,7 +314,11 @@ public class KurentoClient {
 
   @PreDestroy
   public void destroy() {
-    log.info("Closing KurentoClient");
+    if (isClosed()) {
+      log.debug("{} KurentoClient already closed", label);
+      return;
+    }
+    log.debug("Closing KurentoClient");
     manager.destroy();
     if (kmsUrlLoader != null) {
       kmsUrlLoader.clientDestroyed(id);

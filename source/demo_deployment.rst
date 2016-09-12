@@ -59,7 +59,7 @@ Now unzip the generated execution binaries:
 .. sourcecode:: bash
 
    $ cd kurento-room-demo/target
-   $ unzip kurento-room-demo-6.5.1-SNAPSHOT.zip
+   $ unzip kurento-room-demo-6.6.0.zip
 
 The directory structure of the uncompressed binaries:
 
@@ -79,7 +79,7 @@ inside ``/etc/kurento``.
 
 .. sourcecode:: bash
 
-   $ cd kurento-room-demo-6.5.1-SNAPSHOT
+   $ cd kurento-room-demo-6.6.0
    $ vim files/kurento-room-demo.conf.json
    ## or ##
    $ vim /etc/kurento/kurento-room-demo.conf.json
@@ -211,13 +211,13 @@ The default logging configuration can be overwritten by editing the file
 
 .. sourcecode:: bash
 
-   $ cd kurento-room-demo-6.5.1-SNAPSHOT
+   $ cd kurento-room-demo-6.6.0
    $ vim files/kurento-room-demo-log4j.properties
    ## or ##
    $ vim /etc/kurento/kurento-room-demo-log4j.properties
 
 In it, the location of the server's output log file can be set up, the default 
-location will be ``kurento-room-demo-6.5.1-SNAPSHOT/logs/kurento-room-demo.log`` 
+location will be ``kurento-room-demo-6.6.0/logs/kurento-room-demo.log`` 
 (or ``/var/log/kurento/kurento-room-demo.log`` for system-wide installations).
 
 To change it, replace the ``${application.log.file}`` variable with an 
@@ -253,7 +253,7 @@ execute the start script:
 
 .. sourcecode:: bash
 
-   $ cd kurento-room-demo-6.5.1-SNAPSHOT
+   $ cd kurento-room-demo-6.6.0
    $ ./bin/start.sh
 
 Run as daemon
@@ -264,7 +264,7 @@ binaries. **sudo** privileges are required to install it as a service:
 
 .. sourcecode:: bash
 
-   $ cd kurento-room-demo-6.5.1-SNAPSHOT
+   $ cd kurento-room-demo-6.6.0
    $ sudo ./bin/install.sh
 
 The service **kurento-room-demo** will be automatically started.
@@ -284,7 +284,7 @@ execute the *fat jar* from the **lib** folder:
 
 .. sourcecode:: bash
 
-   $ cd kurento-room-demo-6.5.1-SNAPSHOT/lib
+   $ cd kurento-room-demo-6.6.0/lib
    $ java -jar kurento-room-demo.jar
 
 Version upgrade
