@@ -121,6 +121,8 @@ langdoc:
 	    -subpackages org.kurento.room:org.kurento.client \
 	    -exclude org.kurento.room.endpoint:org.kurento.room.internal:org.kurento.client.internal
 
+	  rm -rf $(BUILDDIR)/langdoc
+
 qthelp:
 	$(SPHINXBUILD) -b qthelp $(ALLSPHINXOPTS) $(BUILDDIR)/qthelp
 	@echo
